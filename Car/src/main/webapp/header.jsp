@@ -4,12 +4,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Insert title here</title>
+		<title>헤더</title>
 		<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 		<style>
-			body {
+			.header-container {
 				font-family: 'Gugi' !important;
 			}
 			.navbar {
@@ -45,6 +45,10 @@
 				padding: 5px 100px;
 				font-size: 25px;
 			}
+			.menu a {
+				text-decoration: none;
+				color: black;
+			}
 			.search {
 				position: absolute;
 				top: 30px;
@@ -68,26 +72,28 @@
 		</style>
 	</head>
 	<body>
-		<nav class="navbar">
-			<div class="logo">
-				<h1><a href="main.jsp"><span>차량생각</span></a></h1>
-			</div>	
-			<ul class="menu">
-				<li>게시판</li>
-				<li>차량비교</li>
-			</ul>
-			<div class="search">
-				<input type="text" placeholder="검색어를 입력해주세요">
-				<button class="searchBtn">검색</button>
-			</div>
-			<div class="dropdown">
-				<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><img src="./icons8-메뉴-64.png" alt="메뉴 아이콘" class="menu-icon"></button>
-					<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-						<li><a class="dropdown-item" href="#">로그인</a></li>
-	 					<li><a class="dropdown-item" href="#">마이페이지</a></li>
-	 					<li><a class="dropdown-item" href="#">로그아웃</a></li>
-					</ul>
-			</div>
-		</nav>
+		<div class="header-container">
+			<nav class="navbar">
+				<div class="logo">
+					<h1><a href="main.jsp"><span>차량생각</span></a></h1>
+				</div>	
+				<ul class="menu">
+					<li>게시판</li>
+					<li><a href="carBigyo.jsp">차량비교</a></li>
+				</ul>
+				<div class="search">
+					<input type="text" placeholder="검색어를 입력해주세요">
+					<button class="searchBtn">검색</button>
+				</div>
+				<div class="dropdown">
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><img src="./icons8-메뉴-64.png" alt="메뉴 아이콘" class="menu-icon"></button>
+						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+							<li><a class="dropdown-item" href="#">로그인</a></li>
+		 					<li><a class="dropdown-item" href="#">마이페이지</a></li>
+		 					<li><a class="dropdown-item" href="#">로그아웃</a></li>
+						</ul>
+				</div>
+			</nav>
+		</div>
 	</body>
 </html>
