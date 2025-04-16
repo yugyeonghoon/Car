@@ -82,7 +82,7 @@ for idx in range(num_companies):
 
         model_elements = driver.find_elements(By.XPATH, '//*[@id="seriesItemList"]/li/a')
 
-        for model in model_elements:
+        for model in model_elements[1:]:
             model_name = model.text.strip()
             if model_name:
                 print(f"    └ 모델: {model_name}")
