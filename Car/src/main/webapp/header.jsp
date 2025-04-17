@@ -75,7 +75,7 @@
 		<div class="header-container">
 			<nav class="navbar">
 				<div class="logo">
-					<h1><a href="main.jsp"><span>차량생각</span></a></h1>
+					<h1><a href="carMain.jsp"><span>차량생각</span></a></h1>
 				</div>	
 				<ul class="menu">
 					<li>게시판</li>
