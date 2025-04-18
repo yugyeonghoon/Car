@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="header.jsp" %>
+<%@ include file="../header.jsp" %>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -67,7 +67,7 @@
 		<div class="comparison-containers">
 			<div class="car-containers">
 				<div class="car">
-					<img alt="firstCar" src="k3gt.png" class="car-image">
+					<img alt="firstCar" src="../k3gt.png" class="car-image">
 					<div class="car-model">기아 K3 GT</div>
 					<select class="trim-select">
 						<option>트림 선택</option>
@@ -84,7 +84,7 @@
 				</div>
 				<div class="vs-text">VS</div>
 				<div class="car">
-					<img alt="secondCar" src="투싼 nx4.png" class="car-image">
+					<img alt="secondCar" src="../투싼 nx4.png" class="car-image">
 					<div class="car-model">현대 투싼</div>
 					<select class="trim-select">
 						<option>트림 선택</option>
@@ -108,6 +108,6 @@
 				</div>
 			</div>
 		</div>
-		<%@include file="footer.jsp" %>
+		<%@include file="../footer.jsp" %>
 	</body>
 </html>
