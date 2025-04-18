@@ -76,7 +76,6 @@
   </style>
 </head>
 <body>
-
 <div id="dropdown">
 <!-- 제조사 -->
 <div class="custom-select" id="maker-select">
@@ -88,21 +87,21 @@
 </div>
 
 <!-- 모델 -->
-<div class="custom-select hidden" id="model-select">
-  <div class="select-selected">모델 선택</div>
-  <div class="select-items" id="model-options"></div>
-</div>
-
-<!-- 트림 -->
-<div class="custom-select hidden" id="trim-select">
-  <div class="select-selected">트림 선택</div>
-  <div class="select-items" id="trim-options"></div>
-</div>
-
-<div class="click">
-	<button type="submit" class="select-submit">검색</button>
-</div>
-</div>
+	<div class="custom-select hidden" id="model-select">
+	  <div class="select-selected">모델 선택</div>
+	  <div class="select-items" id="model-options"></div>
+	</div>
+	
+	<!-- 트림 -->
+	<div class="custom-select hidden" id="trim-select">
+	  <div class="select-selected">트림 선택</div>
+	  <div class="select-items" id="trim-options"></div>
+	</div>
+	
+	<div class="click">
+		<button type="submit" class="select-submit">검색</button>
+	</div>
+	</div>
 <script>
   const makerSelect = document.querySelector("#maker-select");
   const makerSelected = makerSelect.querySelector(".select-selected");
