@@ -6,37 +6,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <title>메인</title>
-<style>
-  		#content {
-			position: absolute;
-    		top: 300px;
-		}
-		
-		h4 {
-			text-align: center;
-		}
-		.first {
-		    float: left;
-		    margin-right: 10px;
-		    marign-left: 10%;
-		    width: 25%;
-		}
-		.second, .third {
-			float: left;
-		    margin-right: 10px;
-		    width: 25%;
-		}
-		.carousel-item {
-			margin-left: 11%; 
-		}
-</style>
+<link href="../css/carMain.css" rel="stylesheet">
+<link href="../css/carMainDropdown.css" rel="stylesheet">
+<link href="../css/footer.css" rel="stylesheet">
 </head>
 <body>
-<%@include file="header.jsp" %>
+<%@include file="../header.jsp" %>
 <div id="content">
-<%@include file="dropdown.jsp" %>
+<%@include file="../dropdown.jsp" %>
 <div id="sildeShow">
 	<div id="carouselExampleDark" class="carousel carousel-dark slide" data-bs-touch="false">
 	  <div class="carousel-inner">
@@ -95,6 +73,6 @@
 </div>
 
 </div>
-<%@include file="footer.jsp" %>
+<%@include file="../footer.jsp" %>
 </body>
 </html>

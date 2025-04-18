@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+#content {
+			position: absolute;
+    		top: 300px;
+		}
+		
+h4 {
+		text-align: center;
+	}
+
+.first {
+	    float: left;
+	    margin-right: 10px;
+	    marign-left: 10%;
+	    width: 25%;
+	}
+
+.second, .third {
+		float: left;
+	    margin-right: 10px;
+	    width: 25%;
+	}
+.carousel-item {
+		margin-left: 11%; 
+	}

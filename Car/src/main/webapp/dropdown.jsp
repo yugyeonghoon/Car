@@ -4,76 +4,7 @@
 <html lang="ko">
 <head>
   <meta charset="UTF-8">
-  <title>3단 드롭다운</title>
-  <style>
-  	#dropdown {
-  		/* height: 1000px; */
-  		margin-bottom: 50px;
-  		display: flex;
-		justify-content: center;
-		align-items: center;
-		/* position: absolute;
-		top: 200px; */
-  	}
-    .custom-select {
-      position: relative;
-      width: 300px;
-      margin-bottom: 20px;
-      display: inline-block;
-    }
-
-    .select-selected, .select-submit {
-      background-color: #fff;
-      padding: 10px;
-      border: 1px solid #ccc;
-      cursor: pointer;
-    }
-
-    .select-items {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      right: 0;
-      background-color: #fff;
-      border: 1px solid #ccc;
-      border-top: none;
-      z-index: 99;
-      display: none;
-    }
-
-    .select-items div {
-      padding: 10px;
-      cursor: pointer;
-    }
-
-    .select-items div:hover {
-      background-color: #f1f1f1;
-    }
-
-    .select-selected:after {
-      content: "▼";
-      float: right;
-    }
-
-    .select-selected.open:after {
-      content: "▲";
-    }
-
-    .hidden {
-      /* display: none; */
-    }
-    
-    .click {
-    	margin-bottom: 20px;
-    	display: inline-block;
-    	position: relative;
-    }
-    .select-submit {
-    	
-    	width: 150px;
-    	height: 43.44px;
-    }
-  </style>
+  <title>메인 드롭다운</title>
 </head>
 <body>
 <div id="dropdown">
