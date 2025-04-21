@@ -1,5 +1,4 @@
 import subprocess
-
 import time
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
@@ -14,7 +13,7 @@ import pandas as pd
 option = Options()
 option.add_experimental_option("detach", True)
 
-#드라이버 실행
+# 드라이버 실행
 driver = webdriver.Chrome(service=Service(), options=option)
 driver.get("https://naver.com")
 
@@ -24,19 +23,15 @@ yearlist = []
 imagelist = []
 pricelist = []
 
-#csv 데이터 불러오기
+# csv 데이터 불러오기
 data = pd.read_csv("./carFile/carname.csv")
-
 print(data)
-"""
-현대 그랜저
-현대 그랜저 하이브리드
-현대 더 뉴 그랜저 IG
-"""
 
-#csv 값 하나씩 꺼내서 검색하며 데이터 수집
+count = 50  # 저장 주기 체크용 카운터
+
+# csv 값 하나씩 꺼내서 검색하며 데이터 수집
 for search in data["title"]:
-    #검색
+    # 검색
     search_url = driver.find_element(By.NAME, "query")
     search_url.clear()
     browser = search_url.send_keys(search)
@@ -47,20 +42,19 @@ for search in data["title"]:
     try:
         car_container = driver.find_element(By.XPATH, "//div[@data-dss-logarea='x58']")
         print(car_container.get_attribute("innerHTML")[:100])
-        #name = car_container.find_element(By.CLASS_NAME, "area_text_title").text
         print(search)
 
         sub_title = car_container.find_element(By.CLASS_NAME, "sub_title")
 
-        #차량 타입
+        # 차량 타입
         car_type = sub_title.find_elements(By.CSS_SELECTOR, "span")[0].text
         print(car_type)
 
-        #차량 연식
+        # 차량 연식
         year = sub_title.find_elements(By.CSS_SELECTOR, "span")[2].text
         print(year)
 
-        #차량 이미지
+        # 차량 이미지
         #인덱스 5번의 이미지 없을 시 인덱스 0번의 이미지 출력 그마저도 없을 시 빈문자
         try:
             view_image = car_container.find_element(By.CLASS_NAME, "img_area")
@@ -74,9 +68,9 @@ for search in data["title"]:
                 src = image.get_attribute("src")
                 print(src)
             except:
-                src= ""
-        
-        #차량 가격
+                src = ""
+
+        # 차량 가격
         #차량 가격 없을 시 "가격정보 없음" 출력
         try:
             price_information = car_container.find_element(By.CLASS_NAME, "info_group")
@@ -84,19 +78,41 @@ for search in data["title"]:
             print(price)
         except:
             price = "가격정보 없음"
-            
 
         namelist.append(search)
         car_typelist.append(car_type)
         yearlist.append(year)
         imagelist.append(src)
         pricelist.append(price)
-    except:
+
+        count += 1
+
+        # 5개마다 중간 저장
+        if count % 5 == 0:
+            temp_data = {
+                "name": namelist,
+                "car_type": car_typelist,
+                "year": yearlist,
+                "image": imagelist,
+                "price": pricelist
+            }
+            temp_df = pd.DataFrame(temp_data)
+            temp_df.to_csv("car_information_partial.csv", encoding="utf-8-sig", index=False)
+            print(f"{count}개 저장 완료 (중간 저장)")
+
+    except Exception as e:
+        print(f"오류 발생: {e}")
         continue
-    
+
+# 마지막 전체 저장
 driver.close()
-
-
-data = {"name" : namelist, "car_type" : car_typelist, "year" : yearlist, "image" : imagelist, "price" : pricelist}
-df = pd.DataFrame(data)
-df.to_csv("car_informationFinal.csv", encoding="utf-8-sig")
+final_data = {
+    "name": namelist,
+    "car_type": car_typelist,
+    "year": yearlist,
+    "image": imagelist,
+    "price": pricelist
+}
+df = pd.DataFrame(final_data)
+df.to_csv("car_informationFinal.csv", encoding="utf-8-sig", index=False)
+print("최종 저장 완료")
