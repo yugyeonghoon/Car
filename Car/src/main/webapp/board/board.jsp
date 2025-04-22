@@ -75,6 +75,7 @@
 	    width: 100%;
 	    border-collapse: collapse;
 	    margin-top: 10px;
+	    table-layout: auto; 
 	}
 	
 	.board-table th,
@@ -99,6 +100,7 @@
 	.board-table td a:hover {
 	    text-decoration: underline;
 	}
+	
 	
 	.action {
 	    text-align: right;
@@ -137,15 +139,15 @@
 	    transition: background 0.3s ease, color 0.3s ease;
 	}
 	
-	.pagination a:hover {
-	    background: #000;
-	    color: #fff;
-	}
-	
 	.pagination a.active {
 	    background: #000;
 	    color: #fff;
 	    pointer-events: none;
+	}
+	
+	.pagination a:hover {
+	    background: #000;
+	    color: #fff;
 	}
 	
 	.search-bar {
@@ -193,6 +195,13 @@
 			</form>
 		</div>
 		<table class="board-table">
+			<colgroup>
+				<col style="width: 80px;">
+				<col style="width: 60%;">
+				<col style="width: 120px;">
+				<col style="width: 150px;">
+				<col style="width: 80px;">
+			</colgroup>
 			<thead>
 				<tr>
 					<th>타입</th>
@@ -223,48 +232,41 @@
 				<%
 					}
 				%>
-				<tr>
-					<td>자유</td>
-					<td><a href="post.jsp?id=2">첫 방문했습니다~</a></td>
-					<td>홍길동</td>
-					<td>2025-04-20</td>
-					<td>74</td>
-				</tr>
 			</tbody>
 		</table>
 		<div class="action">
 			<button onclick="location.href='write.jsp?boardType=2'">글쓰기</button>
 		</div>
 		<div class="pagination">
-			<%
-				if(currentPage > 1){
-					%>
-						<a href="board.jsp?page=1<%= searchType != "" ? "&searchType="+searchType : ""%><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&lt;&lt;</a>
-						<a href="board.jsp?page=<%= currentPage - 1 %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&lt;</a>
-					<%
-				}
+        	<%
+        		if(currentPage > 1){
+	        	%>
+				<a href="board.jsp?page=1<%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&lt;&lt;</a>
+				<a href="board.jsp?page=<%= currentPage - 1 %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&lt;</a>
+				<%
+        		}
 			%>
-			<%
-				for(int i = startPage; i <= endPage; i++){
-					if(i == currentPage){
-						%>
-						<a class="active" href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>"><%=i %></a>
-						<%
-					}else{
-						%>
-						<a href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>"><%= i %></a>
-						<%
-					}
-				}
-			%>
-			<%
-				if(currentPage < totalPage){
-					%>
-						<a href="board.jsp?page=<%= currentPage + 1 %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&gt;</a>
-			            <a href="board.jsp?page=<%= totalPage %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&gt;&gt;</a>
-	       			<%
-	    		}
-			%>
+            <%
+            	for(int i = startPage; i <= endPage; i ++){
+            		if(i == currentPage){
+            			%>
+	            			<a class="active" href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>"><%= i %></a>
+	            		<%
+            		}else{
+            			%>
+	            			<a href="board.jsp?page=<%= i %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>"><%= i %></a>
+	            		<%
+            		}
+            	}
+            %>
+            <%
+            	if(currentPage < totalPage) {
+	            %>
+		            <a href="board.jsp?page=<%= currentPage + 1 %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&gt;</a>
+		            <a href="board.jsp?page=<%= totalPage %><%= searchType != "" ? "&searchType="+searchType : "" %><%= keyword != "" ? "&searchKeyword="+keyword : "" %>">&gt;&gt;</a>
+	            <%
+            	}
+            %>
         </div>
 	</div>
 </body>

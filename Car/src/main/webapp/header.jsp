@@ -75,11 +75,11 @@
 		<div class="header-container">
 			<nav class="navbar">
 				<div class="logo">
-					<h1><a href="carMain.jsp"><span>차량생각</span></a></h1>
+					<h1><a href="/Car/car/carMain.jsp"><span>차량생각</span></a></h1>
 				</div>	
 				<ul class="menu">
-					<li>게시판</li>
-					<li><a href="carBigyo.jsp">차량비교</a></li>
+					<li><a href="/Car/board/board.jsp">게시판</a></li>
+					<li><a href="/Car/car/carBigyo.jsp">차량비교</a></li>
 				</ul>
 				<div class="search">
 					<input type="text" placeholder="검색어를 입력해주세요">

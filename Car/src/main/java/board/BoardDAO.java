@@ -116,7 +116,7 @@ public class BoardDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select count(*) as cnt from board where board_type ! = 99";
+		String sql = "select count(*) as cnt from board where board_type != 99";
 
 		if(searchType != null && keyword != null) {
 			sql += " and " + searchType + " like '%" + keyword + "%'";
