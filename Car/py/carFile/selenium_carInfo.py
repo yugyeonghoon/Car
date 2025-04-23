@@ -39,7 +39,7 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 result = []
 fail_list = []
 
-for title in title_list[24:]:
+for title in title_list:
     url = f"https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query={title + ' 제원'}"
     driver.get(url)
     time.sleep(2)
