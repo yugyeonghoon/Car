@@ -75,11 +75,11 @@
 		<div class="header-container">
 			<nav class="navbar">
 				<div class="logo">
-					<h1><a href="carMain.jsp"><span>차량생각</span></a></h1>
+					<h1><a href="/Car/car/carMain.jsp"><span>차량생각</span></a></h1>
 				</div>	
 				<ul class="menu">
-					<li>게시판</li>
-					<li><a href="carBigyo.jsp">차량비교</a></li>
+					<li><a href="/Car/board/board.jsp">게시판</a></li>
+					<li><a href="/Car/car/carBigyo.jsp">차량비교</a></li>
 				</ul>
 				<div class="search">
 					<input type="text" placeholder="검색어를 입력해주세요">
@@ -88,9 +88,9 @@
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><img src="../icons8-메뉴-64.png" alt="메뉴 아이콘" class="menu-icon"></button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-							<li><a class="dropdown-item" href="#">로그인</a></li>
+							<li><a class="dropdown-item" href="/Car/login/login.jsp">로그인</a></li>
 		 					<li><a class="dropdown-item" href="#">마이페이지</a></li>
-		 					<li><a class="dropdown-item" href="#">로그아웃</a></li>
+		 					<li><a class="dropdown-item" href="/Car/login/logout.jsp">로그아웃</a></li>
 						</ul>
 				</div>
 			</nav>
