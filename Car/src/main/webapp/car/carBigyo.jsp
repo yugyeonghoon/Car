@@ -146,7 +146,7 @@
 		<div class="comparison-containers">
 			<div class="car-containers">
 				<div class="car">
-					<img alt="firstCar" src="../model_200_100.png" class="car-image">
+					<img alt="firstCar" src="../none_car.png" class="car-image">
 					<button class="select-button" onclick="openModal('modal1')">추가하기</button>
 					<table class="car-info">
 						<tr><th colspan="2">기본정보</th></tr>
@@ -159,7 +159,7 @@
 				</div>
 				<div class="vs-text">VS</div>
 				<div class="car">
-					<img alt="secondCar" src="../model_200_100.png" class="car-image">
+					<img alt="secondCar" src="../none_car.png" class="car-image">
 					<button class="select-button" onclick="openModal('modal2')">추가하기</button>
 					<table class="car-info">
 						<tr><th colspan="2">기본정보</th></tr>

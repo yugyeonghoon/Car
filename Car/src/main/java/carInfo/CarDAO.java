@@ -11,7 +11,7 @@ public class CarDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from car where car_img != '자료없음' order by rand() limit 30";
+		String sql = "select * from car_info where car_img != '자료없음' order by rand() limit 30";
 		
 		executeQuery(sql);
 		

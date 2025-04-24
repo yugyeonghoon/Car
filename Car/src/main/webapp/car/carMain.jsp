@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <title>차량 메인</title>
     <style>
-    	#dropdown {
+	   	#dropdown {
 			/* height: 1000px; */
 			margin-bottom: 50px;
 			display: flex;
@@ -73,7 +73,7 @@
 		  	width: 150px;
 		  	height: 43.44px;
 		  }
-        #content {
+         #content {
             margin: 100px auto;
             width: 1400px;
             position: relative;
@@ -88,8 +88,8 @@
             padding: 10px;
         }
         .car img {
-            width: 100%;
-            height: 200px;
+            width: 105%;
+            height: 320px;
             object-fit: contain;
             display: block;
             margin: auto;
@@ -101,11 +101,11 @@
             text-align: center;
             font-size: 1rem;
             font-weight: 500;
-            margin-top: 0.5rem;
+            margin-top: -3.5rem;
         }
         .carousel-control-prev,
         .carousel-control-next {
-            width: 50%;
+            width: 10%;
             z-index: 10;
         }
         .carousel-control-prev-icon,
@@ -120,7 +120,6 @@
 </head>
 <body>
 <%@include file="../header.jsp" %>
-
 <div id="content">
     <%@include file="../dropdown.jsp" %>
 
