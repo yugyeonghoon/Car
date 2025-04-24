@@ -39,6 +39,7 @@
 	if(keyword == null) {
 		keyword = "";
 	}
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -223,8 +224,8 @@
 						int views = vo.getViews();
 				%>		
 						<tr>
-							<td><%= boardType%> </td>
-							<td><%= title%> </td>
+							<td><%= boardType == 0 ? "공지" : "자유" %></td>
+							<td><a href="post.jsp?no=<%= no %><%= searchType != "" ? "&searchType="+searchType : ""%><%= keyword != "" ? "&searchKeyword="+keyword : "" %>"><%=title %></a></td>
 							<td><%= author%> </td>
 							<td><%= createDate%> </td>
 							<td><%= views%> </td>

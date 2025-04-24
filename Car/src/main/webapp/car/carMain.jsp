@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,7 +12,99 @@
 <title>메인</title>
 <link href="../css/carMain.css" rel="stylesheet">
 <link href="../css/carMainDropdown.css" rel="stylesheet">
-<link href="../css/footer.css" rel="stylesheet">
+<style>
+	#content {
+			position: absolute;
+    		top: 300px;
+		}
+		
+	h4 {
+		text-align: center;
+	}
+
+	.first {
+	    float: left;
+	    margin-right: 10px;
+	    marign-left: 10%;
+	    width: 25%;
+	}
+
+	.second, .third {
+		float: left;
+	    margin-right: 10px;
+	    width: 25%;
+	}
+	.carousel-item {
+		margin-left: 11%; 
+	}
+	
+	#dropdown {
+  		/* height: 1000px; */
+  		margin-bottom: 50px;
+  		display: flex;
+		justify-content: center;
+		align-items: center;
+		/* position: absolute;
+		top: 200px; */
+  	}
+	.custom-select {
+      position: relative;
+      width: 300px;
+      margin-bottom: 20px;
+      display: inline-block;
+    }
+
+	.select-selected, .select-submit {
+      background-color: #fff;
+      padding: 10px;
+      border: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+	.select-items {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background-color: #fff;
+      border: 1px solid #ccc;
+      border-top: none;
+      z-index: 99;
+      display: none;
+    }
+
+	.select-items div {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+	.select-items div:hover {
+      background-color: #f1f1f1;
+    }
+
+	.select-selected:after {
+      content: "▼";
+      float: right;
+    }
+
+	.select-selected.open:after {
+      content: "▲";
+    }
+
+    .hidden {
+      /* display: none; */
+    }
+    
+	.click {
+    	margin-bottom: 20px;
+    	display: inline-block;
+    	position: relative;
+    }
+	.select-submit {
+    	width: 150px;
+    	height: 43.44px;
+    }
+</style>
 </head>
 <body>
 <%@include file="../header.jsp" %>

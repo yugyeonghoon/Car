@@ -33,6 +33,7 @@
 		<button type="submit" class="select-submit">검색</button>
 	</div>
 	</div>
+</body>
 <script>
   const makerSelect = document.querySelector("#maker-select");
   const makerSelected = makerSelect.querySelector(".select-selected");
@@ -135,8 +136,6 @@
     }
   });
 </script>
-
-</body>
 </html>
 
 

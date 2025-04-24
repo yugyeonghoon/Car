@@ -88,9 +88,9 @@
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><img src="../icons8-메뉴-64.png" alt="메뉴 아이콘" class="menu-icon"></button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-							<li><a class="dropdown-item" href="#">로그인</a></li>
+							<li><a class="dropdown-item" href="/Car/login/login.jsp">로그인</a></li>
 		 					<li><a class="dropdown-item" href="#">마이페이지</a></li>
-		 					<li><a class="dropdown-item" href="#">로그아웃</a></li>
+		 					<li><a class="dropdown-item" href="/Car/login/logout.jsp">로그아웃</a></li>
 						</ul>
 				</div>
 			</nav>

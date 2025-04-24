@@ -216,12 +216,13 @@ public class BoardDAO extends DBManager{
 	
 	//조회수 증가
 	
-	public void updateViews(int no) {
+	public void updateViews(String bno) {
 		driverLoad();
 		DBConnect();
 		
-		String sql = "update board set views = views +1 where no ="+no;
+		String sql = "update board set views = views +1 where no ="+bno;
 		executeUpdate(sql);
 		DBDisConnect();
 	}
+	
 }
