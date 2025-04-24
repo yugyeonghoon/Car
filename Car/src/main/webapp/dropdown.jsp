@@ -7,6 +7,7 @@
   <title>메인 드롭다운</title>
 </head>
 <body>
+	<p>최근 본 차량 : 아반떼. 소나타</p>
 <div id="dropdown">
 <!-- 제조사 -->
 <div class="custom-select" id="maker-select">
@@ -27,6 +28,11 @@
 	<div class="custom-select hidden" id="trim-select">
 	  <div class="select-selected">트림 선택</div>
 	  <div class="select-items" id="trim-options"></div>
+	</div>
+	
+	<div class="custom-select hidden" id="model-select">
+	  <div class="select-selected">트림선택 </div>
+	  <div class="select-items" id="model-options"></div>
 	</div>
 	
 	<div class="click">
@@ -54,7 +60,7 @@
     	  	"아반떼", "더 뉴 아반떼 AD", "아반떼 AD", "더 뉴 아반떼", "아반떼 쿠페",
     	  	"아반떼 MD", "아반떼 하이브리드"],
       쏘나타: ["모던", "인스퍼레이션"]
-    },
+    },<%=%>
     kia: {
       K3: ["프레스티지", "노블레스"],
       K5: ["프레스티지", "시그니처"]

@@ -12,9 +12,9 @@
 	}
 	int currentPage = Integer.parseInt(pageNum);
 	
-	int startNum = (currentPage -1) * 10;
+	int startNum = (currentPage -1) * 20;
 	
-	int limitPerPage = 10;
+	int limitPerPage = 20;
 
 	String searchType = request.getParameter("searchType");
 	String keyword = request.getParameter("searchKeyword");
@@ -197,11 +197,11 @@
 		</div>
 		<table class="board-table">
 			<colgroup>
+				<col style="width: 60px;">
+				<col style="width: 65%;">
 				<col style="width: 80px;">
-				<col style="width: 60%;">
 				<col style="width: 120px;">
-				<col style="width: 150px;">
-				<col style="width: 80px;">
+				<col style="width: 60px;">
 			</colgroup>
 			<thead>
 				<tr>
