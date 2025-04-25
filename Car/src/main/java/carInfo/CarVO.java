@@ -1,8 +1,9 @@
 package carInfo;
 
 public class CarVO {
+	private String no;
+	private String mno;
 	private String company;
-	private String title;
 	private String trim;
 	private String engine;
 	private String compressor;
@@ -16,20 +17,40 @@ public class CarVO {
 	private String shift;
 	private String car_type;
 	private int year;
-	private String image;
+	private String car_img;
 	private String price;
+	private String car_name;
+	private String tno;
 	
+	public String getTno() {
+		return tno;
+	}
+	public void setTno(String tno) {
+		this.tno = tno;
+	}
+	public String getMno() {
+		return mno;
+	}
+	public void setMno(String mno) {
+		this.mno = mno;
+	}
+	public String getNo() {
+		return no;
+	}
+	public void setNo(String no) {
+		this.no = no;
+	}
+	public String getCar_name() {
+		return car_name;
+	}
+	public void setCar_name(String car_name) {
+		this.car_name = car_name;
+	}
 	public String getCompany() {
 		return company;
 	}
 	public void setCompany(String company) {
 		this.company = company;
-	}
-	public String getTitle() {
-		return title;
-	}
-	public void setTitle(String title) {
-		this.title = title;
 	}
 	public String getTrim() {
 		return trim;
@@ -109,17 +130,18 @@ public class CarVO {
 	public void setYear(int year) {
 		this.year = year;
 	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
+
 	public String getPrice() {
 		return price;
 	}
 	public void setPrice(String price) {
 		this.price = price;
+	}
+	public String getCar_img() {
+		return car_img;
+	}
+	public void setCar_img(String car_img) {
+		this.car_img = car_img;
 	}
 	
 	

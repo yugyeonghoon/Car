@@ -45,6 +45,8 @@
 		    border-top: none;
 		    z-index: 99;
 		    display: none;
+		    max-height: 200px;   /* 드롭다운 최대 높이 */
+  			overflow-y: auto;
 		  }
 		
 		  .select-items div {
@@ -121,7 +123,7 @@
 <body>
 <%@include file="../header.jsp" %>
 <div id="content">
-    <%@include file="../dropdown.jsp" %>
+    <%@include file="dropdown.jsp" %>
 
     <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -136,10 +138,10 @@
                         CarVO car = list.get(j); %>
                         <div class="col-md-4">
                             <div class="car">
-                                <a href="carDetail.jsp?title=<%= car.getTitle() %>">
+                                <a href="carDetail.jsp?title=<%= car.getCar_name() %>">
                                     <img src="<%= car.getImage() %>" alt="...">
                                     <div class="car-title">
-                                        <%= car.getCompany() %> <%= car.getTitle() %>
+                                        <%= car.getCompany() %> <%= car.getCar_name() %>
                                     </div>
                                 </a>
                             </div>
