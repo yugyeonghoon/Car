@@ -90,10 +90,12 @@
 					<li><a href="/Car/board/board.jsp">게시판</a></li>
 					<li><a href="/Car/car/carBigyo.jsp">차량비교</a></li>
 				</ul>
+				<form action="../carList.jsp" method="get">
 				<div class="search">
-					<input type="text" placeholder="검색어를 입력해주세요">
+					<input value="<%=ckeyword %>" type="text" name="carKeyword" placeholder="검색어를 입력해주세요">
 					<button class="searchBtn">검색</button>
 				</div>
+				</form>
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><img src="../icons8-메뉴-64.png" alt="메뉴 아이콘" class="menu-icon"></button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
