@@ -203,32 +203,31 @@
 		</div>
 </body>
 <script>
-  // 차량 평가 데이터 (차량 평가 항목에 맞게 데이터 수정)
-  let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>]; // 각 항목에 대한 점수 (주행, 가격, 거주성, 품질, 디자인, 연비)
-	
+  let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>];
+  data = data.map(value => Math.max(0, Math.min(10, value)));
 
-  // 차트 데이터
   let chartData = {
-    labels: ['주행', '가격', '거주성', '품질', '디자인', '연비'], // 평가 항목
+    labels: ['주행', '가격', '거주성', '품질', '디자인', '연비'],
     datasets: [{
-      label: '<%= vo.getCar_name() %> 차량 평가', // 차량 이름을 차트 제목에 추가
+      label: '<%= vo.getCar_name() %> 차량 평가',
       data: data,
-      backgroundColor: 'rgba(255, 108, 61, 0.2)', // 배경색
-      borderColor: 'rgba(255, 108, 61, 1)', // 테두리 색
+      backgroundColor: 'rgba(255, 108, 61, 0.2)',
+      borderColor: 'rgba(255, 108, 61, 1)',
       borderWidth: 2
     }]
   };
 
-  // 차트 옵션
   let chartOptions = {
     responsive: false,
     scales: {
       r: {
+        beginAtZero: true,
+        min: 0,
+        max: 10,
         ticks: {
-          beginAtZero: true,
-          suggestedMin: 0,
-          suggestedMax: 10,
-          stepSize: 1 // 간격 설정
+          stepSize: 2,
+          display: true,
+          color: "#333"
         },
         pointLabels: {
           font: {
@@ -239,25 +238,29 @@
           color: '#333'
         },
         angleLines: {
-        	display : false
-        },
+          display: false
+        }
       }
     },
     plugins: {
       legend: {
-        display: true // 범례 숨기기
+        display: true
       }
     }
   };
 
-  // Chart.js 레이더 차트 생성
+  if (window.radarChartInstance) {
+    window.radarChartInstance.destroy();
+  }
+
   let ctx = document.getElementById('carRadarChart').getContext('2d');
-  new Chart(ctx, {
+  window.radarChartInstance = new Chart(ctx, {
     type: 'radar',
     data: chartData,
     options: chartOptions
   });
 </script>
+
 <!--<script type="importmap">
       {
         "imports": {

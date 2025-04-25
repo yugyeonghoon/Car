@@ -1,209 +1,311 @@
+<%@page import="rating.RatingVO"%>
+<%@page import="rating.RatingDAO"%>
 <%@page import="carInfo.CarVO"%>
-<%@page import="java.util.List"%>
 <%@page import="carInfo.CarDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-    CarDAO dao = new CarDAO();
-    List<CarVO> list = dao.carView();
+	String tno = request.getParameter("tno");
+	System.out.println(tno);
+	
+	CarDAO dao = new CarDAO();
+	CarVO vo = dao.carDetail(tno);
+	
+	RatingDAO rdao = new RatingDAO();
+	RatingVO rvo = rdao.selectRating(tno);
 %>
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <title>차량 메인</title>
-    <style>
-	   	#dropdown {
-			/* height: 1000px; */
-			margin-bottom: 50px;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			}
-		  .custom-select {
-		    position: relative;
-		    width: 300px;
-		    margin-bottom: 20px;
-		    display: inline-block;
-		  }
-		  .select-selected, .select-submit {
-		    background-color: #fff;
-		    padding: 10px;
-		    border: 1px solid #ccc;
-		    cursor: pointer;
-		  }
-		  .select-items {
-		    position: absolute;
-		    top: 100%;
-		    left: 0;
-		    right: 0;
-		    background-color: #fff;
-		    border: 1px solid #ccc;
-		    border-top: none;
-		    z-index: 99;
-		    display: none;
-		    max-height: 200px;   /* 드롭다운 최대 높이 */
-  			overflow-y: auto;
-		  }
-		
-		  .select-items div {
-		    padding: 10px;
-		    cursor: pointer;
-		  }
-		  .select-items div:hover {
-		    background-color: #f1f1f1;
-		  }
-		  .select-selected:after {
-		    content: "▼";
-		    float: right;
-		  }
-		  .select-selected.open:after {
-		    content: "▲";
-		  }
-		  .hidden {
-		    /* display: none; */
-		  }
-		  .click {
-		  	margin-bottom: 20px;
-		  	display: inline-block;
-		  	position: relative;
-		  }
-		  .select-submit {
-		  	width: 150px;
-		  	height: 43.44px;
-		  }
-         #content {
-            margin: 100px auto;
-            width: 1400px;
-            position: relative;
-        }
-        .car {
-            width: 100%;
-            border: none;
-            transition: transform 0.2s;
-            border-radius: 8px;
-            overflow: hidden;
-            background-color: #fff;
-            padding: 10px;
-        }
-        .car img {
-            width: 105%;
-            height: 320px;
-            object-fit: contain;
-            display: block;
-            margin: auto;
-        }
-        .car:hover {
-            transform: scale(1.05);
-        }
-        .car-title {
-            text-align: center;
-            font-size: 1rem;
-            font-weight: 500;
-            margin-top: -3.5rem;
-        }
-        .carousel-control-prev,
-        .carousel-control-next {
-            width: 10%;
-            z-index: 10;
-        }
-        .carousel-control-prev-icon,
-        .carousel-control-next-icon {
-            background-color: rgba(0, 0, 0, 0.5);
-            border-radius: 50%;
-        }
-        .carousel-inner {
-            padding: 0 60px;
-        }
-        
-        /* 모달창 css */
-        .modal {
-		  display: none;
-		  position: fixed;
-		  z-index: 9999;
-		  left: 0;
-		  top: 0;
-		  width: 100%;
-		  height: 100%;
-		  background-color: rgba(0,0,0,0.5);
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>차량 상세 페이지</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 추가 -->
+<style>
+	body{
+		font-family: Arial, sans-serif;
+		margin: 20px;
+		background-color: white;
+		}
+	h3 {
+		text-align: center;
+		}
+	.car-wrapper {
+	    display: flex;
+	    gap: 30px;
+	    max-width: 1200px;
+	    margin: 0 auto;
+	    padding: 20px;
+	    background: white;
+	    border-radius: 10px;
+	    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 		}
 		
-		.modal-content {
-		  background-color: white;
-		  position: absolute;
-		  top: 50%;
-		  left: 50%;
-		  transform: translate(-50%, -50%);
-		  padding: 30px;
-		  width: 100%;
-		  max-width: 400px;
-		  border-radius: 10px;
-		  box-sizing: border-box;
-		  display: flex;
-		  flex-direction: column;
+	.car-image img {
+	    width: 100px;
+	    border-radius: 8px;
+	    object-fit: cover;
+		}
+	
+	.car-info-box {
+	    flex: 2;
+		}
+	
+	.car-rating-box {
+	    flex: 1;
+		}
+			
+    .car-container {
+		flex: 1;
+		min-width: 400px;
+		margin: 0 auto;
+		padding: 20px;
+		background-color: white;
+		border-radius: 10px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+       }
+    .car-info {
+      	flex: 1;
+       }
+       
+    .car-info h2 {
+        font-size: 25px;
+        color: #333;
+       }
+       
+    .car-info p {
+        font-size: 16px;
+        color: #555;
+       }
+       
+	th, td {
+		text-align: center;
+		font-size: 20px;
+       }
+       
+	div.table {
+       	padding: 20px;
+       }
+       
+	.card-title {
+		color: #343a40;
+		
 		}
 		
-		.close {
-		  position: absolute;
-		  right: 15px;
-		  top: 10px;
-		  font-size: 20px;
-		  cursor: pointer;
+	.card-text {
+		font-size: 16px;
 		}
-    </style>
+		
+	.list-group-item {
+		font-size: 15px;
+		padding: 0.5rem 1rem;
+		}
+		
+	.poster {
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+		max-height: 320px;
+		object-fit: contain;
+		display: block;
+		margin: auto;
+		border-radius: 8px;
+		}
+		.card-body p {
+  margin-bottom: 0.3rem;
+  font-size: 15px;
+}
+.card-body hr {
+  margin: 0.5rem 0;
+}
+		
+</style>
 </head>
 <body>
-<%@include file="../header.jsp" %>
-<div id="content">
-    <%@include file="dropdown.jsp" %>
-
-    <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner">
-            <%
-                int size = list.size();
-                int chunk = 3;
-                for (int i = 0; i < size; i += chunk) {
-            %>
-            <div class="carousel-item <%= (i == 0) ? "active" : "" %>">
-                <div class="row g-4">
-                    <% for (int j = i; j < i + chunk && j < size; j++) {
-                        CarVO car = list.get(j); %>
-                        <div class="col-md-4">
-                            <div class="car">
-                                <a href="carDetail.jsp?tno=<%=car.getTno()%>">
-                                    <img src="<%= car.getCar_img() %>" alt="...">
-                                    <div class="car-title">
-                                        <%= car.getCompany() %> <%= car.getCar_name() %>
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                    <% } %>
-                </div>
+<%@ include file="../header.jsp" %>
+<div class="container my-4">
+  <div class="row g-4">
+  
+    <!-- 차량 상세 정보 카드 -->
+    <div class="col-lg-8">
+      <div class="card shadow-sm">
+        <div class="row g-0">
+          <div class="col-md-5">
+            <img src="<%=vo.getCar_img() %>" alt="포스터" id="posterImage" class="poster">
+          </div>
+          <div class="col-md-7">
+            <div class="card-body">
+              <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %></h5>
+              <p class="card-text text-muted mb-2" id="carModel"><%=vo.getCar_type() %>, <%=vo.getYear() %></p>
+              
+              <ul class="list-group list-group-flush">
+                	<li class="list-group-item"><strong>가격:</strong> <%= vo.getPrice() %></li>
+					<li class="list-group-item"><strong>연료:</strong> <%= vo.getGas() %></li>
+					<li class="list-group-item"><strong>출력:</strong> <%= vo.getOutput() %></li>
+					<li class="list-group-item"><strong>토크:</strong> <%= vo.getTorque() %></li>
+					<li class="list-group-item"><strong>배기:</strong> <%= vo.getExhaust() %></li>
+					<li class="list-group-item"><strong>엔진:</strong> <%= vo.getEngine() %></li>
+					<li class="list-group-item"><strong>과급방식:</strong> <%= vo.getCompressor() %></li>
+					<li class="list-group-item"><strong>변속:</strong> <%= vo.getShift() %></li>
+					<li class="list-group-item"><strong>전장/전폭:</strong> <%= vo.getLength_width() %></li>
+					<li class="list-group-item"><strong>차량 무게:</strong> <%= vo.getWeight() %></li>
+              </ul>
             </div>
-            <% } %>
+          </div>
         </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
-            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-        </button>
+      </div>
     </div>
+
+    <!-- 차량 종합 평가 카드 -->
+    <div class="col-lg-4">
+      <div class="card shadow-sm h-100">
+        <div class="card-body">
+  <h5 class="card-title fw-bold">차량 종합 평점</h5>
+  <p class="card-text">평점: <span id="rating"><%=rvo.getRating() %>/10</span>  <span>  참여인원 :<%=rvo.getRating_people()%></span></p>
+  <hr>
+  <div class="row row-cols-2">
+    <div class="col"><strong>주행:</strong> <%=rvo.getDrive() %></div>
+    <div class="col"><strong>가격:</strong> <%=rvo.getPrice() %></div>
+    <div class="col"><strong>거주성:</strong> <%=rvo.getHabitability() %></div>
+    <div class="col"><strong>품질:</strong> <%=rvo.getQuality() %></div>
+    <div class="col"><strong>디자인:</strong> <%=rvo.getDesign() %></div>
+    <div class="col"><strong>연비:</strong> <%=rvo.getFuel() %></div>
+  </div>
+   <div class="my-4">
+            <canvas id="carRadarChart" width="350px" height="250px"></canvas> <!-- 차트 크기 줄이기 -->
+          </div>
 </div>
-<!-- 모달 창 -->
-	<div id="modal" class="modal">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-   			<div id="modal-body"></div>
+
+    </div>
+
+  </div>
+</div>
+		<div class="table">
+		  <h4>👍 긍정적인 피드백</h4>
+		  <table class="table table-success table-bordered">
+		    <thead><tr><th>내용</th></tr></thead>
+		    <tbody>
+		      <tr><td>디자인이 세련되고 만족스러워요.</td></tr>
+		      <tr><td>연비가 기대 이상입니다.</td></tr>
+		    </tbody>
+		  </table>
+		  <h4>👎 부정적인 피드백</h4>
+		  <table class="table table-danger table-bordered">
+		    <thead><tr><th>내용</th></tr></thead>
+		    <tbody>
+		      <tr><td>실내 소음이 다소 큽니다.</td></tr>
+		      <tr><td>가격이 조금 비싼 편입니다.</td></tr>
+		    </tbody>
+		  </table>
 		</div>
-	</div>
-<%@include file="../footer.jsp" %>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../js/modal.js" defer></script>
+<script>
+  let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>];
+  data = data.map(value => Math.max(0, Math.min(10, value)));
+
+  let chartData = {
+    labels: ['주행', '가격', '거주성', '품질', '디자인', '연비'],
+    datasets: [{
+      label: '<%= vo.getCar_name() %> 차량 평가',
+      data: data,
+      backgroundColor: 'rgba(255, 108, 61, 0.2)',
+      borderColor: 'rgba(255, 108, 61, 1)',
+      borderWidth: 2
+    }]
+  };
+
+  let chartOptions = {
+    responsive: false,
+    scales: {
+      r: {
+        beginAtZero: true,
+        min: 0,
+        max: 10,
+        ticks: {
+          stepSize: 2,
+          display: true,
+          color: "#333"
+        },
+        pointLabels: {
+          font: {
+            size: 10,
+            weight: '700',
+            family: 'Arial'
+          },
+          color: '#333'
+        },
+        angleLines: {
+          display: false
+        }
+      }
+    },
+    plugins: {
+      legend: {
+        display: true
+      }
+    }
+  };
+
+  if (window.radarChartInstance) {
+    window.radarChartInstance.destroy();
+  }
+
+  let ctx = document.getElementById('carRadarChart').getContext('2d');
+  window.radarChartInstance = new Chart(ctx, {
+    type: 'radar',
+    data: chartData,
+    options: chartOptions
+  });
+</script>
+
+<!--<script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+
+      // Fetch your API_KEY
+      const API_KEY = "AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4";
+      // Reminder: This should only be for local testing
+
+      // Access your API key (see "Set up your API key" above)
+      const genAI = new GoogleGenerativeAI(API_KEY);
+
+      // ...
+
+      // The Gemini 1.5 models are versatile and work with most use cases
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash"});
+
+	  const prompt = "최적의 연비로 안정감 있는 승차 넓고 쾌적한 드라이빙으로 손색없는 한국의 최고의 자랑 차량입니다" + " 이런 리뷰들이 있는데 이 차량에 대한 피드백과 개선점을 정리해서 줘 "
+
+		const result = await model.generateContent(prompt);
+  		const response = await result.response;
+  		const text = response.text();
+  		console.log(text);
+
+      // ...
+    </script>  -->
+<!-- <script>
+let param = [{"parts":[{"text": "최적의 연비로 안정감 있는 승차 넓고 쾌적한 드라이빙으로 손색없는 한국의 최고의 자랑 차량입니다" + " 이런 리뷰들이 있는데 이 차량에 대한 피드백과 개선점을 정리해서 줘 "}]}]; 
+$.ajax({
+	url : "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4",
+	type : "post",
+	data : {
+		contents : param
+	},
+	success : function(result){
+		console.log(result)
+	},
+	error : function(){
+		alert("에러!")
+	}
+})
+</script> -->
 </html>
