@@ -24,7 +24,7 @@ public class CarDAO extends DBManager{
 			CarVO vo = new CarVO();
 			vo.setCompany(company);
 			vo.setCar_name(carName);
-			vo.setImage(img);
+			vo.setCar_img(img);
 			
 			list.add(vo);
 		}
@@ -123,6 +123,31 @@ public class CarDAO extends DBManager{
 			String lengthWidth = getString("length_width");
 			String weidgt = getString("weidgt");
 			String shift = getString("shift");
+			
+			CarVO vo = new CarVO();
+			vo.setTno(tno2);
+			vo.setCar_name(carName);
+			vo.setYear(year);
+			vo.setCar_type(carType);
+			vo.setPrice(price);
+			vo.setCar_img(img);
+			vo.setTrim(trim);
+			vo.setEngine(engine);
+			vo.setCompressor(compressor);
+			vo.setExhaust(exhaust);
+			vo.setGas(gas);
+			vo.setOutput(output);
+			vo.setTorque(torque);
+			vo.setFuel(fuel);
+			vo.setLength_width(lengthWidth);
+			vo.setWeidgt(weidgt);
+			vo.setShift(shift);
+			
+			DBDisConnect();
+			return vo;
+			}else {
+				DBDisConnect();
+				return null;
 			}
 		
 	}
