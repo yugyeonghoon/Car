@@ -173,7 +173,7 @@
                         CarVO car = list.get(j); %>
                         <div class="col-md-4">
                             <div class="car">
-                                <a href="carDetail.jsp?title=<%= car.getCar_name() %>">
+                                <a href="carDetail.jsp?tno=<%=car.getTno()%>">
                                     <img src="<%= car.getCar_img() %>" alt="...">
                                     <div class="car-title">
                                         <%= car.getCompany() %> <%= car.getCar_name() %>

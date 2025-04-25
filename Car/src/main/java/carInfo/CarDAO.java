@@ -11,7 +11,7 @@ public class CarDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from car_info where car_img != '자료없음' order by rand() limit 30";
+		String sql = "select * from car_info where car_img != 'none_car.png' order by rand() limit 30";
 		
 		executeQuery(sql);
 		
@@ -20,11 +20,13 @@ public class CarDAO extends DBManager{
 			String company = getString("company");
 			String carName = getString("car_name");
 			String img = getString("car_img");
+			String tno = getString("tno");
 			
 			CarVO vo = new CarVO();
 			vo.setCompany(company);
 			vo.setCar_name(carName);
 			vo.setCar_img(img);
+			vo.setTno(tno);
 			
 			list.add(vo);
 		}
@@ -59,7 +61,7 @@ public class CarDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from model where no = " + no;
+		String sql = "SELECT * FROM model m WHERE m.no = "+no+" AND EXISTS ( SELECT 1 FROM car_info c WHERE c.mno = m.mno AND c.car_img != 'none_car.png')" ;
 		executeQuery(sql);
 			
 		List<CarVO> list = new ArrayList<>();
@@ -262,10 +264,22 @@ public class CarDAO extends DBManager{
 				driverLoad();
 				DBConnect();
 				
-				String sql = "select m.mno, ci.car_name , ci.car_type, ci.car_img from model m ";
-						sql += "inner join car_info ci on m.mno = ci.mno ";
-						sql += "where car_img != 'none_car.png' and car_name like '%"+title+"%' ";
-						sql += "group by m.mno, ci.car_name, ci.car_type, ci.car_img";
+				String sql = "SELECT mno, car_name, car_type, tno, car_img\r\n"
+						+ "FROM (\r\n"
+						+ "    SELECT \r\n"
+						+ "        m.mno,\r\n"
+						+ "        ci.car_name,\r\n"
+						+ "        ci.car_type,\r\n"
+						+ "        ci.tno,\r\n"
+						+ "        ci.car_img,\r\n"
+						+ "        ROW_NUMBER() OVER (PARTITION BY ci.car_name ORDER BY ci.tno) AS rn\r\n"
+						+ "    FROM model m\r\n"
+						+ "    INNER JOIN car_info ci ON m.mno = ci.mno\r\n"
+						+ "    WHERE ci.car_img != 'none_car.png'\r\n"
+						+ "      AND ci.car_name LIKE '%"+title+"%'\r\n"
+						+ ") AS sub\r\n"
+						+ "WHERE rn = 1\r\n"
+						+ "ORDER BY mno";
 				
 				executeQuery(sql);
 
@@ -274,11 +288,13 @@ public class CarDAO extends DBManager{
 					String carName = getString("car_name");
 					String carType = getString("car_type");
 					String img = getString("car_img");
+					String tno = getString("tno");
 
 					CarVO vo = new CarVO();
 					vo.setCar_name(carName);
 					vo.setCar_type(carType);
 					vo.setCar_img(img);
+					vo.setTno(tno);
 					
 					list.add(vo);
 				}

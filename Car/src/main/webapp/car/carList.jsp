@@ -65,7 +65,7 @@
   </style>
 </head>
 <body>
-<%@include file="header.jsp" %>
+<%@include file="../header.jsp" %>
 <!-- 헤더 검색어에 키워드 클릭 시 관련된 차량 정보 목록 나옴-->
   <div class="product-grid">
     
@@ -76,9 +76,10 @@
     		String carName = vo.getCar_name();
     		String img = vo.getCar_img();
     		String carType = vo.getCar_type();
+    		String tno = vo.getTno();
     %>
     <div class="product-card">
-	      <a href="/Car/car/carDetail.jsp?<%=mno %>"><img src="<%=img %>" alt="..."></a>
+	      <a href="/Car/car/carDetail.jsp?tno=<%=tno%>"><img src="<%=img %>" alt="..."></a>
 	      <div class="car-name"><%=carName %></div>
 	      <div class="car-type"><%=carType %></div>
     </div>
@@ -86,6 +87,6 @@
       	}
       %>
     </div>
-<%@include file="footer.jsp" %>
+<%@include file="../footer.jsp" %>
 </body>
 </html>
