@@ -1,7 +1,14 @@
+<%@page import="carInfo.CarVO"%>
+<%@page import="carInfo.CarDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
 	String tno = request.getParameter("tno");
+	System.out.println(tno);
+	
+	CarDAO dao = new CarDAO();
+	CarVO vo = new CarVO();
+	dao.carDetail(tno);
 %>
 <!DOCTYPE html>
 <html>
