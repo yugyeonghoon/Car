@@ -4,13 +4,28 @@ public class RatingVO {
 	private String no;
 	private String title;
 	private String rating;
-	private String ratingPeople;
+	private String rating_people;
 	private String drive;
 	private String price;
 	private String habitability;
 	private String quality;
 	private String design;
 	private String fuel;
+	private String tno;
+	
+	
+	public String getRating_people() {
+		return rating_people;
+	}
+	public void setRating_people(String rating_people) {
+		this.rating_people = rating_people;
+	}
+	public String getTno() {
+		return tno;
+	}
+	public void setTno(String tno) {
+		this.tno = tno;
+	}
 	public String getNo() {
 		return no;
 	}
@@ -28,12 +43,6 @@ public class RatingVO {
 	}
 	public void setRating(String rating) {
 		this.rating = rating;
-	}
-	public String getRatingPeople() {
-		return ratingPeople;
-	}
-	public void setRatingPeople(String ratingPeople) {
-		this.ratingPeople = ratingPeople;
 	}
 	public String getDrive() {
 		return drive;

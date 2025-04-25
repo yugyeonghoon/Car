@@ -1,3 +1,5 @@
+<%@page import="rating.RatingVO"%>
+<%@page import="rating.RatingDAO"%>
 <%@page import="carInfo.CarVO"%>
 <%@page import="carInfo.CarDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,6 +10,9 @@
 	
 	CarDAO dao = new CarDAO();
 	CarVO vo = dao.carDetail(tno);
+	
+	RatingDAO rdao = new RatingDAO();
+	RatingVO rvo = rdao.selectRating(tno);
 %>
 <!DOCTYPE html>
 <html>
@@ -158,15 +163,15 @@
       <div class="card shadow-sm h-100">
         <div class="card-body">
   <h5 class="card-title fw-bold">차량 종합 평점</h5>
-  <p class="card-text">평점: <span id="rating">2</span>/10</p>
+  <p class="card-text">평점: <span id="rating"><%=rvo.getRating() %>/10</span>  <span>  참여인원 :<%=rvo.getRating_people()%></span></p>
   <hr>
   <div class="row row-cols-2">
-    <div class="col"><strong>주행:</strong> 2</div>
-    <div class="col"><strong>가격:</strong> 2</div>
-    <div class="col"><strong>거주성:</strong> 2</div>
-    <div class="col"><strong>품질:</strong> 2</div>
-    <div class="col"><strong>디자인:</strong> 2</div>
-    <div class="col"><strong>연비:</strong> 2</div>
+    <div class="col"><strong>주행:</strong> <%=rvo.getDrive() %></div>
+    <div class="col"><strong>가격:</strong> <%=rvo.getPrice() %></div>
+    <div class="col"><strong>거주성:</strong> <%=rvo.getHabitability() %></div>
+    <div class="col"><strong>품질:</strong> <%=rvo.getQuality() %></div>
+    <div class="col"><strong>디자인:</strong> <%=rvo.getDesign() %></div>
+    <div class="col"><strong>연비:</strong> <%=rvo.getFuel() %></div>
   </div>
 </div>
 
