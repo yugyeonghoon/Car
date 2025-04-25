@@ -151,4 +151,107 @@ public class CarDAO extends DBManager{
 			}
 		
 	}
+	
+	//제조사 조회
+			public List<CarVO> companyView() {
+			    driverLoad();
+			    DBConnect();
+
+			    String sql = "select distinct company from car_info";
+
+			    executeQuery(sql);
+
+			    List<CarVO> list = new ArrayList<>();
+			    while(next()) {
+			        String company = getString("company");
+			        
+			        CarVO vo = new CarVO();
+			        vo.setCompany(company);
+			        list.add(vo);
+			    }
+
+			    DBDisConnect();
+			    return list;
+			}
+			
+			//모델 조회
+			public List<CarVO> modelView(String company) {
+			    driverLoad();
+			    DBConnect();
+
+			    String sql = "select distinct car_name from car_info where company = '"+company+"'";
+
+
+			    executeQuery(sql);
+
+			    List<CarVO> list = new ArrayList<>();
+			    while(next()) {
+			        String model = getString("car_name");
+			        
+			        CarVO vo = new CarVO();
+			        vo.setCar_name(model);;
+			        list.add(vo);
+			    }
+
+			    DBDisConnect();
+			    return list;
+			}
+			
+			//트림 조회
+			public List<CarVO> trimView(String carName) {
+			    driverLoad();
+			    DBConnect();
+
+			    String sql = "select trim from car_info where car_name = '"+carName+"'";
+
+
+			    executeQuery(sql);
+
+			    List<CarVO> list = new ArrayList<>();
+			    while(next()) {
+			        String trim = getString("trim");
+			        
+			        CarVO vo = new CarVO();
+			        vo.setCar_name(trim);
+			        list.add(vo);
+			    }
+
+			    DBDisConnect();
+			    return list;
+			}
+			
+			public List<CarVO> carBigyo(String car, String trim) {
+				driverLoad();
+				DBConnect();
+				
+				String sql = "select * from car_info where car_name = '"+car+"' and trim = '"+trim+"'";
+				
+				executeQuery(sql);
+				
+				List<CarVO> list = new ArrayList<>();
+				while(next()) {
+					String company = getString("company");
+					String carName = getString("car_name");
+					String img = getString("car_img");
+					String price = getString("price");
+					String gas = getString("gas");
+					String output = getString("output");
+					String engine = getString("engine");
+					String fuel = getString("fuel");
+					
+					CarVO vo = new CarVO();
+					vo.setCompany(company);
+					vo.setCar_name(carName);
+					vo.setCar_img(img);
+					vo.setPrice(price);
+					vo.setGas(gas);
+					vo.setOutput(output);
+					vo.setEngine(engine);
+					vo.setFuel(fuel);
+					
+					list.add(vo);
+				}
+				DBDisConnect();
+				return list;
+			}
 }
