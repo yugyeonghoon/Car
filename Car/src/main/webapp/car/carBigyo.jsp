@@ -33,7 +33,7 @@
 			}
 			/* 차량 이미지 스타일 */
 			.car-image {
-				width: 410px;
+				width: 460px;
 				height: 250px;
 				object-fit: cover;
 			}
@@ -182,11 +182,14 @@
 					<!-- 차량 기본 정보 테이블 -->
 					<table class="car-info">
 						<tr><th colspan="2">기본정보</th></tr>
+						<tr><th>이름</th><td></td></tr>
 						<tr><th>가격</th><td></td></tr>
 						<tr><th>연료</th><td></td></tr>
 						<tr><th>연비</th><td><br></td></tr>
 						<tr><th>출력</th><td></td></tr>
 						<tr><th>엔진</th><td></td></tr>
+						<tr><th>타입</th><td></td></tr>
+						
 					</table>
 				</div>
 				<div class="vs-text">VS</div>
@@ -197,11 +200,13 @@
 					<!-- 차량 기본 정보 테이블 -->
 					<table class="car-info">
 						<tr><th colspan="2">기본정보</th></tr>
+						<tr><th>이름</th><td></td></tr>
 						<tr><th>가격</th><td></td></tr>
 						<tr><th>연료</th><td></td></tr>
 						<tr><th>연비</th><td><br></td></tr>
 						<tr><th>출력</th><td></td></tr>
 						<tr><th>엔진</th><td></td></tr>
+						<tr><th>타입</th><td></td></tr>
 					</table>
 				</div>
 			</div>
@@ -353,11 +358,13 @@
 						let td = carElements[num - 1].querySelectorAll(".car-info td");
 
 						img.src = data.image;
-						td[0].textContent = data.price;
-						td[1].textContent = data.gas;
-						td[2].textContent = data.fuel; 
-						td[3].textContent = data.output;
-						td[4].textContent = data.engine;
+						td[0].textContent = data.carName;
+						td[1].textContent = data.price;
+						td[2].textContent = data.gas;
+						td[3].textContent = data.fuel; 
+						td[4].textContent = data.output;
+						td[5].textContent = data.engine;
+						td[6].textContent = data.type;
 
 						closeModal("modal" + num);
 					}
