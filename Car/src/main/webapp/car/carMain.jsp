@@ -45,6 +45,8 @@
 		    border-top: none;
 		    z-index: 99;
 		    display: none;
+		    max-height: 200px;   /* 드롭다운 최대 높이 */
+  			overflow-y: auto;
 		  }
 		
 		  .select-items div {
@@ -116,47 +118,12 @@
         .carousel-inner {
             padding: 0 60px;
         }
-        
-        /* 모달창 */
-        .modal {
-		  display: none;
-		  position: fixed;
-		  z-index: 9999;
-		  left: 0;
-		  top: 0;
-		  width: 100%;
-		  height: 100%;
-		  background-color: rgba(0,0,0,0.5);
-		}
-		
-		.modal-content {
-		  background-color: white;
-		  position: absolute;
-		  top: 50%;
-		  left: 50%;
-		  transform: translate(-50%, -50%);
-		  padding: 30px;
-		  width: 100%;
-		  max-width: 400px;
-		  border-radius: 10px;
-		  box-sizing: border-box;
-		  display: flex;
-		  flex-direction: column;
-		}
-		
-		.close {
-		  position: absolute;
-		  right: 15px;
-		  top: 10px;
-		  font-size: 20px;
-		  cursor: pointer;
-		}
     </style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
 <div id="content">
-    <%@include file="../dropdown.jsp" %>
+    <%@include file="dropdown.jsp" %>
 
     <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
         <div class="carousel-inner">
@@ -171,10 +138,10 @@
                         CarVO car = list.get(j); %>
                         <div class="col-md-4">
                             <div class="car">
-                                <a href="carDetail.jsp?title=<%= car.getTitle() %>">
+                                <a href="carDetail.jsp?title=<%= car.getCar_name() %>">
                                     <img src="<%= car.getImage() %>" alt="...">
                                     <div class="car-title">
-                                        <%= car.getCompany() %> <%= car.getTitle() %>
+                                        <%= car.getCompany() %> <%= car.getCar_name() %>
                                     </div>
                                 </a>
                             </div>
@@ -193,16 +160,6 @@
         </button>
     </div>
 </div>
-
-<!-- 모달 창 -->
-	<div id="modal" class="modal">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-   			<div id="modal-body"></div>
-		</div>
-	</div>
 <%@include file="../footer.jsp" %>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../js/modal.js" defer></script>
 </html>
