@@ -238,6 +238,7 @@ public class CarDAO extends DBManager{
 					String output = getString("output");
 					String engine = getString("engine");
 					String fuel = getString("fuel");
+					String carType = getString("car_type");
 					
 					CarVO vo = new CarVO();
 					vo.setCompany(company);
@@ -248,6 +249,7 @@ public class CarDAO extends DBManager{
 					vo.setOutput(output);
 					vo.setEngine(engine);
 					vo.setFuel(fuel);
+					vo.setCar_type(carType);
 					
 					list.add(vo);
 				}
