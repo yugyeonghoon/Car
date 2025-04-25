@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 <%
 	session.invalidate();
-	response.sendRedirect("../login/login.jsp");
+	response.sendRedirect("../car/carMain.jsp");
 %>

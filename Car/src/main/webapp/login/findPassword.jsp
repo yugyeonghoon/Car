@@ -121,10 +121,10 @@
 						<input type="submit" id="mailCheckBtn" value="확인" class="btn">
 						<div id="mailCheck-feedback" class="feedback">인증번호가 일치하지 않습니다.</div>
 					</div>
-					<div class="button-wrapper">			
-						<button onclick="location.href='../login/login.jsp'" class="btn">취소</button>
-					</div>
 				</form>
+				<div class="button-wrapper">			
+						<button onclick="location.href='../login/login.jsp'" class="btn">취소</button>
+				</div>
 		</div>
 	</div>	
 </body>

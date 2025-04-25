@@ -116,6 +116,41 @@
         .carousel-inner {
             padding: 0 60px;
         }
+        
+        /* 모달창 */
+        .modal {
+		  display: none;
+		  position: fixed;
+		  z-index: 9999;
+		  left: 0;
+		  top: 0;
+		  width: 100%;
+		  height: 100%;
+		  background-color: rgba(0,0,0,0.5);
+		}
+		
+		.modal-content {
+		  background-color: white;
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  padding: 30px;
+		  width: 100%;
+		  max-width: 400px;
+		  border-radius: 10px;
+		  box-sizing: border-box;
+		  display: flex;
+		  flex-direction: column;
+		}
+		
+		.close {
+		  position: absolute;
+		  right: 15px;
+		  top: 10px;
+		  font-size: 20px;
+		  cursor: pointer;
+		}
     </style>
 </head>
 <body>
@@ -158,6 +193,16 @@
         </button>
     </div>
 </div>
+
+<!-- 모달 창 -->
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+   			<div id="modal-body"></div>
+		</div>
+	</div>
 <%@include file="../footer.jsp" %>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../js/modal.js" defer></script>
 </html>
