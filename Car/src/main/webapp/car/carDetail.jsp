@@ -7,8 +7,7 @@
 	System.out.println(tno);
 	
 	CarDAO dao = new CarDAO();
-	CarVO vo = new CarVO();
-	dao.carDetail(tno);
+	CarVO vo = dao.carDetail(tno);
 %>
 <!DOCTYPE html>
 <html>
@@ -121,27 +120,24 @@
       <div class="card shadow-sm">
         <div class="row g-0">
           <div class="col-md-5">
-            <img src="https://search.pstatic.net/common?quality=75&direct=true&ttype=input&src=https%3A%2F%2Fdbscthumb-phinf.pstatic.net%2F5662_000_74%2F20250415103120800_H0Q5YTNQ0.png%2F20250415102117_a.png%3Ftype%3Dm1500" alt="포스터" id="posterImage" class="poster">
+            <img src="<%=vo.getCar_img() %>" alt="포스터" id="posterImage" class="poster">
           </div>
           <div class="col-md-7">
             <div class="card-body">
-              <h5 class="card-title fw-bold" id="carTitle">현대 아반떼 하이브리드</h5>
-              <p class="card-text text-muted mb-2" id="carModel">준중형 세단 2026</p>
+              <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %></h5>
+              <p class="card-text text-muted mb-2" id="carModel"><%=vo.getCar_type() %>, <%=vo.getYear() %></p>
               
               <ul class="list-group list-group-flush">
-                <li class="list-group-item"><strong>가격:</strong> 2,523~3,184만원</li>
-                <li class="list-group-item"><strong>연료:</strong> 가솔린, 하이브리드</li>
-                <li class="list-group-item"><strong>연비:</strong> 복합 19.2~21.1km/</li>
-                <li class="list-group-item"><strong>출력:</strong> 141hp/105hp</li>
-                <li class="list-group-item"><strong>토크:</strong> 15kg.m</li>
-                <li class="list-group-item"><strong>배기:</strong> 1,580cc</li>
-                <li class="list-group-item"><strong>엔진:</strong> I4</li>
-                <li class="list-group-item"><strong>구동:</strong> FF</li>
-                <li class="list-group-item"><strong>변속:</strong> DCT6단</li>
-                <li class="list-group-item"><strong>전장:</strong> 4,710mm</li>
-                <li class="list-group-item"><strong>전고:</strong> 1,420mm</li>
-                <li class="list-group-item"><strong>전폭:</strong> 1,825mm</li>
-                <li class="list-group-item"><strong>축거:</strong> 2,720mm</li>
+                	<li class="list-group-item"><strong>가격:</strong> <%= vo.getPrice() %></li>
+					<li class="list-group-item"><strong>연료:</strong> <%= vo.getGas() %></li>
+					<li class="list-group-item"><strong>출력:</strong> <%= vo.getOutput() %></li>
+					<li class="list-group-item"><strong>토크:</strong> <%= vo.getTorque() %></li>
+					<li class="list-group-item"><strong>배기:</strong> <%= vo.getExhaust() %></li>
+					<li class="list-group-item"><strong>엔진:</strong> <%= vo.getEngine() %></li>
+					<li class="list-group-item"><strong>과급방식:</strong> <%= vo.getCompressor() %></li>
+					<li class="list-group-item"><strong>변속:</strong> <%= vo.getShift() %></li>
+					<li class="list-group-item"><strong>전장/전폭:</strong> <%= vo.getLength_width() %></li>
+					<li class="list-group-item"><strong>차량 무게:</strong> <%= vo.getWeight() %></li>
               </ul>
             </div>
           </div>

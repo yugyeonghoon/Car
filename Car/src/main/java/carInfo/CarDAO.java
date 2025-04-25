@@ -121,7 +121,7 @@ public class CarDAO extends DBManager{
 			String torque = getString("torque");
 			String fuel = getString("fuel");
 			String lengthWidth = getString("length_width");
-			String weidgt = getString("weidgt");
+			String weight = getString("weight");
 			String shift = getString("shift");
 			
 			CarVO vo = new CarVO();
@@ -140,7 +140,7 @@ public class CarDAO extends DBManager{
 			vo.setTorque(torque);
 			vo.setFuel(fuel);
 			vo.setLength_width(lengthWidth);
-			vo.setWeidgt(weidgt);
+			vo.setWeight(weight);
 			vo.setShift(shift);
 			
 			DBDisConnect();
