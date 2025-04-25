@@ -3,6 +3,7 @@
     pageEncoding="UTF-8"%>
 <%@page import="carInfo.CarDAO" %>
 <%@page import="carInfo.CarVO" %>
+<%@include file="../header.jsp" %>
 <%
 	String title = request.getParameter("carKeyword");
 
@@ -30,12 +31,12 @@
 
     .product-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 60px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
       padding: 40px;
-      /* max-width: 1200px; */
+      max-width: 1200px;
       margin: 0 auto;
-      overflow: scroll;
+      overflow-y: auto;
       width: 100rem;
       height: 50rem;
     }
@@ -65,7 +66,7 @@
   </style>
 </head>
 <body>
-<%@include file="header.jsp" %>
+
 <!-- 헤더 검색어에 키워드 클릭 시 관련된 차량 정보 목록 나옴-->
   <div class="product-grid">
     
@@ -76,9 +77,10 @@
     		String carName = vo.getCar_name();
     		String img = vo.getCar_img();
     		String carType = vo.getCar_type();
+    		int carYear = vo.getYear();
     %>
     <div class="product-card">
-	      <a href="/Car/car/carDetail.jsp?<%=mno %>"><img src="<%=img %>" alt="..."></a>
+	      <a href="/Car/car/carDetail.jsp?mno=<%=mno %>"><img src="<%=img %>" alt="..."></a>
 	      <div class="car-name"><%=carName %></div>
 	      <div class="car-type"><%=carType %></div>
     </div>
@@ -86,6 +88,6 @@
       	}
       %>
     </div>
-<%@include file="footer.jsp" %>
+<%@include file="../footer.jsp" %>
 </body>
 </html>

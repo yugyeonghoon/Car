@@ -90,7 +90,7 @@
 					<li><a href="/Car/board/board.jsp">게시판</a></li>
 					<li><a href="/Car/car/carBigyo.jsp">차량비교</a></li>
 				</ul>
-				<form action="/Car/carList.jsp" method="get">
+				<form action="/Car/car/carList.jsp" method="get">
 				<div class="search">
 					<input value="<%=ckeyword %>" type="text" name="carKeyword" placeholder="검색어를 입력해주세요">
 					<button class="searchBtn">검색</button>
