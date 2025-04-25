@@ -13,7 +13,7 @@ public class CarVO {
 	private String torque;
 	private String fuel;
 	private String length_width;
-	private String weidgt;
+	private String weight;
 	private String shift;
 	private String car_type;
 	private int year;
@@ -106,12 +106,6 @@ public class CarVO {
 	public void setLength_width(String length_width) {
 		this.length_width = length_width;
 	}
-	public String getWeidgt() {
-		return weidgt;
-	}
-	public void setWeidgt(String weidgt) {
-		this.weidgt = weidgt;
-	}
 	public String getShift() {
 		return shift;
 	}
@@ -142,6 +136,12 @@ public class CarVO {
 	}
 	public void setCar_img(String car_img) {
 		this.car_img = car_img;
+	}
+	public String getWeight() {
+		return weight;
+	}
+	public void setWeight(String weight) {
+		this.weight = weight;
 	}
 	
 	
