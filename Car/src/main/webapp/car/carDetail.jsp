@@ -108,6 +108,13 @@
 		margin: auto;
 		border-radius: 8px;
 		}
+		.card-body p {
+  margin-bottom: 0.3rem;
+  font-size: 15px;
+}
+.card-body hr {
+  margin: 0.5rem 0;
+}
 		
 </style>
 </head>
@@ -150,17 +157,19 @@
     <div class="col-lg-4">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-          <h5 class="card-title fw-bold">차량 종합 평점</h5>
-          <p class="card-text">평점: <span id="rating">2</span>/10</p>
-          <hr>
-          <p><strong>주행:</strong> 2</p>
-          <p><strong>가격:</strong> 2</p>
-          <p><strong>거주성:</strong> 2</p>
-          <p><strong>품질:</strong> 2</p>
-          <p><strong>디자인:</strong> 2</p>
-          <p><strong>연비:</strong> 2</p>
-        </div>
-      </div>
+  <h5 class="card-title fw-bold">차량 종합 평점</h5>
+  <p class="card-text">평점: <span id="rating">2</span>/10</p>
+  <hr>
+  <div class="row row-cols-2">
+    <div class="col"><strong>주행:</strong> 2</div>
+    <div class="col"><strong>가격:</strong> 2</div>
+    <div class="col"><strong>거주성:</strong> 2</div>
+    <div class="col"><strong>품질:</strong> 2</div>
+    <div class="col"><strong>디자인:</strong> 2</div>
+    <div class="col"><strong>연비:</strong> 2</div>
+  </div>
+</div>
+
     </div>
 
   </div>
