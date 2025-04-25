@@ -16,7 +16,7 @@ driver = webdriver.Chrome(options=option)
 df = pd.read_csv("./carCSV/carmodel.csv")
 all_reviews = []
 
-for i, t in enumerate(df["title"][:5]):
+for i, t in enumerate(df["title"][800:]):
     query = f"{t} 오너평가"
     print(f"모델 검색: {query}")
     driver.get(f"https://search.naver.com/search.naver?query={quote_plus(query)}")
@@ -85,7 +85,7 @@ for i, t in enumerate(df["title"][:5]):
                     print(f"{t} | {trim_name} | 리뷰 {review_index} 수집됨")
 
                     if len(all_reviews) % 50 == 0:
-                        pd.DataFrame(all_reviews).to_csv("trim_test_partial.csv", index=False)
+                        pd.DataFrame(all_reviews).to_csv("./carCSV/trim_test2.csv", index=False)
 
                     time.sleep(1.5)
 
@@ -98,5 +98,5 @@ for i, t in enumerate(df["title"][:5]):
         continue
 
 # 최종 저장
-pd.DataFrame(all_reviews).to_csv("trim_test.csv", index=False, encoding="utf-8-sig")
+pd.DataFrame(all_reviews).to_csv("./carCSV/trim_reply_2.csv", index=False, encoding="utf-8-sig")
 print("전체 수집 끝")

@@ -256,4 +256,33 @@ public class CarDAO extends DBManager{
 				DBDisConnect();
 				return list;
 			}
+			
+			//헤더 검색어에 입력했을 때 나오는 차량 목록
+			public List<CarVO> searchCars(String title) {
+				driverLoad();
+				DBConnect();
+				
+				String sql = "select m.mno, ci.car_name , ci.car_type, ci.car_img from model m ";
+						sql += "inner join car_info ci on m.mno = ci.mno ";
+						sql += "where car_img != 'none_car.png' and car_name like '%"+title+"%' ";
+						sql += "group by m.mno, ci.car_name, ci.car_type, ci.car_img";
+				
+				executeQuery(sql);
+
+				List<CarVO> list = new ArrayList<>();
+				while (next()) {
+					String carName = getString("car_name");
+					String carType = getString("car_type");
+					String img = getString("car_img");
+
+					CarVO vo = new CarVO();
+					vo.setCar_name(carName);
+					vo.setCar_type(carType);
+					vo.setCar_img(img);
+					
+					list.add(vo);
+				}
+				DBDisConnect();
+				return list;
+			}
 }

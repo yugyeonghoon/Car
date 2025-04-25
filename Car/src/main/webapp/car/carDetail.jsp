@@ -17,6 +17,7 @@
 <title>차량 상세 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
 	body{
 		font-family: Arial, sans-serif;
@@ -183,4 +184,51 @@
 		  </table>
 		</div>
 </body>
+<!--<script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+
+      // Fetch your API_KEY
+      const API_KEY = "AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4";
+      // Reminder: This should only be for local testing
+
+      // Access your API key (see "Set up your API key" above)
+      const genAI = new GoogleGenerativeAI(API_KEY);
+
+      // ...
+
+      // The Gemini 1.5 models are versatile and work with most use cases
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash"});
+
+	  const prompt = "최적의 연비로 안정감 있는 승차 넓고 쾌적한 드라이빙으로 손색없는 한국의 최고의 자랑 차량입니다" + " 이런 리뷰들이 있는데 이 차량에 대한 피드백과 개선점을 정리해서 줘 "
+
+		const result = await model.generateContent(prompt);
+  		const response = await result.response;
+  		const text = response.text();
+  		console.log(text);
+
+      // ...
+    </script>  -->
+<!-- <script>
+let param = [{"parts":[{"text": "최적의 연비로 안정감 있는 승차 넓고 쾌적한 드라이빙으로 손색없는 한국의 최고의 자랑 차량입니다" + " 이런 리뷰들이 있는데 이 차량에 대한 피드백과 개선점을 정리해서 줘 "}]}]; 
+$.ajax({
+	url : "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4",
+	type : "post",
+	data : {
+		contents : param
+	},
+	success : function(result){
+		console.log(result)
+	},
+	error : function(){
+		alert("에러!")
+	}
+})
+</script> -->
 </html>

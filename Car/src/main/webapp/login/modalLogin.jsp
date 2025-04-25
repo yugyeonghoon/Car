@@ -14,33 +14,14 @@
 		}
 	}
 %>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>로그인</title>
-<script src="./jquery-3.7.1.js"></script>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<style>
-	@import url('https://fonts.googleapis.com/css2?family=Pretendard&display=swap');
-	body, html {
-	  font-family: 'Pretendard', sans-serif;
-	  background-color: #f3f4f6;
-	  margin: 0;
-	  padding: 0;
-	  height: 100vh;
-	  display: flex;
-	  justify-content: center;
-	  align-items: center;
-	}
-	
+	<style>
 	.container {
-	  background-color: #ffffff;
+	  /* background-color: #ffffff;
 	  width: 400px;
 	  padding: 50px 40px;
 	  border-radius: 12px;
 	  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-	  box-sizing: border-box;
+	  box-sizing: border-box; */
 	}
 	
 	h4 {
@@ -51,7 +32,7 @@
 	  margin-bottom: 30px;
 	}
 	
-	input[type="text"],
+	input[type="text1"],
 	input[type="password"] {
 	  width: 100%;
 	  padding: 12px 0;
@@ -65,7 +46,7 @@
 	  transition: border-color 0.3s;
 	}
 	
-	input[type="text"]:focus,
+	input[type="text1"]:focus,
 	input[type="password"]:focus {
 	  border-bottom: 2px solid #1f2937;
 	}
@@ -147,33 +128,28 @@
 	.dnthave:hover {
 	  text-decoration: underline;
 	}
-
-</style>
-</head>
-<body>
-	<div class="container">
-		<span class="error animated tada" id="msg"></span>
-		<form method="post" name="form1" class="box" onsubmit="return formCheckId()" action="../login/loginOk.jsp">
-			<h4>로그인 페이지<span></span></h4>
-			<h5></h5>
-				<input type="text" id="id" value="<%= cookie %>" name="id" placeholder="Id" autocomplete="off">
-					<i class="typcn typcn-eye" id="eye"></i>
-				<input type="password" name="password" placeholder="Password" id="pw" autocomplete="off">
-				<label>
-					<input type="checkbox" <%= !cookie.equals("") ? "checked" : "" %>id="checkId" name="checkId" class="checkId">
-					<span></span>
-					<small class="rmb">아이디 저장</small>
-				</label>
-				<div class="find-links">
-					<a href="../login/findId.jsp" class="forgetid">아이디 찾기</a>
-					<a href="../login/findPassword.jsp" class="forgetpass">비밀번호 찾기</a>
-				</div>
-					<input type="submit" value="로그인" class="btn1" >
-		</form>
-			<a href="../login/signUp.jsp" class="dnthave">회원가입</a>
-	</div> 
-		
-</body>
+	</style>
+		<div class="container">
+			<span class="error animated tada" id="msg"></span>
+			<form method="post" name="form1" class="box" onsubmit="return formCheckId()" action="../login/loginOk.jsp">
+				<h4>로그인 페이지<span></span></h4>
+				<h5></h5>
+					<input type="text1" id="id" value="<%= cookie %>" name="id" placeholder="Id" autocomplete="off">
+						<i class="typcn typcn-eye" id="eye"></i>
+					<input type="password" name="password" placeholder="Password" id="pw" autocomplete="off">
+					<label>
+						<input type="checkbox" <%= !cookie.equals("") ? "checked" : "" %>id="checkId" name="checkId" class="checkId">
+						<span></span>
+						<small class="rmb">아이디 저장</small>
+					</label>
+					<div class="find-links">
+						<a href="../login/findId.jsp" class="forgetid">아이디 찾기</a>
+						<a href="../login/findPassword.jsp" class="forgetpass">비밀번호 찾기</a>
+					</div>
+						<input type="submit" value="로그인" class="btn1" >
+			</form>
+				<a href="../login/signUp.jsp" class="dnthave">회원가입</a>
+		</div> 
 <script>
 	$(document).ready(function() {
 		console.log("html 로딩 완료")
