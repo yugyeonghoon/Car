@@ -23,6 +23,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script> -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 추가 -->
 <style>
 	body{
 		font-family: Arial, sans-serif;
@@ -173,6 +174,9 @@
     <div class="col"><strong>디자인:</strong> <%=rvo.getDesign() %></div>
     <div class="col"><strong>연비:</strong> <%=rvo.getFuel() %></div>
   </div>
+   <div class="my-4">
+            <canvas id="carRadarChart" width="350px" height="250px"></canvas> <!-- 차트 크기 줄이기 -->
+          </div>
 </div>
 
     </div>
@@ -198,6 +202,62 @@
 		  </table>
 		</div>
 </body>
+<script>
+  // 차량 평가 데이터 (차량 평가 항목에 맞게 데이터 수정)
+  let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>]; // 각 항목에 대한 점수 (주행, 가격, 거주성, 품질, 디자인, 연비)
+	
+
+  // 차트 데이터
+  let chartData = {
+    labels: ['주행', '가격', '거주성', '품질', '디자인', '연비'], // 평가 항목
+    datasets: [{
+      label: '<%= vo.getCar_name() %> 차량 평가', // 차량 이름을 차트 제목에 추가
+      data: data,
+      backgroundColor: 'rgba(255, 108, 61, 0.2)', // 배경색
+      borderColor: 'rgba(255, 108, 61, 1)', // 테두리 색
+      borderWidth: 2
+    }]
+  };
+
+  // 차트 옵션
+  let chartOptions = {
+    responsive: false,
+    scales: {
+      r: {
+        ticks: {
+          beginAtZero: true,
+          suggestedMin: 0,
+          suggestedMax: 10,
+          stepSize: 1 // 간격 설정
+        },
+        pointLabels: {
+          font: {
+            size: 10,
+            weight: '700',
+            family: 'Arial'
+          },
+          color: '#333'
+        },
+        angleLines: {
+        	display : false
+        },
+      }
+    },
+    plugins: {
+      legend: {
+        display: true // 범례 숨기기
+      }
+    }
+  };
+
+  // Chart.js 레이더 차트 생성
+  let ctx = document.getElementById('carRadarChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'radar',
+    data: chartData,
+    options: chartOptions
+  });
+</script>
 <!--<script type="importmap">
       {
         "imports": {
