@@ -12,9 +12,9 @@
 	}
 	int currentPage = Integer.parseInt(pageNum);
 	
-	int startNum = (currentPage -1) * 10;
+	int startNum = (currentPage -1) * 20;
 	
-	int limitPerPage = 10;
+	int limitPerPage = 20;
 
 	String searchType = request.getParameter("searchType");
 	String keyword = request.getParameter("searchKeyword");
@@ -39,6 +39,7 @@
 	if(keyword == null) {
 		keyword = "";
 	}
+	
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -196,11 +197,11 @@
 		</div>
 		<table class="board-table">
 			<colgroup>
+				<col style="width: 60px;">
+				<col style="width: 65%;">
 				<col style="width: 80px;">
-				<col style="width: 60%;">
 				<col style="width: 120px;">
-				<col style="width: 150px;">
-				<col style="width: 80px;">
+				<col style="width: 60px;">
 			</colgroup>
 			<thead>
 				<tr>
@@ -223,8 +224,8 @@
 						int views = vo.getViews();
 				%>		
 						<tr>
-							<td><%= boardType%> </td>
-							<td><%= title%> </td>
+							<td><%= boardType == 0 ? "공지" : "자유" %></td>
+							<td><a href="post.jsp?no=<%= no %><%= searchType != "" ? "&searchType="+searchType : ""%><%= keyword != "" ? "&searchKeyword="+keyword : "" %>"><%=title %></a></td>
 							<td><%= author%> </td>
 							<td><%= createDate%> </td>
 							<td><%= views%> </td>
