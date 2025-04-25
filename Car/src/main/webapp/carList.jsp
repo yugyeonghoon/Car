@@ -1,9 +1,17 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="carInfo.CarDAO" %>
 <%@page import="carInfo.CarVO" %>
 <%
 	String title = request.getParameter("carKeyword");
+
+	CarDAO dao = new CarDAO();
+	List<CarVO> list = dao.searchCars(title);
+	
+	if(title == null) {
+		title = "";
+	}
 %>
 <!DOCTYPE html>
 <html>
@@ -23,10 +31,13 @@
     .product-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 40px;
+      gap: 60px;
       padding: 40px;
-      max-width: 1200px;
+      /* max-width: 1200px; */
       margin: 0 auto;
+      overflow: scroll;
+      width: 100rem;
+      height: 50rem;
     }
 
     .product-card {
@@ -40,13 +51,13 @@
       background-color: #f5f5f5;
     }
 
-    .product-name {
+    .car-name {
       font-size: 14px;
       margin-top: 10px;
       color: #111;
     }
 
-    .product-price {
+    .car-type {
       font-size: 13px;
       color: #666;
       margin-top: 5px;
@@ -55,28 +66,26 @@
 </head>
 <body>
 <%@include file="header.jsp" %>
+<!-- 헤더 검색어에 키워드 클릭 시 관련된 차량 정보 목록 나옴-->
   <div class="product-grid">
+    
+    <% 
+    	for(int i = 0; i < list.size(); i++) {
+    		CarVO vo = list.get(i);
+    		String mno = vo.getMno();
+    		String carName = vo.getCar_name();
+    		String img = vo.getCar_img();
+    		String carType = vo.getCar_type();
+    %>
     <div class="product-card">
-      <img src="https://search.pstatic.net/common?quality=75&direct=true&ttype=input&src=https%3A%2F%2Fdbscthumb-phinf.pstatic.net%2F5662_000_74%2F20250415165505614_GO6DM3ULW.png%2F20250415165321_E.png%3Ftype%3Dm1500" alt="상품">
-      <div class="product-name">혼다 어코드 하이브리드</div>
-      <div class="product-price">중형 세단2025</div>
+	      <a href="/Car/car/carDetail.jsp?<%=mno %>"><img src="<%=img %>" alt="..."></a>
+	      <div class="car-name"><%=carName %></div>
+	      <div class="car-type"><%=carType %></div>
     </div>
-    <div class="product-card">
-      <img src="https://search.pstatic.net/common?quality=75&direct=true&ttype=input&src=https%3A%2F%2Fdbscthumb-phinf.pstatic.net%2F5662_000_74%2F20250404170119967_WDJ92V4C6.png%2F20250404165251_N.png%3Ftype%3Dm1500" alt="상품">
-      <div class="product-name">푸조 308</div>
-      <div class="product-price">준중형 해치백2025</div>
+      <%
+      	}
+      %>
     </div>
-    <div class="product-card">
-      <img src="https://search.pstatic.net/common?quality=75&direct=true&ttype=input&src=https%3A%2F%2Fdbscthumb-phinf.pstatic.net%2F5662_000_74%2F20250408102010155_RR0O55GK9.png%2F20250408101516_e.png%3Ftype%3Dm1500" alt="상품">
-      <div class="product-name">토요타 GR 86</div>
-      <div class="product-price">스포츠카 쿠페2025</div>
-    </div>
-    <div class="product-card">
-      <img src="https://search.pstatic.net/common?quality=75&direct=true&ttype=input&src=https%3A%2F%2Fdbscthumb-phinf.pstatic.net%2F5662_000_74%2F20250403140618669_032SXFOE4.png%2F20250403135907_1.png%3Ftype%3Dm1500" alt="상품">
-      <div class="product-name">KGM 토레스 EVX</div>
-      <div class="product-price">중형 SUV2025</div>
-    </div>
-  </div>
 <%@include file="footer.jsp" %>
 </body>
 </html>
