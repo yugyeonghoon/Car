@@ -139,7 +139,7 @@
                         <div class="col-md-4">
                             <div class="car">
                                 <a href="carDetail.jsp?title=<%= car.getCar_name() %>">
-                                    <img src="<%= car.getImage() %>" alt="...">
+                                    <img src="<%= car.getCar_img() %>" alt="...">
                                     <div class="car-title">
                                         <%= car.getCompany() %> <%= car.getCar_name() %>
                                     </div>
