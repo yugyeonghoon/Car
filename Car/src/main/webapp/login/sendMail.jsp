@@ -28,7 +28,7 @@
 	
 	String user = "wistua003@naver.com";
 	
-	String password = "35798120isn@@";
+	String password = "Y6HXEZB7RWW1";
 	
 	String title = "차량분석 회원가입 인증번호";
 	

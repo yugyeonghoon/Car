@@ -12,6 +12,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 		<title>차량 비교</title>
 		<style>
 			/* 비교 컨테이너 스타일 */
