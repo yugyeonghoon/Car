@@ -189,9 +189,11 @@ public class CarDAO extends DBManager{
 			    List<CarVO> list = new ArrayList<>();
 			    while(next()) {
 			        String model = getString("car_name");
+			        String img = getString("car_img");
 			        
 			        CarVO vo = new CarVO();
-			        vo.setCar_name(model);;
+			        vo.setCar_name(model);
+			        vo.setCar_img(img);
 			        list.add(vo);
 			    }
 
