@@ -147,8 +147,11 @@
           <div class="col-md-7">
             <div class="card-body">
               <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %></h5>
+              <select>
+              	<option><%= vo.getTrim() %></option>
+              </select>
               <p class="card-text text-muted mb-2" id="carModel"><%=vo.getCar_type() %>, <%=vo.getYear() %></p>
-              
+            
               <ul class="list-group list-group-flush">
                 	<li class="list-group-item"><strong>가격:</strong> <%= vo.getPrice() %></li>
 					<li class="list-group-item"><strong>연료:</strong> <%= vo.getGas() %></li>
