@@ -209,7 +209,7 @@
   let chartData = {
     labels: ['주행', '가격', '거주성', '품질', '디자인', '연비'],
     datasets: [{
-      label: '<%= vo.getCar_name() %> 차량 평가',
+      label: '<%= vo.getCar_name() %> 차량 종합 평가',
       data: data,
       backgroundColor: 'rgba(255, 108, 61, 0.2)',
       borderColor: 'rgba(255, 108, 61, 1)',
