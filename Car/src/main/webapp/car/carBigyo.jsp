@@ -271,12 +271,12 @@
 				</div>
 			</div>
 		</div>
-		<div>
+		<div><!-- 
 			<table>
 				<tr>
 					<td>리뷰</td>
 				</tr>
-			</table>
+			</table> -->
 		</div>
 		<script>
 			// 선택한 제조사에 따라 모델 로딩

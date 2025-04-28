@@ -13,6 +13,12 @@
 	
 	RatingDAO rdao = new RatingDAO();
 	RatingVO rvo = rdao.selectRating(tno);
+	
+    String cardStyle = "width: 65%"; // 기본 width 
+
+    if (rvo.getRating() != null && rvo.getRating().trim().equals("평점없음")) {
+        cardStyle = "width: 98%"; //평점없음일때
+    }
 %>
 <!DOCTYPE html>
 <html>
@@ -84,10 +90,12 @@
 	th, td {
 		text-align: center;
 		font-size: 20px;
+		border : none;
        }
        
 	div.table {
        	padding: 20px;
+       	border : none;
        }
        
 	.card-title {
@@ -108,20 +116,20 @@
 		width: 100%;
 		height: 100%;
 		max-width: 100%;
-		max-height: 320px;
+		max-height: 500px;
 		object-fit: contain;
 		display: block;
 		margin: auto;
 		border-radius: 8px;
 		}
 		.card-body p {
-  margin-bottom: 0.3rem;
-  font-size: 15px;
-}
-.card-body hr {
-  margin: 0.5rem 0;
-}
-		
+			margin-bottom: 0.3rem;
+			font-size: 15px;
+		}
+			.card-body hr {
+			margin: 0.5rem 0;
+		}
+	
 </style>
 </head>
 <body>
@@ -130,7 +138,7 @@
   <div class="row g-4">
   
     <!-- 차량 상세 정보 카드 -->
-    <div class="col-lg-8">
+    <div class="col-lg-8" style="<%= cardStyle %>">
       <div class="card shadow-sm">
         <div class="row g-0">
           <div class="col-md-5">
@@ -158,31 +166,37 @@
         </div>
       </div>
     </div>
-
+<%
+   // null 체크 후 trim() 사용
+   if (rvo.getRating() != null && rvo.getRating().trim().equals("평점없음") == false) {
+%>
     <!-- 차량 종합 평가 카드 -->
     <div class="col-lg-4">
       <div class="card shadow-sm h-100">
         <div class="card-body">
-  <h5 class="card-title fw-bold">차량 종합 평점</h5>
-  <p class="card-text">평점: <span id="rating"><%=rvo.getRating() %>/10</span>  <span>  참여인원 :<%=rvo.getRating_people()%></span></p>
-  <hr>
-  <div class="row row-cols-2">
-    <div class="col"><strong>주행:</strong> <%=rvo.getDrive() %></div>
-    <div class="col"><strong>가격:</strong> <%=rvo.getPrice() %></div>
-    <div class="col"><strong>거주성:</strong> <%=rvo.getHabitability() %></div>
-    <div class="col"><strong>품질:</strong> <%=rvo.getQuality() %></div>
-    <div class="col"><strong>디자인:</strong> <%=rvo.getDesign() %></div>
-    <div class="col"><strong>연비:</strong> <%=rvo.getFuel() %></div>
-  </div>
-   <div class="my-4">
+          <h5 class="card-title fw-bold">차량 종합 평점</h5>
+          <p class="card-text">평점: <span id="rating"><%= rvo.getRating() %>/10</span>
+          <span> 참여인원: <%= rvo.getRating_people() %></span></p>
+          <hr>
+          <div class="row row-cols-2">
+            <div class="col"><strong>주행:</strong> <%= rvo.getDrive() %></div>
+            <div class="col"><strong>가격:</strong> <%= rvo.getPrice() %></div>
+            <div class="col"><strong>거주성:</strong> <%= rvo.getHabitability() %></div>
+            <div class="col"><strong>품질:</strong> <%= rvo.getQuality() %></div>
+            <div class="col"><strong>디자인:</strong> <%= rvo.getDesign() %></div>
+            <div class="col"><strong>연비:</strong> <%= rvo.getFuel() %></div>
+          </div>
+          <div class="my-4">
             <canvas id="carRadarChart" width="350px" height="250px"></canvas> <!-- 차트 크기 줄이기 -->
           </div>
-</div>
-
+        </div>
+      </div>
     </div>
+	<%
+	   }
+	%>
 
-  </div>
-</div>
+	</div>
 		<div class="table">
 		  <h4>👍 긍정적인 피드백</h4>
 		  <table class="table table-success table-bordered">
@@ -201,6 +215,7 @@
 		    </tbody>
 		  </table>
 		</div>
+</div>
 </body>
 <script>
   let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>];
@@ -209,7 +224,7 @@
   let chartData = {
     labels: ['주행', '가격', '거주성', '품질', '디자인', '연비'],
     datasets: [{
-      label: '<%= vo.getCar_name() %> 차량 종합 평가',
+      label: '<%= vo.getCar_name() %> 차량 평가',
       data: data,
       backgroundColor: 'rgba(255, 108, 61, 0.2)',
       borderColor: 'rgba(255, 108, 61, 1)',
