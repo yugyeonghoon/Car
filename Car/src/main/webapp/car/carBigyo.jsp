@@ -12,7 +12,6 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 		<title>차량 비교</title>
 		<style>
 			/* 비교 컨테이너 스타일 */
@@ -272,12 +271,12 @@
 				</div>
 			</div>
 		</div>
-		<div>
+		<div><!-- 
 			<table>
 				<tr>
 					<td>리뷰</td>
 				</tr>
-			</table>
+			</table> -->
 		</div>
 		<script>
 			// 선택한 제조사에 따라 모델 로딩
