@@ -237,7 +237,7 @@
 			<div class="car-containers">
 				<!-- 첫 번째 차량 -->
 				<div class="car">
-					<img alt="firstCar" src="../model_200_100.png" class="car-image">
+					<img alt="firstCar" src=".././img/model_200_100.png" class="car-image">
 					<button class="select-button" onclick="openModal('modal1')">추가하기</button>
 					<!-- 차량 기본 정보 테이블 -->
 					<table class="car-info">
@@ -255,7 +255,7 @@
 				<div class="vs-text">VS</div>
 				<!-- 두 번째 차량 -->
 				<div class="car">
-					<img alt="secondCar" src="../model_200_100.png" class="car-image">
+					<img alt="secondCar" src=".././img/model_200_100.png" class="car-image">
 					<button class="select-button" onclick="openModal('modal2')">추가하기</button>
 					<!-- 차량 기본 정보 테이블 -->
 					<table class="car-info">
