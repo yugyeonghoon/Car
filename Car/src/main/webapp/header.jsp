@@ -97,7 +97,7 @@
 				</div>
 				</form>
 				<div class="dropdown">
-					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><img src="../icons8-메뉴-64.png" alt="메뉴 아이콘" class="menu-icon"></button>
+					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><img src="../img/icons8-메뉴-64.png" alt="메뉴 아이콘" class="menu-icon"></button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
 						<%
 							if(user == null) {

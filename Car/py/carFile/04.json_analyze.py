@@ -16,7 +16,7 @@ else:
     senti_dict = {k: int(v) for k, v in senti_raw.items()}
 
 def sentiment(text):
-    if not isinstance(text, str):  # safeguard against NaN or non-string types
+    if not isinstance(text, str):
         return 0
 
     words = text.split()
