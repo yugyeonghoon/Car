@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="rating.RatingVO"%>
 <%@page import="rating.RatingDAO"%>
 <%@page import="carInfo.CarVO"%>
@@ -13,6 +14,8 @@
 	
 	RatingDAO rdao = new RatingDAO();
 	RatingVO rvo = rdao.selectRating(tno);
+	
+	List<CarVO> trimList = dao.trimTno(tno);
 	
     String cardStyle = "width: 65%"; // 기본 width 
 
@@ -142,12 +145,19 @@
 	          </div>
 	          <div class="col-md-7">
 	            <div class="card-body">
-	              <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %></h5>
-	              <select class="trim-box">
-	              	<option><%= vo.getTrim() %></option>
-	              	<option><%= vo.getTrim() %></option>
-	              	<option><%= vo.getTrim() %></option>
-	              </select>
+	              <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %> | <%= vo.getTrim() %></h5>
+	              <select class="trim-box" id="trimSelect">
+				    <%
+				        for(int i = 0; i < trimList.size(); i++){
+				            CarVO tvo = trimList.get(i);
+				            String tnos = tvo.getTno();
+				            String trim = tvo.getTrim();
+				    %>
+				        <option value="<%= tnos %>" <%= trim.equals(vo.getTrim()) ? "selected" : "" %>><%= trim %></option>
+				    <%
+				        }
+				    %>
+				</select>
 	              <p class="card-text text-muted mb-2" id="carModel"><%=vo.getCar_type() %>, <%=vo.getYear() %></p>
 	            
 	              <ul class="list-group list-group-flush">
@@ -219,7 +229,7 @@
 	</div>
 	</body>
 	<script>
-	  let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>];
+	  let data = ["<%=rvo.getDrive() %>","<%=rvo.getPrice() %>","<%=rvo.getHabitability() %>","<%=rvo.getQuality() %>","<%=rvo.getDesign() %>","<%=rvo.getFuel() %>"];
 	  data = data.map(value => Math.max(0, Math.min(10, value)));
 	
 	  let chartData = {
@@ -265,18 +275,25 @@
 	    }
 	  };
 	
-	  if (window.radarChartInstance) {
-	    window.radarChartInstance.destroy();
+	  /* if (window.radarChartInstance) {
+		    window.radarChartInstance.destroy();
+		  } */
+	    window.radarChartInstance?.destroy();
+		
+	  let ctx = document.getElementById('carRadarChart')?.getContext('2d');
+	  if(ctx){
+		  window.radarChartInstance = new Chart(ctx, {
+		    type: 'radar',
+		    data: chartData,
+		    options: chartOptions
+		  });
 	  }
-	
-	  let ctx = document.getElementById('carRadarChart').getContext('2d');
-	  window.radarChartInstance = new Chart(ctx, {
-	    type: 'radar',
-	    data: chartData,
-	    options: chartOptions
-	  });
+	  
+	  $("#trimSelect").change(function(e){
+		  const tno = this.value
+		  location.replace("carDetail.jsp?tno="+tno)
+	  })
 	</script>
-	
 	<!--<script type="importmap">
 	      {
 	        "imports": {

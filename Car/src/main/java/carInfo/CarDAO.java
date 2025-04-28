@@ -303,4 +303,28 @@ public class CarDAO extends DBManager{
 				DBDisConnect();
 				return list;
 			}
+			
+			//상세 쿼리 조회
+			public List<CarVO> trimTno(String no){
+				driverLoad();
+				DBConnect();
+				
+				String sql = "select trim, tno from car_info where car_name = (select car_name from car_info where tno = "+no+")";
+				
+				executeQuery(sql);
+				
+				List<CarVO> list = new ArrayList<CarVO>();
+				while(next()) {
+					String trim = getString("trim");
+					String tno = getString("tno");
+					
+					CarVO vo = new CarVO();
+					vo.setTrim(trim);
+					vo.setTno(tno);
+					
+					list.add(vo);
+				}
+				DBDisConnect();
+				return list;
+			}
 }
