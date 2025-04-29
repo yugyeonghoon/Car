@@ -176,29 +176,29 @@ public class CarDAO extends DBManager{
 			    return list;
 			}
 			
-			//모델 조회
-			public List<CarVO> modelView(String company) {
-			    driverLoad();
-			    DBConnect();
+	//모델 조회
+	public List<CarVO> modelView(String company) {
+	    driverLoad();
+	    DBConnect();
 
-			    String sql = "select distinct car_name from car_info where company = '"+company+"'";
+	    String sql = "select distinct car_name, car_img from car_info where company = '"+company+"'";
 
 
-			    executeQuery(sql);
+	    executeQuery(sql);
 
-			    List<CarVO> list = new ArrayList<>();
-			    while(next()) {
-			        String model = getString("car_name");
-			        
-			        CarVO vo = new CarVO();
-			        vo.setCar_name(model);;
-			        list.add(vo);
-			    }
-
-			    DBDisConnect();
-			    return list;
-			}
-			
+	    List<CarVO> list = new ArrayList<>();
+	    while(next()) {
+	        String model = getString("car_name");
+	        String img = getString("car_img");
+	        
+	        CarVO vo = new CarVO();
+	        vo.setCar_name(model);
+	        vo.setCar_img(img);
+	        list.add(vo);
+	    }
+	    DBDisConnect();
+	    return list;
+	}		
 			//트림 조회
 			public List<CarVO> trimView(String carName) {
 			    driverLoad();
@@ -301,4 +301,28 @@ public class CarDAO extends DBManager{
 				DBDisConnect();
 				return list;
 			}
+			
+	//상세 쿼리 조회
+	public List<CarVO> trimTno(String no){
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select trim, tno from car_info where car_name = (select car_name from car_info where tno = "+no+")";
+		
+		executeQuery(sql);
+		
+		List<CarVO> list = new ArrayList<CarVO>();
+		while(next()) {
+			String trim = getString("trim");
+			String tno = getString("tno");
+			
+			CarVO vo = new CarVO();
+			vo.setTrim(trim);
+			vo.setTno(tno);
+			
+			list.add(vo);
+		}
+		DBDisConnect();
+		return list;
+	}
 }

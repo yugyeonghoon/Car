@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="carView.carViewVO"%>
+<%@page import="carView.carViewDAO"%>
 <%@page import="carInfo.CarVO"%>
 <%@page import="java.util.List"%>
 <%@page import="carInfo.CarDAO"%>
@@ -166,11 +169,37 @@
 		  font-size: 20px;
 		  cursor: pointer;
 		}
+<<<<<<< HEAD
+=======
+		
+		span {
+			align-items: center;
+		}
+		.carList {
+			display: flex;
+  			justify-content: center;
+  			margin-bottom: 10px;
+		}
+>>>>>>> branch 'main' of https://github.com/yugyeonghoon/Car.git
     </style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
 <div id="content">
+<!-- <p>최근 본 차량 목록: 현대 더 뉴 아반떼, 현대 더 뉴 아반떼 하이브리드</p> -->
+<div class="carList">
+	<span>최근 본 차량 목록: </span>
+<%
+	for(int i = 0; i < carViewList.size(); i++){
+		carViewVO vo = carViewList.get(i);
+		String carName = vo.getCarName();
+		String carTno = vo.getCarTno();
+		%>
+			<span><a href="carDetail.jsp?tno=<%=carTno%>"><%= carName %></a></span>
+		<%
+	}
+%>
+</div>
     <%@include file="dropdown.jsp" %>
 
     <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -189,7 +218,7 @@
                                 <a href="carDetail.jsp?tno=<%=car.getTno()%>">
                                     <img src="<%= car.getCar_img() %>" alt="...">
                                     <div class="car-title">
-                                        <%= car.getCar_name() %>
+                                        <%= car.getCompany() %> <%= car.getCar_name() %>
                                     </div>
                                 </a>
                             </div>

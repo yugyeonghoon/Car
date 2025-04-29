@@ -3,6 +3,7 @@
 <%@page import="carInfo.CarDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
+
 <%
 	// CarDAO 객체 생성 및 회사 목록 조회
 	CarDAO dao = new CarDAO();
@@ -12,6 +13,7 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
+		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<title>차량 비교</title>
 		<style>
 			/* 비교 컨테이너 스타일 */
@@ -185,8 +187,9 @@
 						for(int i = 0; i < list.size(); i++){
 							CarVO vo = list.get(i);
 							String company = vo.getCompany();
+							String no = vo.getNo();
 					%>
-							<option value="<%= company %>"><%= company %></option>
+							<option value="<%= company %>" data-value="<%=no %>"><%= company %></option>
 					<%
 						}
 					%>
@@ -215,8 +218,9 @@
 						for(int i = 0; i < list.size(); i++){
 							CarVO vo = list.get(i);
 							String company = vo.getCompany();
+							String no2 = vo.getNo();
 					%>
-							<option value="<%= company %>"><%= company %></option>
+							<option value="<%= company %>" data-value="<%=no2 %>"><%= company %></option>
 					<%
 						}
 					%>
@@ -278,107 +282,129 @@
 				</tr>
 			</table> -->
 		</div>
-		<script>
-			// 선택한 제조사에 따라 모델 로딩
-			function loadModels(makerId, modelId) {
-				let maker = document.getElementById(makerId).value;
-				if (maker === "") {
-					document.getElementById(modelId).innerHTML = "<option value=''>모델 선택</option>";
-					return;
-				}
-			
-				let xhr = new XMLHttpRequest();
-				xhr.open("get", "getModels.jsp?company=" + maker, true);
-				xhr.onreadystatechange = function () {
-					if (xhr.readyState === 4 && xhr.status === 200) {
-						let models = JSON.parse(xhr.responseText);
-						let modelSelect = document.getElementById(modelId);
-						modelSelect.innerHTML = "<option value=''>선택하세요</option>";
-						for (let i = 0; i < models.length; i++) {
-							let option = document.createElement("option");
-							option.value = models[i].title;
-							option.textContent = models[i].title;
-							modelSelect.appendChild(option);
-						}
-					}
-				};
-				xhr.send();
-			}
-			
-			function loadTrims(modelId, trimId) {
-				let model = document.getElementById(modelId).value;
-				if (model === "") {
-					document.getElementById(trimId).innerHTML = "<option value=''>트림 선택</option>";
-					return;
-				}
-			
-				let xhr = new XMLHttpRequest();
-				xhr.open("get", "getTrims.jsp?model=" + encodeURIComponent(model), true);
-				xhr.onreadystatechange = function () {
-					if (xhr.readyState === 4 && xhr.status === 200) {
-						let trims = JSON.parse(xhr.responseText);
-						let trimSelect = document.getElementById(trimId);
-						trimSelect.innerHTML = "<option value=''>선택하세요</option>";
-						for (let i = 0; i < trims.length; i++) {
-							let option = document.createElement("option");
-							option.value = trims[i].title;
-							option.textContent = trims[i].title;
-							trimSelect.appendChild(option);
-						}
-					}
-				};
-				xhr.send();
-			}
-			// 모달창 닫기
-			function closeModal(id) {
-				document.getElementById(id).style.display = "none";
-			}
-			// 모달창 열기
-			function openModal(id) {
-				document.getElementById(id).style.display = "block";
-			}
-			// 차량 선택 완료 처리
-			/* function selectCar(num) {
-				alert("차량 " + num + " 선택 완료!");
-				closeModal("modal" + num);
-			} */
-			
-			function selectCar(num) {
-				let maker = document.getElementById("maker" + num).value;
-				let model = document.getElementById("model" + num).value;
-				let trim = document.getElementById("trim" + num).value;
+<script>
+    // 제조사 선택 시 모델 로딩
+    function loadModels(makerId, modelId) {
+        const maker = $('#' + makerId).val();
+        const $modelSelect = $('#' + modelId);
 
-				if (maker === "" || model === "" || trim === "") {
-					alert("제조사, 모델, 트림을 모두 선택하세요.");
-					return;
-				}
+        if (maker === "") {
+            $modelSelect.html("<option value=''>모델 선택</option>");
+            return;
+        }
 
-				let xhr = new XMLHttpRequest();
-				xhr.open("get", "getCarInfo.jsp?model=" + encodeURIComponent(model) + "&trim=" + encodeURIComponent(trim), true);
-				xhr.onreadystatechange = function () {
-					if (xhr.readyState === 4 && xhr.status === 200) {
-						let data = JSON.parse(xhr.responseText);
+        $.ajax({
+            url: 'getModels.jsp',
+            type: 'GET',
+            data: {
+            	company: maker 
+            },
+            dataType: 'json',
+            success: function (models) {
+                $modelSelect.html("<option value=''>선택하세요</option>");
+                $.each(models, function (i, model) {
+                    const option = $('<option>')
+                        .val(model.title)
+                        .text(model.title)
+                        .attr('data-img', model.img);
+                    $modelSelect.append(option);
+                });
+            }
+        });
+    }
 
-						let carElements = document.querySelectorAll(".car");
-						let img = carElements[num - 1].querySelector("img");
-						let td = carElements[num - 1].querySelectorAll(".car-info td");
+    // 모델 선택 시 트림 로딩
+    function loadTrims(modelId, trimId) {
+        const model = $('#' + modelId).val();
+        const $trimSelect = $('#' + trimId);
 
-						img.src = data.image;
-						td[0].textContent = data.carName;
-						td[1].textContent = data.price;
-						td[2].textContent = data.gas;
-						td[3].textContent = data.fuel; 
-						td[4].textContent = data.output;
-						td[5].textContent = data.engine;
-						td[6].textContent = data.type;
+        if (model === "") {
+            $trimSelect.html("<option value=''>트림 선택</option>");
+            return;
+        }
 
-						closeModal("modal" + num);
-					}
-				};
-				xhr.send();
-			}
+        $.ajax({
+            url: 'getTrims.jsp',
+            type: 'GET',
+            data: {
+            	model: model
+            },
+            dataType: 'json',
+            success: function (trims) {
+                $trimSelect.html("<option value=''>선택하세요</option>");
+                $.each(trims, function (i, trim) {
+                    const option = $('<option>')
+                        .val(trim.title)
+                        .text(trim.title);
+                    $trimSelect.append(option);
+                });
+            }
+        });
+    }
 
-		</script>
+    // 모달 열기
+    function openModal(id) {
+        $('#' + id).show();
+    }
+
+    // 모달 닫기
+    function closeModal(id) {
+        $('#' + id).hide();
+    }
+
+    // 차량 선택 처리
+    function selectCar(num) {
+        const maker = $('#maker' + num).val();
+        const $modelSelect = $('#model' + num);
+        const model = $modelSelect.val();
+        const trim = $('#trim' + num).val();
+
+        if (!maker || !model || !trim) {
+            alert("제조사, 모델, 트림을 모두 선택하세요.");
+            return;
+        }
+
+        const imgSrc = $modelSelect.find(':selected').data('img');
+
+        $.ajax({
+            url: 'getCarInfo.jsp',
+            type: 'GET',
+            data: { 
+            	model: model,
+            	trim: trim 
+            },
+            dataType: 'json',
+            success: function (data) {
+                const $car = $('.car').eq(num - 1);
+                const $img = $car.find('img');
+                const $td = $car.find('.car-info td');
+                const carData = data[0];
+                if (imgSrc && imgSrc.startsWith('http')) {
+                    $img.attr('src', imgSrc);
+                } else {
+                    $img.attr('src', '../img/' + (imgSrc || 'model_200_100.png'));
+                }
+                $td.eq(0).text(carData.car_name);
+                $td.eq(1).text(carData.price);
+                $td.eq(2).text(carData.gas);
+                $td.eq(3).text(carData.fuel);
+                $td.eq(4).text(carData.output);
+                $td.eq(5).text(carData.engine);
+                $td.eq(6).text(carData.car_type);
+
+                closeModal("modal" + num);
+            }
+        });
+    }
+   /*  $("#model1").hover(function (e){
+	     let target = $(e.target); 
+	     if(target.is('option')){
+	         alert(target.attr("id"));//Will alert id if it has id attribute
+	         alert(target.text());//Will alert the text of the option
+	         alert(target.val());//Will alert the value of the option
+	     }
+	}); */
+</script>
 		<%@ include file="../footer.jsp" %>
 	</body>
 </html>

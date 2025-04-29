@@ -49,17 +49,17 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
  <%@ include file="../header.jsp" %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 추가 -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 추가 -->
 <style>
 	body{
 		font-family: Arial, sans-serif;
 		margin: 20px;
 		background-color: white;
-		}
+	}
 	h3 {
 		text-align: center;
-		}
+	}
 	.car-wrapper {
 	    display: flex;
 	    gap: 30px;
@@ -69,22 +69,18 @@
 	    background: white;
 	    border-radius: 10px;
 	    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-		}
-		
+	}				
 	.car-image img {
 	    width: 100px;
 	    border-radius: 8px;
 	    object-fit: cover;
-		}
-	
+	}			
 	.car-info-box {
 	    flex: 2;
-		}
-	
+	}			
 	.car-rating-box {
 	    flex: 1;
-		}
-			
+	}					
     .car-container {
 		flex: 1;
 		min-width: 400px;
@@ -93,46 +89,38 @@
 		background-color: white;
 		border-radius: 10px;
 		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-       }
+      }
     .car-info {
       	flex: 1;
-       }
-       
+      }	       
     .car-info h2 {
         font-size: 25px;
         color: #333;
-       }
-       
+      }		       
     .car-info p {
         font-size: 16px;
         color: #555;
-       }
-       
+      }		       
 	th, td {
 		text-align: center;
 		font-size: 20px;
 		border : none;
-       }
-       
+      }		       
 	div.table {
        	padding: 20px;
        	border : none;
-       }
-       
+       }       
 	.card-title {
 		color: #343a40;
 		
-		}
-		
+	}				
 	.card-text {
 		font-size: 16px;
-		}
-		
+	}			
 	.list-group-item {
 		font-size: 15px;
 		padding: 0.5rem 1rem;
-		}
-		
+	}				
 	.poster {
 		width: 100%;
 		height: 100%;
@@ -142,15 +130,27 @@
 		display: block;
 		margin: auto;
 		border-radius: 8px;
-		}
-		.card-body p {
-			margin-bottom: 0.3rem;
-			font-size: 15px;
-		}
-			.card-body hr {
-			margin: 0.5rem 0;
-		}
+	}
+	.card-body p {
+		margin-bottom: 0.3rem;
+		font-size: 15px;
+	}
+	.card-body hr {
+		margin: 0.5rem 0;
+	}
+	.trim-box {
+		width: 30%;
+		padding: 5px;
+		border: 1px solid #ccc;
+		border-radius: 8px;
+		font-size: 15px;
+		outline: none;
+		transition: border-color 0.2s;
+	}
 	
+	.table>:not(:last-child)>:last-child>* {
+	    border-bottom-color: #bcd0c7;
+	}
 </style>
 </head>
 <body>

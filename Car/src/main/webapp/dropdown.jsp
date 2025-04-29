@@ -7,7 +7,7 @@
   <title>메인 드롭다운</title>
 </head>
 <body>
-	<p>최근 본 차량 : 아반떼. 소나타</p>
+	<!-- <p>최근 본 차량 : 아반떼. 소나타</p> -->
 <div id="dropdown">
 <!-- 제조사 -->
 <div class="custom-select" id="maker-select">
