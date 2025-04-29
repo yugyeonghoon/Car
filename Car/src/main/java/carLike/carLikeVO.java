@@ -1,28 +1,41 @@
 package carLike;
 
 public class carLikeVO {
-	private int lno;
-	private String member;
-	private int carNo;
+	private int likeNo;
+	private String userId;
+	private String carTno;
+	private int likeCheck;
+	private String updateDate;
 	
-	public int getLno() {
-		return lno;
+	public int getLikeNo() {
+		return likeNo;
 	}
-	public void setLno(int lno) {
-		this.lno = lno;
+	public void setLikeNo(int likeNo) {
+		this.likeNo = likeNo;
 	}
-	public String getMember() {
-		return member;
+	public String getUserId() {
+		return userId;
 	}
-	public void setMember(String member) {
-		this.member = member;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public int getCarNo() {
-		return carNo;
+	public String getCarTno() {
+		return carTno;
 	}
-	public void setCarNo(int carNo) {
-		this.carNo = carNo;
+	public void setCarTno(String carTno) {
+		this.carTno = carTno;
 	}
-	
-	
+	public int getLikeCheck() {
+		return likeCheck;
+	}
+	public void setLikeCheck(int likeCheck) {
+		this.likeCheck = likeCheck;
+	}
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
+	}
+
 }

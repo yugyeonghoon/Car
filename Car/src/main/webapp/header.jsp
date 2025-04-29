@@ -3,7 +3,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%
-	UserVO user = (UserVO)session.getAttribute("user");
+	/* UserVO user = (UserVO)session.getAttribute("user"); */
 	String ckeyword = request.getParameter("ckeyword");
 	if(ckeyword == null){
 		ckeyword = "";
@@ -12,10 +12,10 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>차량생각</title>
+		<title>헤더</title>
 		<link href="https://fonts.googleapis.com/css2?family=Gugi&display=swap" rel="stylesheet">
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+		<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 		<style>
 		
 			.header-container {
@@ -90,16 +90,18 @@
 					<li><a href="/Car/board/board.jsp">게시판</a></li>
 					<li><a href="/Car/car/carBigyo.jsp">차량비교</a></li>
 				</ul>
+				<form action="/Car/car/carList.jsp" method="get">
 				<div class="search">
-					<input type="text" placeholder="검색어를 입력해주세요">
+					<input value="<%=ckeyword %>" type="text" name="carKeyword" placeholder="검색어를 입력해주세요">
 					<button class="searchBtn">검색</button>
 				</div>
+				</form>
 				<div class="dropdown">
 					<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false"><img src="../icons8-메뉴-64.png" alt="메뉴 아이콘" class="menu-icon"></button>
 						<ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-							<li><a class="dropdown-item" href="/Car/login/login.jsp">로그인</a></li>
-		 					<li><a class="dropdown-item" href="#">마이페이지</a></li>
-		 					<li><a class="dropdown-item" href="/Car/login/logout.jsp">로그아웃</a></li>
+								<li><a class="dropdown-item" data-url="/Car/login/modalLogin.jsp">로그인</a></li>
+								<li><a class="dropdown-item" href="#">마이페이지</a></li>
+		 						<li><a class="dropdown-item" href="../car/carMain.jsp">로그아웃</a></li>
 						</ul>
 				</div>
 			</nav>

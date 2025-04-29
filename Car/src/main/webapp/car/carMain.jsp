@@ -1,3 +1,6 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="carView.carViewVO"%>
+<%@page import="carView.carViewDAO"%>
 <%@page import="carInfo.CarVO"%>
 <%@page import="java.util.List"%>
 <%@page import="carInfo.CarDAO"%>
@@ -6,6 +9,19 @@
 <%
     CarDAO dao = new CarDAO();
     List<CarVO> list = dao.carView();
+    
+    List<carViewVO> carViewList = new ArrayList<>();
+    
+    UserVO userVO = (UserVO)session.getAttribute("user");
+    if(userVO != null){
+    	
+    	String id = userVO.getId();
+    	carViewDAO carViewDAO = new carViewDAO();
+    	carViewList = carViewDAO.viewList(id);
+    }
+    
+    System.out.println(carViewList.size());
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -14,11 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-<<<<<<< HEAD
-    <title>차량 생각</title> 
-=======
-    <title>차량 메인</title>
->>>>>>> branch 'main' of https://github.com/yugyeonghoon/Car.git
+    <title>차량 메인</title> 
     <style>
 	   	#dropdown {
 			/* height: 1000px; */
@@ -122,11 +134,69 @@
         .carousel-inner {
             padding: 0 60px;
         }
+        
+        /* 모달창 css */
+        .modal {
+		  display: none;
+		  position: fixed;
+		  z-index: 9999;
+		  left: 0;
+		  top: 0;
+		  width: 100%;
+		  height: 100%;
+		  background-color: rgba(0,0,0,0.5);
+		}
+		
+		.modal-content {
+		  background-color: white;
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  padding: 30px;
+		  width: 100%;
+		  max-width: 400px;
+		  border-radius: 10px;
+		  box-sizing: border-box;
+		  display: flex;
+		  flex-direction: column;
+		}
+		
+		.close {
+		  position: absolute;
+		  right: 15px;
+		  top: 10px;
+		  font-size: 20px;
+		  cursor: pointer;
+		}
+		
+		span {
+			align-items: center;
+		}
+		.carList {
+			display: flex;
+  			justify-content: center;
+  			margin-bottom: 10px;
+		}
     </style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
 <div id="content">
+<!-- <p>최근 본 차량 목록: 현대 더 뉴 아반떼, 현대 더 뉴 아반떼 하이브리드</p> -->
+<div class="carList">
+	<span>최근 본 차량 목록: </span>
+<%
+	for(int i = 0; i < carViewList.size(); i++){
+		carViewVO vo = carViewList.get(i);
+		String carName = vo.getCarName();
+		String carTno = vo.getCarTno();
+		%>
+			<span><a href="carDetail.jsp?tno=<%=carTno%>"><%= carName %></a></span>
+		<%
+	}
+%>
+</div>
     <%@include file="dropdown.jsp" %>
 
     <div id="carCarousel" class="carousel slide" data-bs-ride="carousel">
@@ -142,10 +212,10 @@
                         CarVO car = list.get(j); %>
                         <div class="col-md-4">
                             <div class="car">
-                                <a href="carDetail.jsp?title=<%= car.getCar_name() %>">
+                                <a href="carDetail.jsp?tno=<%=car.getTno()%>">
                                     <img src="<%= car.getCar_img() %>" alt="...">
                                     <div class="car-title">
-                                        <%= car.getCar_name() %>
+                                        <%= car.getCompany() %> <%= car.getCar_name() %>
                                     </div>
                                 </a>
                             </div>
@@ -164,6 +234,15 @@
         </button>
     </div>
 </div>
+<!-- 모달 창 -->
+	<div id="modal" class="modal">
+		<div class="modal-content">
+			<span class="close">&times;</span>
+   			<div id="modal-body"></div>
+		</div>
+	</div>
 <%@include file="../footer.jsp" %>
 </body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../js/modal.js" defer></script>
 </html>
