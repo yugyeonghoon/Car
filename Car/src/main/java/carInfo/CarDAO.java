@@ -239,6 +239,7 @@ public class CarDAO extends DBManager{
 					String engine = getString("engine");
 					String fuel = getString("fuel");
 					String carType = getString("car_type");
+					String trims = getString("trim");
 					
 					CarVO vo = new CarVO();
 					vo.setCompany(company);
@@ -250,10 +251,81 @@ public class CarDAO extends DBManager{
 					vo.setEngine(engine);
 					vo.setFuel(fuel);
 					vo.setCar_type(carType);
+					vo.setTrim(trims);
 					
 					list.add(vo);
 				}
 				DBDisConnect();
 				return list;
 			}
+<<<<<<< HEAD
+=======
+			
+			//헤더 검색어에 입력했을 때 나오는 차량 목록
+			public List<CarVO> searchCars(String title) {
+				driverLoad();
+				DBConnect();
+				
+				String sql = "SELECT mno, car_name, car_type, tno, car_img\r\n"
+						+ "FROM (\r\n"
+						+ "    SELECT \r\n"
+						+ "        m.mno,\r\n"
+						+ "        ci.car_name,\r\n"
+						+ "        ci.car_type,\r\n"
+						+ "        ci.tno,\r\n"
+						+ "        ci.car_img,\r\n"
+						+ "        ROW_NUMBER() OVER (PARTITION BY ci.car_name ORDER BY ci.tno) AS rn\r\n"
+						+ "    FROM model m\r\n"
+						+ "    INNER JOIN car_info ci ON m.mno = ci.mno\r\n"
+						+ "    WHERE ci.car_img != 'none_car.png'\r\n"
+						+ "      AND ci.car_name LIKE '%"+title+"%'\r\n"
+						+ ") AS sub\r\n"
+						+ "WHERE rn = 1\r\n"
+						+ "ORDER BY mno";
+				
+				executeQuery(sql);
+
+				List<CarVO> list = new ArrayList<>();
+				while (next()) {
+					String carName = getString("car_name");
+					String carType = getString("car_type");
+					String img = getString("car_img");
+					String tno = getString("tno");
+
+					CarVO vo = new CarVO();
+					vo.setCar_name(carName);
+					vo.setCar_type(carType);
+					vo.setCar_img(img);
+					vo.setTno(tno);
+					
+					list.add(vo);
+				}
+				DBDisConnect();
+				return list;
+			}
+			
+			//상세 쿼리 조회
+			public List<CarVO> trimTno(String no){
+				driverLoad();
+				DBConnect();
+				
+				String sql = "select trim, tno from car_info where car_name = (select car_name from car_info where tno = "+no+")";
+				
+				executeQuery(sql);
+				
+				List<CarVO> list = new ArrayList<CarVO>();
+				while(next()) {
+					String trim = getString("trim");
+					String tno = getString("tno");
+					
+					CarVO vo = new CarVO();
+					vo.setTrim(trim);
+					vo.setTno(tno);
+					
+					list.add(vo);
+				}
+				DBDisConnect();
+				return list;
+			}
+>>>>>>> 8043696ea76af4e1a27797b6e7d97cc86f72c6a5
 }
