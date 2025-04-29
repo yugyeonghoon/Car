@@ -17,13 +17,13 @@
 	RatingDAO rdao = new RatingDAO();
 	RatingVO rvo = rdao.selectRating(tno);
 	
-	UserVO user = (UserVO)session.getAttribute("user");
-	System.out.println(user);
-	if(user != null){
+	UserVO users = (UserVO)session.getAttribute("user");
+	System.out.println(users);
+	if(users != null){
 		carViewDAO carViewDao = new carViewDAO();
 		carViewVO carViewVo = new carViewVO();
 		
-		String userId = user.getId();
+		String userId = users.getId();
 		String carName = vo.getCar_name();
 		
 		carViewVo.setUserId(userId);
@@ -47,14 +47,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>차량 상세 페이지</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
- <%@ include file="../header.jsp" %>
+<%@ include file="../header.jsp" %>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 추가 -->
 <style>
 	body{
 		font-family: Arial, sans-serif;
-		margin: 20px;
+		/* margin: 20px; */
 		background-color: white;
 	}
 	h3 {
