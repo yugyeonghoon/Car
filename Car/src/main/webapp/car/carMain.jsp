@@ -14,7 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<<<<<<< HEAD
     <title>차량 생각</title> 
+=======
+    <title>차량 메인</title>
+>>>>>>> branch 'main' of https://github.com/yugyeonghoon/Car.git
     <style>
 	   	#dropdown {
 			/* height: 1000px; */
@@ -118,41 +122,6 @@
         .carousel-inner {
             padding: 0 60px;
         }
-        
-        /* 모달창 css */
-        .modal {
-		  display: none;
-		  position: fixed;
-		  z-index: 9999;
-		  left: 0;
-		  top: 0;
-		  width: 100%;
-		  height: 100%;
-		  background-color: rgba(0,0,0,0.5);
-		}
-		
-		.modal-content {
-		  background-color: white;
-		  position: absolute;
-		  top: 50%;
-		  left: 50%;
-		  transform: translate(-50%, -50%);
-		  padding: 30px;
-		  width: 100%;
-		  max-width: 400px;
-		  border-radius: 10px;
-		  box-sizing: border-box;
-		  display: flex;
-		  flex-direction: column;
-		}
-		
-		.close {
-		  position: absolute;
-		  right: 15px;
-		  top: 10px;
-		  font-size: 20px;
-		  cursor: pointer;
-		}
     </style>
 </head>
 <body>
@@ -173,7 +142,7 @@
                         CarVO car = list.get(j); %>
                         <div class="col-md-4">
                             <div class="car">
-                                <a href="carDetail.jsp?tno=<%=car.getTno()%>">
+                                <a href="carDetail.jsp?title=<%= car.getCar_name() %>">
                                     <img src="<%= car.getCar_img() %>" alt="...">
                                     <div class="car-title">
                                         <%= car.getCar_name() %>
@@ -195,15 +164,6 @@
         </button>
     </div>
 </div>
-<!-- 모달 창 -->
-	<div id="modal" class="modal">
-		<div class="modal-content">
-			<span class="close">&times;</span>
-   			<div id="modal-body"></div>
-		</div>
-	</div>
 <%@include file="../footer.jsp" %>
 </body>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="../js/modal.js" defer></script>
 </html>

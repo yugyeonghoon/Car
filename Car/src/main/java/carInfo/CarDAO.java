@@ -11,7 +11,7 @@ public class CarDAO extends DBManager{
 		driverLoad();
 		DBConnect();
 		
-		String sql = "select * from car_info where car_img != 'none_car.png' order by rand() limit 30";
+		String sql = "select * from car_info where car_img != '자료없음' order by rand() limit 30";
 		
 		executeQuery(sql);
 		
@@ -20,13 +20,11 @@ public class CarDAO extends DBManager{
 			String company = getString("company");
 			String carName = getString("car_name");
 			String img = getString("car_img");
-			String tno = getString("tno");
 			
 			CarVO vo = new CarVO();
 			vo.setCompany(company);
 			vo.setCar_name(carName);
 			vo.setCar_img(img);
-			vo.setTno(tno);
 			
 			list.add(vo);
 		}
@@ -123,7 +121,7 @@ public class CarDAO extends DBManager{
 			String torque = getString("torque");
 			String fuel = getString("fuel");
 			String lengthWidth = getString("length_width");
-			String weight = getString("weight");
+			String weidgt = getString("weidgt");
 			String shift = getString("shift");
 			
 			CarVO vo = new CarVO();
@@ -142,7 +140,7 @@ public class CarDAO extends DBManager{
 			vo.setTorque(torque);
 			vo.setFuel(fuel);
 			vo.setLength_width(lengthWidth);
-			vo.setWeight(weight);
+			vo.setWeidgt(weidgt);
 			vo.setShift(shift);
 			
 			DBDisConnect();
@@ -186,6 +184,7 @@ public class CarDAO extends DBManager{
 
 	    executeQuery(sql);
 
+<<<<<<< HEAD
 	    List<CarVO> list = new ArrayList<>();
 	    while(next()) {
 	        String model = getString("car_name");
@@ -196,6 +195,16 @@ public class CarDAO extends DBManager{
 	        vo.setCar_img(img);
 	        list.add(vo);
 	    }
+=======
+			    List<CarVO> list = new ArrayList<>();
+			    while(next()) {
+			        String model = getString("car_name");
+			        
+			        CarVO vo = new CarVO();
+			        vo.setCar_name(model);;
+			        list.add(vo);
+			    }
+>>>>>>> branch 'main' of https://github.com/yugyeonghoon/Car.git
 
 	    DBDisConnect();
 	    return list;
@@ -224,6 +233,7 @@ public class CarDAO extends DBManager{
 	    return list;
 	}
 			
+<<<<<<< HEAD
 	public List<CarVO> carBigyo(String car, String trim) {
 		driverLoad();
 		DBConnect();
@@ -243,6 +253,48 @@ public class CarDAO extends DBManager{
 			String engine = getString("engine");
 			String fuel = getString("fuel");
 			String carType = getString("car_type");
+=======
+			public List<CarVO> carBigyo(String car, String trim) {
+				driverLoad();
+				DBConnect();
+				
+				String sql = "select * from car_info where car_name = '"+car+"' and trim = '"+trim+"'";
+				
+				executeQuery(sql);
+				
+				List<CarVO> list = new ArrayList<>();
+				while(next()) {
+					String company = getString("company");
+					String carName = getString("car_name");
+					String img = getString("car_img");
+					String price = getString("price");
+					String gas = getString("gas");
+					String output = getString("output");
+					String engine = getString("engine");
+					String fuel = getString("fuel");
+					String carType = getString("car_type");
+					String trims = getString("trim");
+					
+					CarVO vo = new CarVO();
+					vo.setCompany(company);
+					vo.setCar_name(carName);
+					vo.setCar_img(img);
+					vo.setPrice(price);
+					vo.setGas(gas);
+					vo.setOutput(output);
+					vo.setEngine(engine);
+					vo.setFuel(fuel);
+					vo.setCar_type(carType);
+					vo.setTrim(trims);
+					
+					list.add(vo);
+				}
+				DBDisConnect();
+				return list;
+			}
+<<<<<<< HEAD
+=======
+>>>>>>> branch 'main' of https://github.com/yugyeonghoon/Car.git
 			
 			CarVO vo = new CarVO();
 			vo.setCompany(company);
@@ -255,6 +307,7 @@ public class CarDAO extends DBManager{
 			vo.setFuel(fuel);
 			vo.setCar_type(carType);
 			
+<<<<<<< HEAD
 			list.add(vo);
 		}
 		DBDisConnect();
@@ -327,4 +380,30 @@ public class CarDAO extends DBManager{
 		DBDisConnect();
 		return list;
 	}
+=======
+			//상세 쿼리 조회
+			public List<CarVO> trimTno(String no){
+				driverLoad();
+				DBConnect();
+				
+				String sql = "select trim, tno from car_info where car_name = (select car_name from car_info where tno = "+no+")";
+				
+				executeQuery(sql);
+				
+				List<CarVO> list = new ArrayList<CarVO>();
+				while(next()) {
+					String trim = getString("trim");
+					String tno = getString("tno");
+					
+					CarVO vo = new CarVO();
+					vo.setTrim(trim);
+					vo.setTno(tno);
+					
+					list.add(vo);
+				}
+				DBDisConnect();
+				return list;
+			}
+>>>>>>> 8043696ea76af4e1a27797b6e7d97cc86f72c6a5
+>>>>>>> branch 'main' of https://github.com/yugyeonghoon/Car.git
 }

@@ -24,7 +24,7 @@
 	int no = dao.write(vo);
 	
 	if(boardTypeNum == 1) {
-		response.sendRedirect("post.jsp?no="+ no);
+		response.sendRedirect("moviePost.jsp?no="+ no);
 	} else {
 		response.sendRedirect("post.jsp?no="+ no);
 	}
