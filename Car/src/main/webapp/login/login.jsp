@@ -150,30 +150,29 @@
 
 </style>
 </head>
-<body id="particles-js">
-	<div class="animated bounceInDown">
-		<div class="container">
-			<span class="error animated tada" id="msg"></span>
-			<form method="post" name="form1" class="box" onsubmit="return formCheckId()" action="../login/loginOk.jsp">
-				<h4>로그인 페이지<span></span></h4>
-				<h5></h5>
-					<input type="text" id="id" value="<%= cookie %>" name="id" placeholder="Id" autocomplete="off">
-						<i class="typcn typcn-eye" id="eye"></i>
-					<input type="password" name="password" placeholder="Password" id="pw" autocomplete="off">
-					<label>
-						<input type="checkbox" <%= !cookie.equals("") ? "checked" : "" %>id="checkId" name="checkId" class="checkId">
-						<span></span>
-						<small class="rmb">아이디 저장</small>
-					</label>
-					<div class="find-links">
-						<a href="../login/findId.jsp" class="forgetid">아이디 찾기</a>
-						<a href="../login/findPassword.jsp" class="forgetpass">비밀번호찾기</a>
-					</div>
-						<input type="submit" value="로그인" class="btn1" >
-			</form>
-				<a href="../login/signUp.jsp" class="dnthave">회원가입</a>
-		</div> 	
-	</div>
+<body>
+	<div class="container">
+		<span class="error animated tada" id="msg"></span>
+		<form method="post" name="form1" class="box" onsubmit="return formCheckId()" action="../login/loginOk.jsp">
+			<h4>로그인 페이지<span></span></h4>
+			<h5></h5>
+				<input type="text" id="id" value="<%= cookie %>" name="id" placeholder="Id" autocomplete="off">
+					<i class="typcn typcn-eye" id="eye"></i>
+				<input type="password" name="password" placeholder="Password" id="pw" autocomplete="off">
+				<label>
+					<input type="checkbox" <%= !cookie.equals("") ? "checked" : "" %>id="checkId" name="checkId" class="checkId">
+					<span></span>
+					<small class="rmb">아이디 저장</small>
+				</label>
+				<div class="find-links">
+					<a href="../login/findId.jsp" class="forgetid">아이디 찾기</a>
+					<a href="../login/findPassword.jsp" class="forgetpass">비밀번호 찾기</a>
+				</div>
+					<input type="submit" value="로그인" class="btn1" >
+		</form>
+			<a href="/Car/login/signUp.jsp" class="dnthave">회원가입</a>
+	</div> 
+		
 </body>
 <script>
 	$(document).ready(function() {

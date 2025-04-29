@@ -13,15 +13,19 @@
     String jsonResponse = "[";
 
     for (CarVO vo : modelList) {
-        jsonResponse += "{\"title\": \"" + vo.getCar_name() + "\"},"; // 모델 제목 추가
+        jsonResponse += "{"
+                      + "\"title\": \"" + vo.getCar_name() + "\","
+                      + "\"img\": \"" + vo.getCar_img() + "\""
+                      + "},";
     }
+
 
     // 마지막 쉼표 제거하고 JSON 배열 닫기
     if (jsonResponse.length() > 1) {
         jsonResponse = jsonResponse.substring(0, jsonResponse.length() - 1);
     }
     jsonResponse += "]";
-
+	System.out.println(jsonResponse);
     // JSON 응답 전송
     out.print(jsonResponse);
 %>

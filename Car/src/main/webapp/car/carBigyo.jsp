@@ -172,46 +172,7 @@
 		</style>
 	</head>
 	<body>
-		<!-- 차량 비교 컨테이너 -->
-		<div class="comparison-containers">
-			<div class="car-containers">
-				<!-- 첫 번째 차량 -->
-				<div class="car">
-					<img alt="firstCar" src="../model_200_100.png" class="car-image">
-					<button class="select-button" onclick="openModal('modal1')">추가하기</button>
-					<!-- 차량 기본 정보 테이블 -->
-					<table class="car-info">
-						<tr><th colspan="2">기본정보</th></tr>
-						<tr><th>이름</th><td></td></tr>
-						<tr><th>가격</th><td></td></tr>
-						<tr><th>연료</th><td></td></tr>
-						<tr><th>연비</th><td><br></td></tr>
-						<tr><th>출력</th><td></td></tr>
-						<tr><th>엔진</th><td></td></tr>
-						<tr><th>타입</th><td></td></tr>
-						
-					</table>
-				</div>
-				<div class="vs-text">VS</div>
-				<!-- 두 번째 차량 -->
-				<div class="car">
-					<img alt="secondCar" src="../model_200_100.png" class="car-image">
-					<button class="select-button" onclick="openModal('modal2')">추가하기</button>
-					<!-- 차량 기본 정보 테이블 -->
-					<table class="car-info">
-						<tr><th colspan="2">기본정보</th></tr>
-						<tr><th>이름</th><td></td></tr>
-						<tr><th>가격</th><td></td></tr>
-						<tr><th>연료</th><td></td></tr>
-						<tr><th>연비</th><td><br></td></tr>
-						<tr><th>출력</th><td></td></tr>
-						<tr><th>엔진</th><td></td></tr>
-						<tr><th>타입</th><td></td></tr>
-					</table>
-				</div>
-			</div>
-		</div>
-		<!-- 첫 번째 차량 모달창 -->
+	<!-- 첫 번째 차량 모달창 -->
 		<div id="modal1" class="modal">
 			<div class="modal-content">
 				<span class="close" onclick="closeModal('modal1')">&times;</span>
@@ -271,7 +232,52 @@
 				<button class="select-button" onclick="selectCar(2)">선택 완료</button>
 			</div>
 		</div>
-		
+		<!-- 차량 비교 컨테이너 -->
+		<div class="comparison-containers">
+			<div class="car-containers">
+				<!-- 첫 번째 차량 -->
+				<div class="car">
+					<img alt="firstCar" src=".././img/model_200_100.png" class="car-image">
+					<button class="select-button" onclick="openModal('modal1')">추가하기</button>
+					<!-- 차량 기본 정보 테이블 -->
+					<table class="car-info">
+						<tr><th colspan="2">기본정보</th></tr>
+						<tr><th>이름</th><td></td></tr>
+						<tr><th>가격</th><td></td></tr>
+						<tr><th>연료</th><td></td></tr>
+						<tr><th>연비</th><td><br></td></tr>
+						<tr><th>출력</th><td></td></tr>
+						<tr><th>엔진</th><td></td></tr>
+						<tr><th>타입</th><td></td></tr>
+						
+					</table>
+				</div>
+				<div class="vs-text">VS</div>
+				<!-- 두 번째 차량 -->
+				<div class="car">
+					<img alt="secondCar" src=".././img/model_200_100.png" class="car-image">
+					<button class="select-button" onclick="openModal('modal2')">추가하기</button>
+					<!-- 차량 기본 정보 테이블 -->
+					<table class="car-info">
+						<tr><th colspan="2">기본정보</th></tr>
+						<tr><th>이름</th><td></td></tr>
+						<tr><th>가격</th><td></td></tr>
+						<tr><th>연료</th><td></td></tr>
+						<tr><th>연비</th><td><br></td></tr>
+						<tr><th>출력</th><td></td></tr>
+						<tr><th>엔진</th><td></td></tr>
+						<tr><th>타입</th><td></td></tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div><!-- 
+			<table>
+				<tr>
+					<td>리뷰</td>
+				</tr>
+			</table> -->
+		</div>
 		<script>
 			// 선택한 제조사에 따라 모델 로딩
 			function loadModels(makerId, modelId) {
