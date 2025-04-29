@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <title>차량 메인</title> 
+    <title>차량 생각</title> 
     <style>
 	   	#dropdown {
 			/* height: 1000px; */
@@ -176,7 +176,7 @@
                                 <a href="carDetail.jsp?tno=<%=car.getTno()%>">
                                     <img src="<%= car.getCar_img() %>" alt="...">
                                     <div class="car-title">
-                                        <%= car.getCompany() %> <%= car.getCar_name() %>
+                                        <%= car.getCar_name() %>
                                     </div>
                                 </a>
                             </div>
