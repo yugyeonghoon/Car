@@ -3,7 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ include file="../header.jsp" %>
 <%
 	
 	String pageNum = request.getParameter("page");
@@ -46,7 +46,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <title>자유 게시판</title>
 <style>
 	body {
@@ -183,7 +182,6 @@
 </style>
 </head>
 <body>
-<%@ include file="../header.jsp" %>
 <h2>자유 게시판</h2>
 	<div class="board-container">
 		<div class="search-bar">

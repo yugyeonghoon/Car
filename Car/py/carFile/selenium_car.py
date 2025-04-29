@@ -23,11 +23,11 @@ yearlist = []
 imagelist = []
 pricelist = []
 
-# carname.csv 데이터 불러오기
+# csv 데이터 불러오기
 data = pd.read_csv("./carFile/carname.csv")
 print(data)
 
-count = 50  # 중간 저장 주기 체크용 카운터
+count = 50  # 저장 주기 체크용 카운터
 
 # csv 값 하나씩 꺼내서 검색하며 데이터 수집
 for search in data["title"]:
@@ -37,18 +37,13 @@ for search in data["title"]:
     browser = search_url.send_keys(search)
     search_url.send_keys(Keys.RETURN)
 
-    # 검색 후 ENTER 누르고 난 후 2초 쉬기
     time.sleep(2)
 
-    #차량 기본 정보 출력
     try:
-        # XPath가 //div[@data-dss-logarea='x58']인 요소를 car_container에 대입
         car_container = driver.find_element(By.XPATH, "//div[@data-dss-logarea='x58']")
-        #car_container의 html을 앞에서부터 100글자까지 출력
         print(car_container.get_attribute("innerHTML")[:100])
         print(search)
 
-        # 차량 이름
         sub_title = car_container.find_element(By.CLASS_NAME, "sub_title")
 
         # 차량 타입
@@ -60,21 +55,19 @@ for search in data["title"]:
         print(year)
 
         # 차량 이미지
+        #인덱스 5번의 이미지 없을 시 인덱스 0번의 이미지 출력 그마저도 없을 시 빈문자
         try:
-            # 인덱스 5번의 이미지 출력
             view_image = car_container.find_element(By.CLASS_NAME, "img_area")
             image = view_image.find_elements(By.CSS_SELECTOR, "img")[5]
             src = image.get_attribute("src")
             print(src)
         except:
             try:
-                # 인덱스 5번이 없을 경우 인덱스 0번의 이미지 출력
                 view_image = car_container.find_element(By.CLASS_NAME, "img_area")
                 image = view_image.find_elements(By.CSS_SELECTOR, "img")[0]
                 src = image.get_attribute("src")
                 print(src)
             except:
-                # 이미지가 아예 없을 시 빈 문자 출력
                 src = ""
 
         # 차량 가격
