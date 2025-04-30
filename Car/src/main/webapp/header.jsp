@@ -105,7 +105,7 @@
 								<%
 							}else {
 								%>
-								<li><a class="dropdown-item" href="#">마이페이지</a></li>
+								<li><a class="dropdown-item" href="../user/profile.jsp">마이페이지</a></li>
 		 						<li><a class="dropdown-item" href="/Car/car/carMain.jsp">로그아웃</a></li>
 								<%
 							}
