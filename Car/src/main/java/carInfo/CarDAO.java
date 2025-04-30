@@ -241,6 +241,11 @@ public class CarDAO extends DBManager{
 					String engine = getString("engine");
 					String fuel = getString("fuel");
 					String carType = getString("car_type");
+					String exhaust = getString("exhaust");
+					String torque = getString("torque");
+					String length_width = getString("length_width");
+					String weight = getString("weight");
+					String shift = getString("shift");
 					
 					CarVO vo = new CarVO();
 					vo.setCompany(company);
@@ -252,6 +257,11 @@ public class CarDAO extends DBManager{
 					vo.setEngine(engine);
 					vo.setFuel(fuel);
 					vo.setCar_type(carType);
+					vo.setExhaust(exhaust);
+					vo.setTorque(torque);
+					vo.setLength_width(length_width);
+					vo.setWeight(weight);
+					vo.setShift(shift);
 					
 					list.add(vo);
 				}

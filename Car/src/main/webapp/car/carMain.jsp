@@ -129,7 +129,7 @@
 	            position: fixed;
 	            z-index: 9999;
 	            left: 0;
-	            top: 0;
+	            top: 100px;
 	            width: 100%;
 	            height: 100%;
 	            background-color: rgba(0,0,0,0.5);
@@ -149,9 +149,10 @@
 	        .close {
 	            position: absolute;
 	            right: 15px;
-	            top: 10px;
+	            top: 5px;
 	            font-size: 20px;
 	            cursor: pointer;
+	            color: white;
 	        }
 	        .carList {
 	            display: flex;
@@ -203,7 +204,7 @@
 	    </div>
 	</div>
 	<!-- 챗봇 열기 버튼 -->
-	<div onclick="openChatModal()" style="position: fixed; bottom: 20px; right: 20px; cursor: pointer; z-index: 10000;">
+	<div onclick="openChatModal()" style="position: fixed; bottom: 250px; right: 20px; cursor: pointer; z-index: 10000;">
 	    <img src="../img/icons8-챗봇-48.png" alt="챗봇 열기">
 	</div>
 	<!-- 챗봇 모달 -->
