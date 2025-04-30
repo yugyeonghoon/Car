@@ -8,7 +8,7 @@
         userMessage = "안녕하세요. 차량 관련 질문을 입력해주세요.";
     }
 
-    String[] carKeywords = {"안녕", "차량", "자동차", "엔진", "연비", "타이어", "중고차", "세단", "SUV", "브레이크", "마력", "주행", "신차", "차종", "남자", "여자"};
+    String[] carKeywords = {"차", "안녕", "차량", "자동차", "엔진", "연비", "타이어", "중고차", "세단", "SUV", "브레이크", "마력", "주행", "신차", "차종", "남자", "여자"};
     boolean isCarRelated = false;
     for (String keyword : carKeywords) {
         if (userMessage.contains(keyword)) {
