@@ -48,6 +48,8 @@
 			    line-height: 1.4;
 			    display: inline-block;
 			    clear: both;
+			    white-space: pre-wrap;
+ 				word-break: break-word;
 			}
 			.message.user {
 			    background-color: #1e88e5;
@@ -56,7 +58,7 @@
 			    border-bottom-right-radius: 0;
 			}
 			.message.bot {
-			    background-color: #eee;
+			    background-color: yellow;
 			    color: black;
 			    float: left;
 			    border-bottom-left-radius: 0;
@@ -105,15 +107,30 @@
 	        function appendMessage(sender, text) {
 	            const div = document.createElement("div");
 	            div.className = "message " + (sender === "나" ? "user" : "bot");
-	            div.innerHTML = text || "(빈 응답)";
+
+	            const cleanedText = (text || "(빈 응답)")
+	                .replace(/\*\*(.*?)\*\*/g, '$1') 
+	                .replace(/\*/g, '')               
+	                .replace(/\n/g, "<br>");
+
+	            div.innerHTML = cleanedText;
 	            chatMessages.appendChild(div);
 	            chatMessages.scrollTop = chatMessages.scrollHeight;
 	        }
+
 	
 	        function isCarRelated(message) {
-	            const carKeywords = ['안녕', '차량', '자동차', '엔진', '연비', '브레이크', '타이어', '차종', 'SUV', '세단', '중고차', '신차', '주행', '마력', '남자', '여자'];
-	            return carKeywords.some(keyword => message.includes(keyword));
+	            const karKeywords = ['안녕', '여자', '남자', '차량', '자동차', '엔진', '연비', '브레이크', '타이어', '차종', 'SUV', '세단', '중고차', '신차', '주행', '마력'];
+
+	            const noKarKeywords = ['사주', '운세', '궁합', '띠', '출생', '별자리', '점', '타로'];
+
+	            if (noKarKeywords.some(keyword => message.includes(keyword))) {
+	                return false;
+	            }
+
+	            return karKeywords.some(keyword => message.includes(keyword));
 	        }
+
 	
 	        async function sendMessage() {
 	            const input = document.getElementById("message");
@@ -121,7 +138,7 @@
 	            if (!message) return;
 	
 	            if (!isCarRelated(message)) {
-	                appendMessage("시스템", "⚠️ 차량 관련 질문만 받을 수 있습니다.");
+	                appendMessage("시스템", "◈ 차량 관련 질문만 받을 수 있습니다.");
 	                input.value = "";
 	                return;
 	            }
