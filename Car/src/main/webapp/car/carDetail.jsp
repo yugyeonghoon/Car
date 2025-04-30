@@ -1,3 +1,6 @@
+<%@page import="carFeedback.CarFeedbackVO"%>
+<%@page import="java.util.List"%>
+<%@page import="carFeedback.CarFeedbackDAO"%>
 <%@page import="carView.carViewVO"%>
 <%@page import="carView.carViewDAO"%>
 <%@page import="rating.RatingVO"%>
@@ -13,7 +16,7 @@
 	
 	CarDAO dao = new CarDAO();
 	CarVO vo = dao.carDetail(tno);
-	
+	String title = vo.getCar_name();
 	RatingDAO rdao = new RatingDAO();
 	RatingVO rvo = rdao.selectRating(tno);
 	
@@ -39,6 +42,12 @@
     if (rvo.getRating() != null && rvo.getRating().trim().equals("평점없음")) {
         cardStyle = "width: 98%"; //평점없음일때
     }
+    
+    CarFeedbackDAO fdao = new CarFeedbackDAO();
+    List<CarFeedbackVO> goodList = fdao.goodfeedback(tno);
+    List<CarFeedbackVO> badList = fdao.badfeedback(tno);
+    List<CarFeedbackVO> feddbackList = fdao.feedback(tno);
+    
 %>
 <!DOCTYPE html>
 <html>
@@ -150,6 +159,11 @@
 	
 	.table>:not(:last-child)>:last-child>* {
 	    border-bottom-color: #bcd0c7;
+
+	}
+	.table-bordered>:not(caption)>*>* {
+		text-align: left;
+		font-size: 1rem;
 	}
 </style>
 </head>
@@ -215,26 +229,64 @@
 	<%
 	   }
 	%>
-
 	</div>
-		<div class="table">
-		  <h4>👍 긍정적인 피드백</h4>
+	<% if(goodList != null && !goodList.isEmpty()){%>
+	<div class="row mt-4">
+    <div class="col-md-6">
+		  <h4><%= title %>의 장점</h4>
 		  <table class="table table-success table-bordered">
-		    <thead><tr><th>내용</th></tr></thead>
 		    <tbody>
-		      <tr><td>디자인이 세련되고 만족스러워요.</td></tr>
-		      <tr><td>연비가 기대 이상입니다.</td></tr>
+		    <%for(int i = 0; i < goodList.size(); i++){
+		    	CarFeedbackVO fvo = goodList.get(i);
+		    	String content = fvo.getContent();
+		    	%>
+					<tr><td><%=fvo.getContent() %></td></tr>
+		    	<%
+		    }
+		    %>
 		    </tbody>
 		  </table>
-		  <h4>👎 부정적인 피드백</h4>
-		  <table class="table table-danger table-bordered">
-		    <thead><tr><th>내용</th></tr></thead>
+		  </div>
+		  <div class="col-md-6">
+		  <h4><%= title %>의 단점</h4>
+		  <table class="table table-warning table-bordered">
 		    <tbody>
-		      <tr><td>실내 소음이 다소 큽니다.</td></tr>
-		      <tr><td>가격이 조금 비싼 편입니다.</td></tr>
+		    <%for(int i = 0; i < badList.size(); i++){
+		    	CarFeedbackVO fvo = badList.get(i);
+		    	String content = fvo.getContent();
+		    	%>
+					<tr><td><%=fvo.getContent() %></td></tr>
+		    	<%
+		    }
+		    %>
 		    </tbody>
+		</table>
+		</div>
+		  <div class="row mt-4">
+    <div class="col-12">
+			<h4><%= title %>의 개선점</h4>
+			<table class="table table-danger table-bordered">
+				<tbody>
+					<%for(int i = 0; i < feddbackList.size(); i++){
+						CarFeedbackVO fvo = feddbackList.get(i);
+						String content = fvo.getContent();
+					%>
+						<tr><td><%=fvo.getContent() %></td></tr>
+					<%
+					}
+					%>
+				</tbody>
 		  </table>
 		</div>
+		</div>
+		</div>
+		<%
+	}else{%>
+	<br>
+	<br>
+		<h4>해당 차량의 리뷰가 없습니다.</h4>
+		<%
+	}%>
 </div>
 </body>
 <script>
