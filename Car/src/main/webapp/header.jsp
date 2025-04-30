@@ -17,7 +17,6 @@
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 		<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 		<style>
-		
 			.header-container {
 				font-family: 'Gugi' !important;
 			}
@@ -106,7 +105,7 @@
 								<%
 							}else {
 								%>
-								<li><a class="dropdown-item" href="#">마이페이지</a></li>
+								<li><a class="dropdown-item" href="../user/profile.jsp">마이페이지</a></li>
 		 						<li><a class="dropdown-item" href="/Car/car/carMain.jsp">로그아웃</a></li>
 								<%
 							}
