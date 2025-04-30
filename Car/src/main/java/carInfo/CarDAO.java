@@ -241,11 +241,6 @@ public class CarDAO extends DBManager{
 					String engine = getString("engine");
 					String fuel = getString("fuel");
 					String carType = getString("car_type");
-					String exhaust = getString("exhaust");
-					String torque = getString("torque");
-					String length_width = getString("length_width");
-					String weight = getString("weight");
-					String shift = getString("shift");
 					
 					CarVO vo = new CarVO();
 					vo.setCompany(company);
@@ -257,11 +252,6 @@ public class CarDAO extends DBManager{
 					vo.setEngine(engine);
 					vo.setFuel(fuel);
 					vo.setCar_type(carType);
-					vo.setExhaust(exhaust);
-					vo.setTorque(torque);
-					vo.setLength_width(length_width);
-					vo.setWeight(weight);
-					vo.setShift(shift);
 					
 					list.add(vo);
 				}
@@ -274,22 +264,25 @@ public class CarDAO extends DBManager{
 				driverLoad();
 				DBConnect();
 				
-				String sql = "SELECT mno, car_name, car_type, tno, car_img\r\n"
-						+ "FROM (\r\n"
-						+ "    SELECT \r\n"
-						+ "        m.mno,\r\n"
-						+ "        ci.car_name,\r\n"
-						+ "        ci.car_type,\r\n"
-						+ "        ci.tno,\r\n"
-						+ "        ci.car_img,\r\n"
-						+ "        ROW_NUMBER() OVER (PARTITION BY ci.car_name ORDER BY ci.tno) AS rn\r\n"
-						+ "    FROM model m\r\n"
-						+ "    INNER JOIN car_info ci ON m.mno = ci.mno\r\n"
-						+ "    WHERE ci.car_img != 'none_car.png'\r\n"
-						+ "      AND ci.car_name LIKE '%"+title+"%'\r\n"
-						+ ") AS sub\r\n"
-						+ "WHERE rn = 1\r\n"
-						+ "ORDER BY mno";
+				String sql = "SELECT mno, car_name, car_type, tno, car_img, exhaust, fuel, year "
+						+ "FROM ("
+						+ "    SELECT "
+						+ "        m.mno,"
+						+ "        ci.car_name,"
+						+ "        ci.car_type,"
+						+ "        ci.tno,"
+						+ "        ci.car_img,"
+						+ "        ci.exhaust,"
+						+ "        ci.fuel,"
+						+ "        ci.year,"
+						+ "        ROW_NUMBER() OVER (PARTITION BY ci.car_name ORDER BY ci.tno) AS rn"
+						+ "    FROM model m"
+						+ "    JOIN car_info ci ON m.mno = ci.mno"
+						+ "    WHERE ci.car_img != 'none_car.png'"
+						+ "      AND ci.car_name LIKE '%"+title+"%'"
+						+ ") AS sub "
+						+ "WHERE rn = 1 "
+						+ " ORDER BY mno";
 				
 				executeQuery(sql);
 
@@ -299,12 +292,18 @@ public class CarDAO extends DBManager{
 					String carType = getString("car_type");
 					String img = getString("car_img");
 					String tno = getString("tno");
+					String exhaust = getString("exhaust");
+					String fuel = getString("fuel");
+					int year = getInt("year");
 
 					CarVO vo = new CarVO();
 					vo.setCar_name(carName);
 					vo.setCar_type(carType);
 					vo.setCar_img(img);
 					vo.setTno(tno);
+					vo.setExhaust(exhaust);
+					vo.setFuel(fuel);
+					vo.setYear(year);
 					
 					list.add(vo);
 				}
