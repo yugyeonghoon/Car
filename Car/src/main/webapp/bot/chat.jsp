@@ -18,7 +18,7 @@
     }
 
     if (!isCarRelated) {
-        out.print(new JSONObject().put("reply", "⚠️ 죄송합니다. 차량 관련 질문만 받을 수 있습니다."));
+        out.print(new JSONObject().put("reply", "◈ 죄송합니다. 차량 관련 질문만 받을 수 있습니다."));
         return;
     }
 
