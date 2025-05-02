@@ -241,6 +241,12 @@ public class CarDAO extends DBManager{
 					String engine = getString("engine");
 					String fuel = getString("fuel");
 					String carType = getString("car_type");
+					String exhaust = getString("exhaust");
+					String torque = getString("torque");
+					String length_width = getString("length_width");
+					String weight = getString("weight");
+					String shift = getString("shift");
+					String trim2 = getString("trim");
 					
 					CarVO vo = new CarVO();
 					vo.setCompany(company);
@@ -252,12 +258,19 @@ public class CarDAO extends DBManager{
 					vo.setEngine(engine);
 					vo.setFuel(fuel);
 					vo.setCar_type(carType);
+					vo.setExhaust(exhaust);
+					vo.setTorque(torque);
+					vo.setLength_width(length_width);
+					vo.setWeight(weight);
+					vo.setShift(shift);
+					vo.setTrim(trim2);
 					
 					list.add(vo);
 				}
 				DBDisConnect();
 				return list;
 			}
+			
 			
 			//헤더 검색어에 입력했을 때 나오는 차량 목록
 			public List<CarVO> searchCars(String title) {
