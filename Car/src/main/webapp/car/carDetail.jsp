@@ -71,6 +71,11 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 추가 -->
 <style>
+	.footer {
+		position: static !important;
+		margin-top: 100px;
+		background-color: #e0f7fa;
+		}
 	body{
 		font-family: Arial, sans-serif;
 		/* margin: 20px; */
@@ -332,7 +337,7 @@
 	
 	</div>
 </div>
-
+	<%@include file="../footer.jsp" %>
 </body>
 <script>
   let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>];

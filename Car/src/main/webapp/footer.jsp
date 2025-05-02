@@ -19,7 +19,6 @@
 	    text-align: center;
 	    font-size: 12px;
 	    letter-spacing: -1px;
-	    margin-top: 40px;
 	    position: absolute;
 	    bottom: 0;
 	}
@@ -74,13 +73,13 @@
 					<a>차량분석</a>
 				</li>
 				<li>
-					<a>여러가지</a>
+					<a>이용약관</a>
 				</li>
 				<li>
-					<a>여러가지</a>
+					<a>개인정보처리방침</a>
 				</li>
 				<li>
-					<a>여러가지</a>
+					<a>광고안내</a>
 				</li>
 			</ul>
 		</div>
@@ -88,7 +87,7 @@
 	<p class="footerText">소비자들을 위한 체계적이고 솔직한 정보를 전달하겠습니다.</p>
 	<ul class="info contact">
 		<li>
-			<b>고객센터: 0000-0000</b>
+			<b>고객센터: 1254-4444</b>
 		</li>
 		<li>
 			<b>대표메일: ezen@naver.com</b>
@@ -97,7 +96,7 @@
 			<b>주소: 전북특별자치도 전주시 덕진구</b>
 		</li>
 		<li>
-			<b>대표자: OOO</b>
+			<b>대표자: 홍길동</b>
 		</li>
 	</ul>
 </div>
