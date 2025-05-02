@@ -1,3 +1,5 @@
+<%@page import="carLike.carLikeVO"%>
+<%@page import="carLike.carLikeDAO"%>
 <%@page import="carFeedback.CarFeedbackVO"%>
 <%@page import="java.util.List"%>
 <%@page import="carFeedback.CarFeedbackDAO"%>
@@ -20,10 +22,11 @@
 	RatingDAO rdao = new RatingDAO();
 	RatingVO rvo = rdao.selectRating(tno);
 	
-	List<CarVO> trimList = dao.trimTno(tno);
-	
 	UserVO users = (UserVO)session.getAttribute("user");
 	System.out.println(users);
+	
+	int likeCount = 0;
+	
 	if(users != null){
 		carViewDAO carViewDao = new carViewDAO();
 		carViewVO carViewVo = new carViewVO();
@@ -36,8 +39,12 @@
 		carViewVo.setCarName(carName);
 		
 		carViewDao.viewInsert(carViewVo);
+		
+		carLikeDAO carLikeDAO = new carLikeDAO();
+		likeCount = carLikeDAO.likeFlag(users.getId(), tno);
+		//likeCount가 0이면? 내가, 이 차량에 좋아요 안눌렀다.
+		//1이면? 내가, 이 차량에 좋아요 눌렀다.
 	}
-	//getAttribute는 항상 Object로 반환
 	
     String cardStyle = "width: 65%"; // 기본 width 
 
@@ -167,6 +174,15 @@
 		text-align: left;
 		font-size: 1rem;
 	}
+	
+	/* 하트 아이콘 css */
+	.heart-icon {
+		transform: translate(15px, 450px);
+		display: block;
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
@@ -178,23 +194,21 @@
       <div class="card shadow-sm">
         <div class="row g-0">
           <div class="col-md-5">
+          <!-- likeCount가 0이면? 빈하트 아니면? 채워진하트 -->
+          <%
+            	if(users != null){
+            		if(likeCount == 0){
+                		%><img src="/Car/img/heart1.png" alt="빈하트" class="heart-icon" id="heartIcon"><%
+                	}else{
+                		%><img src="/Car/img/heart2.png" alt="채워진하트" class="heart-icon" id="heartIcon"><%
+                	}
+            	}
+            %>
             <img src="<%=vo.getCar_img() %>" alt="포스터" id="posterImage" class="poster">
           </div>
           <div class="col-md-7">
             <div class="card-body">
-              <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %> | <%= vo.getTrim() %></h5>
-              	<select class="trim-box" id="trimSelect">
-				    <%
-				        for(int i = 0; i < trimList.size(); i++){
-				            CarVO tvo = trimList.get(i);
-				            String tnos = tvo.getTno();
-				            String trim = tvo.getTrim();
-				    %>
-				        <option value="<%= tnos %>" <%= trim.equals(vo.getTrim()) ? "selected" : "" %>><%= trim %></option>
-				    <%
-				        }
-				    %>
-				</select>
+              <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %></h5>
               <p class="card-text text-muted mb-2" id="carModel"><%=vo.getCar_type() %>, <%=vo.getYear() %></p>
               
               <ul class="list-group list-group-flush">
@@ -364,10 +378,89 @@
     data: chartData,
     options: chartOptions
   });
-  
-  $("#trimSelect").change(function(e){
-	  const tno = this.value
-	  location.replace("carDetail.jsp?tno="+tno)
-  })
+</script>
+
+<!--<script type="importmap">
+      {
+        "imports": {
+          "@google/generative-ai": "https://esm.run/@google/generative-ai"
+        }
+      }
+    </script>
+    <script type="module">
+      import { GoogleGenerativeAI } from "@google/generative-ai";
+
+      // Fetch your API_KEY
+      const API_KEY = "AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4";
+      // Reminder: This should only be for local testing
+
+      // Access your API key (see "Set up your API key" above)
+      const genAI = new GoogleGenerativeAI(API_KEY);
+
+      // ...
+
+      // The Gemini 1.5 models are versatile and work with most use cases
+      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash"});
+
+	  const prompt = "최적의 연비로 안정감 있는 승차 넓고 쾌적한 드라이빙으로 손색없는 한국의 최고의 자랑 차량입니다" + " 이런 리뷰들이 있는데 이 차량에 대한 피드백과 개선점을 정리해서 줘 "
+
+		const result = await model.generateContent(prompt);
+  		const response = await result.response;
+  		const text = response.text();
+  		console.log(text);
+
+      // ...
+    </script>  -->
+<!-- <script>
+let param = [{"parts":[{"text": "최적의 연비로 안정감 있는 승차 넓고 쾌적한 드라이빙으로 손색없는 한국의 최고의 자랑 차량입니다" + " 이런 리뷰들이 있는데 이 차량에 대한 피드백과 개선점을 정리해서 줘 "}]}]; 
+$.ajax({
+	url : "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4",
+	type : "post",
+	data : {
+		contents : param
+	},
+	success : function(result){
+		console.log(result)
+	},
+	error : function(){
+		alert("에러!")
+	}
+})
+</script> -->
+
+<script>
+	//빈 하트 클릭 시 하트가 채워지는 이미지로 변경
+	const heartIcon = document.getElementById("heartIcon");
+	let userId = "<%= users != null ? users.getId() : "" %>"
+	let like = "<%= likeCount %>"
+	  //1. 화면에서 하트가 채워져있는지 확인하고, 0이나 1을 줘서 ok에서 처리
+	  //2. 화면에서는 데이터 두개(tno, userId)만 ok에 넘겨주고, dao에서 조회 먼저하고 처리
+	heartIcon?.addEventListener('click', () => {
+		
+	    $.ajax ({
+	    	type: "post",
+	    	url: "/Car/car/carLikeOk.jsp",
+	    	data: {
+	    		carTno: "<%= tno %>",
+	    		userId : userId,
+	    		flag : like
+	    	},
+	    	success: function(response) {
+	    		console.log("좋아요 처리 완료: ", response);
+	    		like = response.trim()
+	    		//result가 1로오면? 좋아요 등록
+	    		//result가 0으로면? 좋아요 취소
+	    		//like가 1이면 -> 채운 하트
+	    		if(like == 1){
+	    			heartIcon.src = '/Car/img/heart2.png'
+	    		}else{
+	    			heartIcon.src = '/Car/img/heart1.png'
+	    		}
+	    	},
+	    	error: function() {
+	    		alert("좋아요 처리 실패");
+	    	}
+	    })
+	  });
 </script>
 </html>

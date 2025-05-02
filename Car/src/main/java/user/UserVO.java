@@ -10,7 +10,14 @@ public class UserVO {
 	private String updateDate;
 	private String deleteDate;
 	private int userType;
+	private String carType;
 	
+	public String getCarType() {
+		return carType;
+	}
+	public void setCarType(String carType) {
+		this.carType = carType;
+	}
 	public String getId() {
 		return id;
 	}

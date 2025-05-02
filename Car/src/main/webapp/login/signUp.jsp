@@ -82,7 +82,7 @@
 		color: black;
 		background: gray;
 	}
-	select.box{
+	select{
 		width: 110px;
 		height: 40px;
 		box-sizing: border-box;
@@ -93,6 +93,8 @@
 		color: #383838;
 		background-color: #ffffff;
 		font-family: 'Montserrat', 'Pretendard', sans-serif;
+		font-size: 16px;
+		margin-top: 15px;
 	}
 	.feedback{
 		font-size: 1rem;
@@ -195,6 +197,17 @@
 					<label>닉네임</label>
 					<input type="text" id="nickname" name="nickname">
 						<div id="nickname-feedback" class="feedback">닉네임 중복확인을 해주세요.</div>
+					<div>
+						<select id="cartype" name="cartype">
+							<option>세단</option>
+							<option>스포츠카</option>
+							<option>suv</option>
+							<option>해치백</option>
+							<option>rv</option>
+							<option>왜건</option>
+							<option>쿠페</option>
+						</select>
+					</div>	
 					<div class="gender-container">
 					    <label><input type="radio" id="male" name="gender" value="남">남자</label>
 					    <label><input type="radio" id="female" name="gender" value="여">여자</label>
@@ -208,6 +221,7 @@
 					<input type="button" id="emailCheckBtn" class="btn" value="인증번호 확인">
 						<div id="emailCheck-feedback" class="feedback">인증번호가 일치하지 않습니다.</div>
 					<input type="submit" value="회원가입" class="btn1" >
+					
 				</form>
 		</div>
 	</div>	

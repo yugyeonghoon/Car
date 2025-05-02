@@ -13,12 +13,13 @@ public class UserDAO extends DBManager {
 		String email = vo.getEmail();
 		String nick = vo.getNick();
 		String gender = vo.getGender();
+		String carType = vo.getCarType();
 		driverLoad();
 		DBConnect();
 		
 		String sql = "";
-		sql += "insert into user(id, password, email, nickname, gender)";
-		sql += " value ('"+id+"', '"+pw+"', '"+email+"', '"+nick+"', '"+gender+"')";
+		sql += "insert into user(id, password, email, nickname, gender, fv_car_type)";
+		sql += " value ('"+id+"', '"+pw+"', '"+email+"', '"+nick+"', '"+gender+"', '"+carType+"')";
 		executeUpdate(sql);
 		
 		DBDisConnect();
@@ -41,12 +42,14 @@ public class UserDAO extends DBManager {
 			String nick = getString("nickname");
 			int userType = getInt("user_type");
 			String email = getString("email");
+			String carType = getString("fv_car_type");
 			
 			UserVO uvo = new UserVO();
 			uvo.setId(uid);
 			uvo.setNick(nick);
 			uvo.setEmail(email);
 			uvo.setUserType(userType);
+			uvo.setCarType(carType);
 			
 			DBDisConnect();
 			return uvo;
@@ -61,12 +64,13 @@ public class UserDAO extends DBManager {
 		String id = vo.getId();
 		String pw = vo.getPw();
 		String nick = vo.getNick();
+		String carType = vo.getCarType();
 		
 		driverLoad();
 		DBConnect();
 		
 		String sql = "";
-		sql += "update user set password = '"+pw+"', nickname = '"+nick+"',";
+		sql += "update user set password = '"+pw+"', nickname = '"+nick+"', fv_car_type = '"+carType+"'";
 		sql += " update_date = now() where id = '"+id+"'";
 		executeUpdate(sql);
 		DBDisConnect();

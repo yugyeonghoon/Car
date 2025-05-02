@@ -100,7 +100,6 @@
 	            <button onclick="sendMessage()">▶</button>
 	        </div>
 	    </div>
-	
 	    <script>
 	        const chatMessages = document.getElementById("chat-messages");
 	

@@ -33,6 +33,35 @@ public class CarDAO extends DBManager{
 		DBDisConnect();
 		return list;
 	}
+	
+	//차 조회 로그인 했을 때
+	public List<CarVO> carView(String id, String carType) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select * from car_info ci, user u where ci.car_img != 'none_car.png'"
+				+ " and ci.car_type like '%"+carType+"%' order by rand() limit 30";
+		
+		executeQuery(sql);
+		
+		List<CarVO> list = new ArrayList<>();
+		while(next()) {
+			String company = getString("company");
+			String carName = getString("car_name");
+			String img = getString("car_img");
+			String tno = getString("tno");
+			
+			CarVO vo = new CarVO();
+			vo.setCompany(company);
+			vo.setCar_name(carName);
+			vo.setCar_img(img);
+			vo.setTno(tno);
+			
+			list.add(vo);
+		}
+		DBDisConnect();
+		return list;
+	}
 	//제조사 목록조회
 	public List<CarVO> company(){
 		driverLoad();

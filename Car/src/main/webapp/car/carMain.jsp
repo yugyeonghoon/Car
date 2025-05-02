@@ -165,10 +165,10 @@
 	<%@include file="../header.jsp" %>
 	<div id="content">
 	    <div class="carList">
-	        <span>최근 보던 차량 목록: </span>
+	        <span>최근 본 차량 목록:&nbsp;</span>
 	        <% for(int i = 0; i < carViewList.size(); i++){ %>
 	            <% carViewVO vo = carViewList.get(i); %>
-	            <span><a href="carDetail.jsp?tno=<%= vo.getCarTno() %>"><%= vo.getCarName() %></a></span>
+	            <span><a href="carDetail.jsp?tno=<%= vo.getCarTno() %>"><%= vo.getCarName() %></a>&nbsp;</span>
 	        <% } %>
 	    </div>
 	    <%@include file="dropdown.jsp" %>
@@ -215,8 +215,6 @@
 	    </div>
 	</div>
 	<%@include file="../footer.jsp" %>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="../js/modal.js" defer></script>
 	<script>
 	function openChatModal() {
 	    document.getElementById("chatbot-modal").style.display = "block";

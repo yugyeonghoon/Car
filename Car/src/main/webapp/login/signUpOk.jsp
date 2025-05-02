@@ -10,6 +10,7 @@
 	String email = request.getParameter("email");
 	String nick = request.getParameter("nickname");
 	String gender = request.getParameter("gender");
+	String carType = request.getParameter("cartype");
 	
 	System.out.println(id);
 	System.out.println(pw);
@@ -34,6 +35,7 @@
 	vo.setEmail(email);
 	vo.setNick(nick);
 	vo.setGender(gender);
+	vo.setCarType(carType);
 	
 	dao.join(vo);
 	
