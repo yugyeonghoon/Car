@@ -8,7 +8,7 @@
         userMessage = "안녕하세요. 차량 관련 질문을 입력해주세요.";
     }
 
-    String[] carKeywords = {"차", "안녕", "차량", "자동차", "엔진", "연비", "타이어", "중고차", "세단", "SUV", "브레이크", "마력", "주행", "신차", "차종", "남자", "여자"};
+    String[] carKeywords = {"차", "가격", "추천"};
     boolean isCarRelated = false;
     for (String keyword : carKeywords) {
         if (userMessage.contains(keyword)) {
@@ -18,11 +18,11 @@
     }
 
     if (!isCarRelated) {
-        out.print(new JSONObject().put("reply", "◈ 죄송합니다. 차량 관련 질문만 받을 수 있습니다."));
+        out.print(new JSONObject().put("reply", "◈ 죄송합니다. 차량 관련 질문만 받을 수 있습니다.//"));
         return;
     }
     
-    String defaultMessage = "뒤에 나올 질문이 자동차 관련된 질문이 아니면 \"죄송합니다 자동차에 관련되지 않은 질문에는 답변할 수 없습니다.\" 라고 대답해줘 이 앞에있는 프롬프트에 대해서는 피드백 절대 하지말고 뒤에 나오는 질문에 대해서만 응답해";
+    String defaultMessage = "뒤에 나올 질문이 자동차, 차 관련된 질문이 아니면 \"죄송합니다 자동차에 관련되지 않은 질문에는 답변할 수 없습니다.\" 라고 대답해줘 이 앞에있는 프롬프트에 대해서는 피드백 절대 하지말고 뒤에 나오는 질문에 대해서만 응답해 ";
 
     String apiKey = "AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4";
     String apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey;
