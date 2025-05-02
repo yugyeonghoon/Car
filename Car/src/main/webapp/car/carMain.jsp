@@ -7,16 +7,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%
     CarDAO dao = new CarDAO();
-    List<CarVO> list = dao.carView();
-
+	List<CarVO> list = new ArrayList<>();
     List<carViewVO> carViewList = new ArrayList<>();
-
+    
     UserVO userVO = (UserVO)session.getAttribute("user");
+    
     if(userVO != null){
         String id = userVO.getId();
-        carViewDAO carViewDAO = new carViewDAO();
-        carViewList = carViewDAO.viewList(id);
+        String carType = userVO.getCarType();
+		list = dao.carView(id, carType);
+    }else{
+    	list = dao.carView();
     }
+    
+    if(userVO != null){
+        carViewDAO carViewDAO = new carViewDAO();
+        carViewList = carViewDAO.viewList(userVO.getId());
+    }
+
 %>
 <!DOCTYPE html>
 <html>
