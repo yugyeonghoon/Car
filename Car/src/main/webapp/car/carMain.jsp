@@ -215,8 +215,6 @@
 	    </div>
 	</div>
 	<%@include file="../footer.jsp" %>
-	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-	<script src="../js/modal.js" defer></script>
 	<script>
 	function openChatModal() {
 	    document.getElementById("chatbot-modal").style.display = "block";
