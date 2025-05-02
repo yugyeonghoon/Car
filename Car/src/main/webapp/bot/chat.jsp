@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="application/json; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="java.io.*, java.net.*, org.json.*" %>
+<%@ page import="java.io.*, java.net.*, org.json.*, java.util.*" %>
+<%@ page import="carInfo.CarDAO, carInfo.CarVO" %>
+<%@ page import="java.util.regex.Pattern" %>
 <%
     request.setCharacterEncoding("UTF-8");
     String userMessage = request.getParameter("message");
@@ -8,6 +10,7 @@
         userMessage = "안녕하세요. 차량 관련 질문을 입력해주세요.";
     }
 
+    // 차량 관련 키워드 확인
     String[] carKeywords = {"차", "가격", "추천"};
     boolean isCarRelated = false;
     for (String keyword : carKeywords) {
@@ -21,8 +24,9 @@
         out.print(new JSONObject().put("reply", "◈ 죄송합니다. 차량 관련 질문만 받을 수 있습니다.//"));
         return;
     }
-    
-    String defaultMessage = "뒤에 나올 질문이 자동차, 차 관련된 질문이 아니면 \"죄송합니다 자동차에 관련되지 않은 질문에는 답변할 수 없습니다.\" 라고 대답해줘 이 앞에있는 프롬프트에 대해서는 피드백 절대 하지말고 뒤에 나오는 질문에 대해서만 응답해 ";
+
+    // Gemini API 요청 전 고정 프롬프트 추가
+    String defaultMessage = "뒤에 나올 질문이 자동차, 차 관련된 질문이 아니면 '죄송합니다 자동차에 관련되지 않은 질문에는 답변할 수 없습니다.' 라고 대답해줘. 이 앞에 있는 프롬프트에 대해서는 피드백 절대 하지 말고 뒤에 나오는 질문에 대해서만 응답해. ";
 
     String apiKey = "AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4";
     String apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey;
@@ -69,6 +73,7 @@
         return;
     }
 
+    // Gemini 응답 추출
     JSONObject responseJson = new JSONObject(responseStr.toString());
     String reply = responseJson
         .getJSONArray("candidates")
@@ -78,5 +83,20 @@
         .getJSONObject(0)
         .optString("text", "(빈 응답)");
 
-    out.print(new JSONObject().put("reply", reply));
+    // 차량 리스트 불러와서 이름 ↔ tno 매핑
+    CarDAO dao = new CarDAO();
+    List<CarVO> carList = dao.carList(); 
+    Map<String, String> carMap = new HashMap<>();
+    for (CarVO car : carList) {
+        carMap.put(car.getCar_name(), String.valueOf(car.getTno()));
+    }
+
+    // 응답에서 차량명을 링크로 치환
+    for (Map.Entry<String, String> entry : carMap.entrySet()) {
+	    String carName = entry.getKey();
+	    String tno = entry.getValue();
+	    reply = reply.replaceAll(Pattern.quote(carName), "<a href='../car/carDetail.jsp?tno=" + tno + "' target='_blank'>" + carName + "</a>");
+	}
+	
+	out.print(new JSONObject().put("reply", reply));
 %>
