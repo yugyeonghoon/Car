@@ -80,7 +80,7 @@
 			}
 			
 			/* 모달창 css */
-		.modalLogin {
+			.modalLogin {
 		  display: none;
 		  position: fixed;
 		  z-index: 9999;
