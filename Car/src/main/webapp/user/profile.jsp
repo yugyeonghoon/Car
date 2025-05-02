@@ -1,3 +1,9 @@
+<%@page import="carInfo.CarDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="carLike.carLikeVO"%>
+<%@page import="carInfo.CarVO"%>
+<%@page import="carLike.carLikeDAO" %>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
@@ -10,6 +16,10 @@
 		response.sendRedirect("../car/carMain.jsp");
 		return;
 	}
+	
+	carLikeDAO likeDao = new carLikeDAO();
+	List<carLikeVO> likeCar = likeDao.likeCar(id); 
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -29,7 +39,7 @@
 		}
 		.profile-container{
 			padding: 20px;
-			max-width: 600px;
+			max-width: 800px;
 			margin: 40px auto;
 			background: #ffffff;
 			border-radius: 10px;
@@ -183,6 +193,10 @@
 			.select-button:hover {
 				background-color: #6e859f;
 			}
+			.carousel {
+				overflow-x : scroll;
+				disflex: flex;
+			}
 	</style>
 	<body>
 		<div class="profile-container">
@@ -225,8 +239,28 @@
 						<button type="button" onclick="location.href='../car/carMain.jsp'">취소</button>
 						<button type="button" onclick="joinout('')">탈퇴</button>
 					</div>
+				<div>
+					<span><%=user.getId() %>님의 좋아요 한 차량</span>
+						<ul class="carousel">
+						<% 
+							for(int i = 0; i < likeCar.size(); i++) {
+								carLikeVO cvo = likeCar.get(i);
+								String tno = cvo.getCarTno();
+								String carName = cvo.getCar_name();
+								String carImg = cvo.getImg();
+								System.out.println(tno);
+						%>
+								<li id="likecarImg"><a href="/Car/car/carDetail.jsp?tno=<%=tno%>"><img src="<%=carImg %>"></a></li>
+								<li id="likecarName"><%=carName %></li>
+						<%
+							}
+						%>
+						</ul>
+					</div>
 			</form>
 		</div>
+		
+
 		<%@include file="../footer.jsp" %>
 	</body>
 	<script>

@@ -1,3 +1,4 @@
+<%@page import="carLike.carLikeDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="carView.carViewVO"%>
 <%@page import="carView.carViewDAO"%>
@@ -7,6 +8,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
+	String tno = request.getParameter("tno");
     CarDAO dao = new CarDAO();
     List<CarVO> list = dao.carView();
     
@@ -105,7 +107,7 @@
             background-color: #fff;
             padding: 10px;
         }
-        .car img {
+        .carImg {
             width: 105%;
             height: 320px;
             object-fit: contain;
@@ -169,9 +171,6 @@
 		  font-size: 20px;
 		  cursor: pointer;
 		}
-<<<<<<< HEAD
-=======
-		
 		span {
 			align-items: center;
 		}
@@ -180,7 +179,6 @@
   			justify-content: center;
   			margin-bottom: 10px;
 		}
->>>>>>> branch 'main' of https://github.com/yugyeonghoon/Car.git
     </style>
 </head>
 <body>
@@ -188,14 +186,14 @@
 <div id="content">
 <!-- <p>최근 본 차량 목록: 현대 더 뉴 아반떼, 현대 더 뉴 아반떼 하이브리드</p> -->
 <div class="carList">
-	<span>최근 본 차량 목록: </span>
+	<span>최근 본 차량 목록:&nbsp;</span>
 <%
 	for(int i = 0; i < carViewList.size(); i++){
 		carViewVO vo = carViewList.get(i);
 		String carName = vo.getCarName();
 		String carTno = vo.getCarTno();
 		%>
-			<span><a href="carDetail.jsp?tno=<%=carTno%>"><%= carName %></a></span>
+			<span><a href="carDetail.jsp?tno=<%=carTno%>"><%= carName %></a>,&nbsp;</span>
 		<%
 	}
 %>
@@ -216,7 +214,7 @@
                         <div class="col-md-4">
                             <div class="car">
                                 <a href="carDetail.jsp?tno=<%=car.getTno()%>">
-                                    <img src="<%= car.getCar_img() %>" alt="...">
+                                    <img src="<%= car.getCar_img() %>" alt="..." class="carImg">
                                     <div class="car-title">
                                         <%= car.getCompany() %> <%= car.getCar_name() %>
                                     </div>

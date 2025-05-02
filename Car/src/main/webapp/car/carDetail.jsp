@@ -1,3 +1,5 @@
+<%@page import="carLike.carLikeVO"%>
+<%@page import="carLike.carLikeDAO"%>
 <%@page import="carView.carViewVO"%>
 <%@page import="carView.carViewDAO"%>
 <%@page import="rating.RatingVO"%>
@@ -19,6 +21,9 @@
 	
 	UserVO users = (UserVO)session.getAttribute("user");
 	System.out.println(users);
+	
+	int likeCount = 0;
+	
 	if(users != null){
 		carViewDAO carViewDao = new carViewDAO();
 		carViewVO carViewVo = new carViewVO();
@@ -31,8 +36,12 @@
 		carViewVo.setCarName(carName);
 		
 		carViewDao.viewInsert(carViewVo);
+		
+		carLikeDAO carLikeDAO = new carLikeDAO();
+		likeCount = carLikeDAO.likeFlag(users.getId(), tno);
+		//likeCount가 0이면? 내가, 이 차량에 좋아요 안눌렀다.
+		//1이면? 내가, 이 차량에 좋아요 눌렀다.
 	}
-	//getAttribute는 항상 Object로 반환
 	
     String cardStyle = "width: 65%"; // 기본 width 
 
@@ -151,6 +160,15 @@
 	.table>:not(:last-child)>:last-child>* {
 	    border-bottom-color: #bcd0c7;
 	}
+	
+	/* 하트 아이콘 css */
+	.heart-icon {
+		transform: translate(15px, 450px);
+		display: block;
+		width: 30px;
+		height: 30px;
+		cursor: pointer;
+	}
 </style>
 </head>
 <body>
@@ -162,6 +180,16 @@
       <div class="card shadow-sm">
         <div class="row g-0">
           <div class="col-md-5">
+          <!-- likeCount가 0이면? 빈하트 아니면? 채워진하트 -->
+          <%
+            	if(users != null){
+            		if(likeCount == 0){
+                		%><img src="/Car/img/heart1.png" alt="빈하트" class="heart-icon" id="heartIcon"><%
+                	}else{
+                		%><img src="/Car/img/heart2.png" alt="채워진하트" class="heart-icon" id="heartIcon"><%
+                	}
+            	}
+            %>
             <img src="<%=vo.getCar_img() %>" alt="포스터" id="posterImage" class="poster">
           </div>
           <div class="col-md-7">
@@ -343,4 +371,40 @@ $.ajax({
 	}
 })
 </script> -->
+
+<script>
+	//빈 하트 클릭 시 하트가 채워지는 이미지로 변경
+	const heartIcon = document.getElementById("heartIcon");
+	let userId = "<%= users != null ? users.getId() : "" %>"
+	let like = "<%= likeCount %>"
+	  //1. 화면에서 하트가 채워져있는지 확인하고, 0이나 1을 줘서 ok에서 처리
+	  //2. 화면에서는 데이터 두개(tno, userId)만 ok에 넘겨주고, dao에서 조회 먼저하고 처리
+	heartIcon?.addEventListener('click', () => {
+		
+	    $.ajax ({
+	    	type: "post",
+	    	url: "/Car/car/carLikeOk.jsp",
+	    	data: {
+	    		carTno: "<%= tno %>",
+	    		userId : userId,
+	    		flag : like
+	    	},
+	    	success: function(response) {
+	    		console.log("좋아요 처리 완료: ", response);
+	    		like = response.trim()
+	    		//result가 1로오면? 좋아요 등록
+	    		//result가 0으로면? 좋아요 취소
+	    		//like가 1이면 -> 채운 하트
+	    		if(like == 1){
+	    			heartIcon.src = '/Car/img/heart2.png'
+	    		}else{
+	    			heartIcon.src = '/Car/img/heart1.png'
+	    		}
+	    	},
+	    	error: function() {
+	    		alert("좋아요 처리 실패");
+	    	}
+	    })
+	  });
+</script>
 </html>
