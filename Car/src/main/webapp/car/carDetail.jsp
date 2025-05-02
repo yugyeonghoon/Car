@@ -22,6 +22,8 @@
 	RatingDAO rdao = new RatingDAO();
 	RatingVO rvo = rdao.selectRating(tno);
 	
+	List<CarVO> trimList = dao.trimTno(tno);
+	
 	UserVO users = (UserVO)session.getAttribute("user");
 	System.out.println(users);
 	
@@ -208,7 +210,19 @@
           </div>
           <div class="col-md-7">
             <div class="card-body">
-              <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %></h5>
+              <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %> | <%= vo.getTrim() %></h5>
+              	<select class="trim-box" id="trimSelect">
+				    <%
+				        for(int i = 0; i < trimList.size(); i++){
+				            CarVO tvo = trimList.get(i);
+				            String tnos = tvo.getTno();
+				            String trim = tvo.getTrim();
+				    %>
+				        <option value="<%= tnos %>" <%= trim.equals(vo.getTrim()) ? "selected" : "" %>><%= trim %></option>
+				    <%
+				        }
+				    %>
+				</select>
               <p class="card-text text-muted mb-2" id="carModel"><%=vo.getCar_type() %>, <%=vo.getYear() %></p>
               
               <ul class="list-group list-group-flush">
@@ -378,7 +392,13 @@
     data: chartData,
     options: chartOptions
   });
+  
+  $("#trimSelect").change(function(e){
+	  const tno = this.value
+	  location.replace("carDetail.jsp?tno="+tno)
+  })
 </script>
+<<<<<<< HEAD
 
 <!--<script type="importmap">
       {
@@ -463,4 +483,6 @@ $.ajax({
 	    })
 	  });
 </script>
+=======
+>>>>>>> branch 'main' of https://github.com/yugyeonghoon/Car.git
 </html>
