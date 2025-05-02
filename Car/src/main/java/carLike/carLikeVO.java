@@ -4,9 +4,21 @@ public class carLikeVO {
 	private int likeNo;
 	private String userId;
 	private String carTno;
-	private int likeCheck;
-	private String updateDate;
+	private String img;
+	private String car_name;
 	
+	public String getImg() {
+		return img;
+	}
+	public void setImg(String img) {
+		this.img = img;
+	}
+	public String getCar_name() {
+		return car_name;
+	}
+	public void setCar_name(String car_name) {
+		this.car_name = car_name;
+	}
 	public int getLikeNo() {
 		return likeNo;
 	}
@@ -25,17 +37,4 @@ public class carLikeVO {
 	public void setCarTno(String carTno) {
 		this.carTno = carTno;
 	}
-	public int getLikeCheck() {
-		return likeCheck;
-	}
-	public void setLikeCheck(int likeCheck) {
-		this.likeCheck = likeCheck;
-	}
-	public String getUpdateDate() {
-		return updateDate;
-	}
-	public void setUpdateDate(String updateDate) {
-		this.updateDate = updateDate;
-	}
-
 }

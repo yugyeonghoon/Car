@@ -1,15 +1,26 @@
+<%@page import="carInfo.CarDAO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="carLike.carLikeVO"%>
+<%@page import="carInfo.CarVO"%>
+<%@page import="carLike.carLikeDAO" %>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <%
-
 	request.setCharacterEncoding("utf-8");
 	String id = user.getId();
+	String tno = request.getParameter("tno");
+	UserVO users = (UserVO)session.getAttribute("user");
 	
 	if(id == null){
 		response.sendRedirect("../car/carMain.jsp");
 		return;
 	}
+	
+	carLikeDAO likeDao = new carLikeDAO();
+	List<carLikeVO> likeCar = likeDao.likeCar(id); 
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -29,7 +40,7 @@
 		}
 		.profile-container{
 			padding: 20px;
-			max-width: 600px;
+			max-width: 1200px;
 			margin: 40px auto;
 			background: #ffffff;
 			border-radius: 10px;
@@ -183,6 +194,40 @@
 			.select-button:hover {
 				background-color: #6e859f;
 			}
+			
+			/* 좋아요 목록 조회 css */
+			.likecarItem {
+				margin-top : 15px;
+			}
+			.carousel {
+				overflow-x : auto;
+				overflow-y: hidden;
+				display: flex;
+				flex-wrap: nowrap;
+				padding-bottom: 10px;
+			}
+			#likecarImg {
+				flex : 0 0 320px;
+				padding-right : 20px;			
+			}
+			img {
+				width: 100%;
+				height: auto;
+			}
+			#likecarName {
+				margin-top: 10px;
+			    font-size: 16px;
+				text-align: center;
+			}
+			
+			/* 하트 아이콘 css */
+			.heart-icon {
+				/* transform: translate(15px, 450px); */
+				display: block;
+				width: 30px;
+				height: 30px;
+				cursor: pointer;
+			}
 	</style>
 	<body>
 		<div class="profile-container">
@@ -225,8 +270,36 @@
 						<button type="button" onclick="location.href='../car/carMain.jsp'">취소</button>
 						<button type="button" onclick="joinout('')">탈퇴</button>
 					</div>
+				<div class="likecarItem">
+					<span><%=user.getId() %>님의 좋아요한 차량</span>
+						<ul class="carousel">
+						<% 
+							for(int i = 0; i < likeCar.size(); i++) {
+								carLikeVO cvo = likeCar.get(i);
+								String carTno = cvo.getCarTno();
+								String carName = cvo.getCar_name();
+								String carImg = cvo.getImg();
+								System.out.println(tno);
+								
+								int likeCount = likeDao.likeFlag(id, carTno);
+						        String heartImg = likeCount == 1 ? "/Car/img/heart2.png" : "/Car/img/heart1.png";
+								
+						%>
+								<li id="likecarImg">
+									<a href="/Car/car/carDetail.jsp?tno=<%=carTno%>"><img src="<%=carImg %>"></a>
+									<div id="likecarName"><%=carName %></div>
+									<!-- likeCount가 0이면? 빈하트 아니면? 채워진하트 -->
+									<img src="<%=heartImg %>" alt="<%= likeCount == 1 ? "채워진하트" : "빈하트" %>" class="heart-icon" id="heartIcon" data-tno="<%=carTno %>" data-like="<%= likeCount%>">
+								</li>
+						<%
+							}
+						%>
+						</ul>
+					</div>
 			</form>
 		</div>
+		
+
 		<%@include file="../footer.jsp" %>
 	</body>
 	<script>
@@ -294,4 +367,32 @@
 		document.getElementById(id).style.display = "block";
 	}
 	</script>
+<script>
+	document.querySelectorAll('.heart-icon').forEach(icon => {
+	    icon.addEventListener('click', function () {
+	        const tno = this.getAttribute('data-tno');
+	        let like = this.getAttribute('data-like');
+	        const that = this;
+	
+	        $.ajax({
+	            type: "post",
+	            url: "/Car/car/carLikeOk.jsp",
+	            data: {
+	                carTno: tno,
+	                userId: "<%= users.getId() %>",
+	                flag: like
+	            },
+	            success: function (response) {
+	                const newLike = response.trim();
+	                that.src = newLike == "1" ? '/Car/img/heart2.png' : '/Car/img/heart1.png';
+	                that.setAttribute('data-like', newLike);
+	            },
+	            error: function () {
+	                alert("좋아요 처리 실패");
+	            }
+	        });
+	    });
+	});
+
+</script>
 </html>
