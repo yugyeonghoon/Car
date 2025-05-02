@@ -185,7 +185,7 @@
 	                                <a href="carDetail.jsp?tno=<%=car.getTno()%>">
 	                                    <img src="<%= car.getCar_img() %>" alt="...">
 	                                    <div class="car-title">
-	                                        <%= car.getCompany() %> <%= car.getCar_name() %>
+	                                       <%= car.getCar_name() %>
 	                                    </div>
 	                                </a>
 	                            </div>

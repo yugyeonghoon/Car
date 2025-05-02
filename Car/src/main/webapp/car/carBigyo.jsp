@@ -82,11 +82,13 @@
 				border: 1px solid #ccc;
 				padding: 8px;
 				text-align: center;
+				font-size: 16px;
 			}
 			.car-info td {
 				border: 1px solid #ccc;
 				padding: 8px;
 				text-align: left;
+				font-size: 16px;
 			}
 			/* 차량 정보 테이블 헤더 배경색 */
 			.car-info th {

@@ -263,7 +263,7 @@
 		</table>
 		</div>
 		  <div class="row mt-4">
-    <div class="col-12">
+    		<div class="col-12">
 			<h4><%= title %>의 개선점</h4>
 			<table class="table table-danger table-bordered">
 				<tbody>
@@ -277,20 +277,21 @@
 					%>
 				</tbody>
 		  </table>
+			</div>
 		</div>
-		</div>
-		</div>
-		<%
+	</div>
+	<%
 	}else{%>
 	<br>
 	<br>
 		<h4>해당 차량의 리뷰가 없습니다.</h4>
 		<%
 	}%>
-</div>
 	<div>
 	
 	</div>
+</div>
+
 </body>
 <script>
   let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>];
