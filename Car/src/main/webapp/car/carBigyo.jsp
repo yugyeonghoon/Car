@@ -74,7 +74,7 @@
 			.car-info {
 				margin-top: 15px;
 				border-collapse: collapse;
-				width: 300px;
+				width: 400px;
 				font-size: 14px;
 			}
 			/* 차량 정보 테이블 헤더 및 데이터 셀 스타일 */
@@ -248,11 +248,11 @@
 				<button class="select-button" onclick="selectCar(2)">선택 완료</button>
 			</div>
 		</div>
-	<!-- 세 번째 차량 모달창 -->
+	<!-- 세 번째 차량 모달창 -->  
 		<div id="modal3" class="modal">
 			<div class="modal-content">
 				<span class="close" onclick="closeModal('modal3')">&times;</span>
-				<h3>첫 번째 차량 선택</h3>
+				<h3>세 번째 차량 선택</h3>
 				<label for="maker3">제조사</label>
 				<!-- 제조사 선택 -->
 				<select id="maker3" class="trim-select" onchange="loadModels('maker3', 'model3')">
@@ -290,6 +290,7 @@
 					<table class="car-info">
 						<tr><th colspan="2">기본정보</th></tr>
 						<tr><th>이름</th><td></td></tr>
+						<tr><th>트림</th><td></td></tr>
 						<tr><th>가격</th><td></td></tr>
 						<tr><th>연료</th><td></td></tr>
 						<tr><th>연비</th><td><br></td></tr>
@@ -311,6 +312,7 @@
 					<table class="car-info">
 						<tr><th colspan="2">기본정보</th></tr>
 						<tr><th>이름</th><td></td></tr>
+						<tr><th>트림</th><td></td></tr>
 						<tr><th>가격</th><td></td></tr>
 						<tr><th>연료</th><td></td></tr>
 						<tr><th>연비</th><td><br></td></tr>
@@ -332,6 +334,7 @@
 					<table class="car-info">
 						<tr><th colspan="2">기본정보</th></tr>
 						<tr><th>이름</th><td></td></tr>
+						<tr><th>트림</th><td></td></tr>
 						<tr><th>가격</th><td></td></tr>
 						<tr><th>연료</th><td></td></tr>
 						<tr><th>연비</th><td><br></td></tr>
@@ -457,17 +460,18 @@
                     $img.attr('src', '../img/' + (imgSrc || 'model_200_100.png'));
                 }
                 $td.eq(0).text(carData.car_name);
-                $td.eq(1).text(carData.price);
-                $td.eq(2).text(carData.gas);
-                $td.eq(3).text(carData.fuel);
-                $td.eq(4).text(carData.output);
-                $td.eq(5).text(carData.engine);
-                $td.eq(6).text(carData.car_type);
-                $td.eq(7).text(carData.exhaust);
-                $td.eq(8).text(carData.torque);
-                $td.eq(9).text(carData.length_width);
-                $td.eq(10).text(carData.weight);
-                $td.eq(11).text(carData.shift);
+                $td.eq(1).text(carData.trim);
+                $td.eq(2).text(carData.price);
+                $td.eq(3).text(carData.gas);
+                $td.eq(4).text(carData.fuel);
+                $td.eq(5).text(carData.output);
+                $td.eq(6).text(carData.engine);
+                $td.eq(7).text(carData.car_type);
+                $td.eq(8).text(carData.exhaust);
+                $td.eq(9).text(carData.torque);
+                $td.eq(10).text(carData.length_width);
+                $td.eq(11).text(carData.weight);
+                $td.eq(12).text(carData.shift);
 
                 closeModal("modal" + num);
             }

@@ -288,6 +288,9 @@
 		<%
 	}%>
 </div>
+	<div>
+	
+	</div>
 </body>
 <script>
   let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>];
