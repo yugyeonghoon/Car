@@ -20,6 +20,8 @@
 	RatingDAO rdao = new RatingDAO();
 	RatingVO rvo = rdao.selectRating(tno);
 	
+	List<CarVO> trimList = dao.trimTno(tno);
+	
 	UserVO users = (UserVO)session.getAttribute("user");
 	System.out.println(users);
 	if(users != null){
@@ -180,7 +182,19 @@
           </div>
           <div class="col-md-7">
             <div class="card-body">
-              <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %></h5>
+              <h5 class="card-title fw-bold" id="carTitle"><%=vo.getCar_name() %> | <%= vo.getTrim() %></h5>
+              	<select class="trim-box" id="trimSelect">
+				    <%
+				        for(int i = 0; i < trimList.size(); i++){
+				            CarVO tvo = trimList.get(i);
+				            String tnos = tvo.getTno();
+				            String trim = tvo.getTrim();
+				    %>
+				        <option value="<%= tnos %>" <%= trim.equals(vo.getTrim()) ? "selected" : "" %>><%= trim %></option>
+				    <%
+				        }
+				    %>
+				</select>
               <p class="card-text text-muted mb-2" id="carModel"><%=vo.getCar_type() %>, <%=vo.getYear() %></p>
               
               <ul class="list-group list-group-flush">
@@ -350,53 +364,10 @@
     data: chartData,
     options: chartOptions
   });
+  
+  $("#trimSelect").change(function(e){
+	  const tno = this.value
+	  location.replace("carDetail.jsp?tno="+tno)
+  })
 </script>
-
-<!--<script type="importmap">
-      {
-        "imports": {
-          "@google/generative-ai": "https://esm.run/@google/generative-ai"
-        }
-      }
-    </script>
-    <script type="module">
-      import { GoogleGenerativeAI } from "@google/generative-ai";
-
-      // Fetch your API_KEY
-      const API_KEY = "AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4";
-      // Reminder: This should only be for local testing
-
-      // Access your API key (see "Set up your API key" above)
-      const genAI = new GoogleGenerativeAI(API_KEY);
-
-      // ...
-
-      // The Gemini 1.5 models are versatile and work with most use cases
-      const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash"});
-
-	  const prompt = "최적의 연비로 안정감 있는 승차 넓고 쾌적한 드라이빙으로 손색없는 한국의 최고의 자랑 차량입니다" + " 이런 리뷰들이 있는데 이 차량에 대한 피드백과 개선점을 정리해서 줘 "
-
-		const result = await model.generateContent(prompt);
-  		const response = await result.response;
-  		const text = response.text();
-  		console.log(text);
-
-      // ...
-    </script>  -->
-<!-- <script>
-let param = [{"parts":[{"text": "최적의 연비로 안정감 있는 승차 넓고 쾌적한 드라이빙으로 손색없는 한국의 최고의 자랑 차량입니다" + " 이런 리뷰들이 있는데 이 차량에 대한 피드백과 개선점을 정리해서 줘 "}]}]; 
-$.ajax({
-	url : "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4",
-	type : "post",
-	data : {
-		contents : param
-	},
-	success : function(result){
-		console.log(result)
-	},
-	error : function(){
-		alert("에러!")
-	}
-})
-</script> -->
 </html>
