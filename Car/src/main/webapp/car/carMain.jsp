@@ -33,7 +33,7 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-	    <title>차량생각</title>
+	    <title>자동차의 다양한 정보를 확인하자 | 차량생각</title>
 	    <style>
 	        #dropdown {
 	            margin-bottom: 50px;
@@ -173,11 +173,16 @@
 	<%@include file="../header.jsp" %>
 	<div id="content">
 	    <div class="carList">
+	    <% if(user != null){
+	    	%>
 	        <span>최근 본 차량 목록:&nbsp;</span>
 	        <% for(int i = 0; i < carViewList.size(); i++){ %>
 	            <% carViewVO vo = carViewList.get(i); %>
 	            <span><a href="carDetail.jsp?tno=<%= vo.getCarTno() %>"><%= vo.getCarName() %></a>&nbsp;</span>
 	        <% } %>
+	        <%
+	        }
+	        %>
 	    </div>
 	    <%@include file="dropdown.jsp" %>
 	
