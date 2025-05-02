@@ -165,10 +165,10 @@
 	<%@include file="../header.jsp" %>
 	<div id="content">
 	    <div class="carList">
-	        <span>최근 보던 차량 목록: </span>
+	        <span>최근 본 차량 목록:&nbsp;</span>
 	        <% for(int i = 0; i < carViewList.size(); i++){ %>
 	            <% carViewVO vo = carViewList.get(i); %>
-	            <span><a href="carDetail.jsp?tno=<%= vo.getCarTno() %>"><%= vo.getCarName() %></a></span>
+	            <span><a href="carDetail.jsp?tno=<%= vo.getCarTno() %>"><%= vo.getCarName() %></a>&nbsp;</span>
 	        <% } %>
 	    </div>
 	    <%@include file="dropdown.jsp" %>

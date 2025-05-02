@@ -78,6 +78,41 @@
 				width: 40px;
 				height: 40px;
 			}
+			
+			/* 모달창 css */
+		.modalLogin {
+		  display: none;
+		  position: fixed;
+		  z-index: 9999;
+		  left: 0;
+		  top: 0;
+		  width: 100%;
+		  height: 100%;
+		  background-color: rgba(0,0,0,0.5);
+		}
+		
+		.modalLogin-content {
+		  background-color: white;
+		  position: absolute;
+		  top: 50%;
+		  left: 50%;
+		  transform: translate(-50%, -50%);
+		  padding: 30px;
+		  width: 100%;
+		  max-width: 400px;
+		  border-radius: 10px;
+		  box-sizing: border-box;
+		  display: flex;
+		  flex-direction: column;
+		}
+		
+		.closeLogin {
+		  position: absolute;
+		  right: 15px;
+		  top: 10px;
+		  font-size: 20px;
+		  cursor: pointer;
+		}
 		</style>
 	</head>
 	<body>
@@ -115,9 +150,9 @@
 				</div>
 			</nav>
 		</div>
-		<div id="modal" class="modal">
-			<div class="modal-content">
-				<span class="close">&times;</span>
+		<div id="modal" class="modalLogin">
+			<div class="modalLogin-content">
+				<span class="closeLogin">&times;</span>
 	   			<div id="modal-body"></div>
 			</div>
 		</div>

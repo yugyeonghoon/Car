@@ -8,9 +8,10 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <%
-
 	request.setCharacterEncoding("utf-8");
 	String id = user.getId();
+	String tno = request.getParameter("tno");
+	UserVO users = (UserVO)session.getAttribute("user");
 	
 	if(id == null){
 		response.sendRedirect("../car/carMain.jsp");
@@ -39,7 +40,7 @@
 		}
 		.profile-container{
 			padding: 20px;
-			max-width: 900px;
+			max-width: 1200px;
 			margin: 40px auto;
 			background: #ffffff;
 			border-radius: 10px;
@@ -200,19 +201,32 @@
 			}
 			.carousel {
 				overflow-x : auto;
+				overflow-y: hidden;
 				display: flex;
+				flex-wrap: nowrap;
+				padding-bottom: 10px;
 			}
 			#likecarImg {
-				flex : 0 0 600px;
+				flex : 0 0 320px;
 				padding-right : 20px;			
 			}
 			img {
 				width: 100%;
-				height: 90%;
+				height: auto;
 			}
 			#likecarName {
-				flex: none;
+				margin-top: 10px;
+			    font-size: 16px;
 				text-align: center;
+			}
+			
+			/* 하트 아이콘 css */
+			.heart-icon {
+				/* transform: translate(15px, 450px); */
+				display: block;
+				width: 30px;
+				height: 30px;
+				cursor: pointer;
 			}
 	</style>
 	<body>
@@ -257,19 +271,25 @@
 						<button type="button" onclick="joinout('')">탈퇴</button>
 					</div>
 				<div class="likecarItem">
-					<span><%=user.getId() %>님의 좋아요 한 차량</span>
+					<span><%=user.getId() %>님의 좋아요한 차량</span>
 						<ul class="carousel">
 						<% 
 							for(int i = 0; i < likeCar.size(); i++) {
 								carLikeVO cvo = likeCar.get(i);
-								String tno = cvo.getCarTno();
+								String carTno = cvo.getCarTno();
 								String carName = cvo.getCar_name();
 								String carImg = cvo.getImg();
 								System.out.println(tno);
+								
+								int likeCount = likeDao.likeFlag(id, carTno);
+						        String heartImg = likeCount == 1 ? "/Car/img/heart2.png" : "/Car/img/heart1.png";
+								
 						%>
 								<li id="likecarImg">
-									<a href="/Car/car/carDetail.jsp?tno=<%=tno%>"><img src="<%=carImg %>"></a>
+									<a href="/Car/car/carDetail.jsp?tno=<%=carTno%>"><img src="<%=carImg %>"></a>
 									<div id="likecarName"><%=carName %></div>
+									<!-- likeCount가 0이면? 빈하트 아니면? 채워진하트 -->
+									<img src="<%=heartImg %>" alt="<%= likeCount == 1 ? "채워진하트" : "빈하트" %>" class="heart-icon" id="heartIcon" data-tno="<%=carTno %>" data-like="<%= likeCount%>">
 								</li>
 						<%
 							}
@@ -347,4 +367,32 @@
 		document.getElementById(id).style.display = "block";
 	}
 	</script>
+<script>
+	document.querySelectorAll('.heart-icon').forEach(icon => {
+	    icon.addEventListener('click', function () {
+	        const tno = this.getAttribute('data-tno');
+	        let like = this.getAttribute('data-like');
+	        const that = this;
+	
+	        $.ajax({
+	            type: "post",
+	            url: "/Car/car/carLikeOk.jsp",
+	            data: {
+	                carTno: tno,
+	                userId: "<%= users.getId() %>",
+	                flag: like
+	            },
+	            success: function (response) {
+	                const newLike = response.trim();
+	                that.src = newLike == "1" ? '/Car/img/heart2.png' : '/Car/img/heart1.png';
+	                that.setAttribute('data-like', newLike);
+	            },
+	            error: function () {
+	                alert("좋아요 처리 실패");
+	            }
+	        });
+	    });
+	});
+
+</script>
 </html>
