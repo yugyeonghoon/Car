@@ -122,7 +122,7 @@
 	        function isCarRelated(message) {
 	            const karKeywords = ['차', '안녕', '여자', '남자', '차량', '자동차', '엔진', '연비', '브레이크', '타이어', '차종', 'SUV', '세단', '중고차', '신차', '주행', '마력'];
 
-	            const noKarKeywords = ['사주', '운세', '궁합', '띠', '출생', '별자리', '점', '타로'];
+	            const noKarKeywords = [/* '사주', '운세', '궁합', '띠', '출생', '별자리', '점', '타로' */];
 	            
 	            if (noKarKeywords.some(keyword => message.replaceAll(" ", "").includes(keyword))) {
 	                return false;

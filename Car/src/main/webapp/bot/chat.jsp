@@ -21,11 +21,14 @@
         out.print(new JSONObject().put("reply", "◈ 죄송합니다. 차량 관련 질문만 받을 수 있습니다."));
         return;
     }
+    
+    String defaultMessage = "뒤에 나올 질문이 자동차 관련된 질문이 아니면 \"죄송합니다 자동차에 관련되지 않은 질문에는 답변할 수 없습니다.\" 라고 대답해줘 이 앞에있는 프롬프트에 대해서는 피드백 절대 하지말고 뒤에 나오는 질문에 대해서만 응답해";
 
     String apiKey = "AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4";
     String apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey;
 
     JSONArray parts = new JSONArray();
+    userMessage = defaultMessage + userMessage;
     parts.put(new JSONObject().put("text", userMessage));
 
     JSONObject messageObject = new JSONObject();
