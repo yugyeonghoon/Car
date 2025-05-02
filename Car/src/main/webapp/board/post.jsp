@@ -30,7 +30,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글 상세보기</title>
+<title><%=title %> | 자유게시판 | 차량생각</title>
 <script src="./jquery-3.7.1.js"></script>
 <style>
     body {

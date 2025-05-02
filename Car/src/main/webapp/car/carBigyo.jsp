@@ -11,178 +11,178 @@
 %>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="UTF-8">
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-		<title>차량생각 | 모델 비교</title>
-		<style>
-			/* carbygyo 페이지에서만 푸터 스타일 수정 */
-	.footer {
-		position: static !important;
-		margin-top: 100px;
-		background-color: #e0f7fa;
-	}
-			/* 비교 컨테이너 스타일 */
-			.comparison-containers {
-				padding: 20px;
-			}
-			/* 차량 컨테이너 스타일 */
-			.car-containers {
-				display: flex;
-				justify-content: center;
-				gap: 10px;
-				padding: 20px;
-			}
-			/* 차량 스타일 */
-			.car {
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-			}
-			/* 차량 이미지 스타일 */
-			.car-image {
-				width: 460px;
-				height: 250px;
-				object-fit: cover;
-			}
-			/* 'VS' 텍스트 스타일 */
-			.vs-text {
-				font-size: 40px;
-				font-weight: bold;
-				color: #444;
-				padding: 0 20px;
-				margin-top: 100px;
-			}
-			/* 차량 모델 스타일 */
-			.car-model {
-				margin-top: 10px;
-				font-size: 20px;
-				font-weight: bold;
-				color: #333;
-			}
-			/* 트림 선택 스타일 */
-			.trim-select {
-				margin-top: 10px;
-				width: 230px;
-				padding: 8px;
-				font-size: 16px;
-				border: 1px solid #ccc;
-				border-radius: 4px;
-			}
-			/* 차량 정보 테이블 스타일 */
-			.car-info {
-				margin-top: 15px;
-				border-collapse: collapse;
-				width: 400px;
-				font-size: 14px;
-			}
-			/* 차량 정보 테이블 헤더 및 데이터 셀 스타일 */
-			.car-info th {
-				border: 1px solid #ccc;
-				padding: 8px;
-				text-align: center;
-				font-size: 16px;
-				background-color: #f5f5f5;
-				width: 100px;
-			}
-			.car-info td {
-				border: 1px solid #ccc;
-				padding: 8px;
-				text-align: left;
-				font-size: 16px;
-			}
-			/* 선택 버튼 스타일 */
-			.select-button {
-				margin-top: 10px;
-				background-color: #94b0cf;
-				color: white;
-				border: none;
-				padding: 10px 20px;
-				border-radius: 8px;
-				font-size: 16px;
-				cursor: pointer;
-				transition: background-color 0.2s;
-			}
-			/* 선택 버튼 hover 효과 */
-			.select-button:hover {
-				background-color: #6e859f;
-			}
-			/* 모달창 스타일 */
-			.modal {
-				display: none;
-				position: fixed;
-				z-index: 999;
-				left: 0;
-				top: 0;
-				width: 100%;
-				height: 100%;
-				background-color: rgba(0, 0, 0, 0.4);
-				backdrop-filter: blur(2px);
-			}
-			/* 모달창 내용 스타일 */
-			.modal-content {
-				background-color: #ffffff;
-				margin: 8% auto;
-				padding: 30px 25px;
-				border-radius: 16px;
-				width: 420px;
-				box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-				position: relative;
-				font-family: 'Segoe UI', sans-serif;
-				animation: fadeIn 0.3s ease-in-out;
-			}
-			/* 모달창 fadeIn 애니메이션 */
-			@keyframes fadeIn {
-				from { opacity: 0; transform: scale(0.95); }
-				to { opacity: 1; transform: scale(1); }
-			}
-			/* 모달창 제목 스타일 */
-			.modal-content h3 {
-				margin-bottom: 20px;
-				font-size: 22px;
-				color: #222;
-				text-align: center;
-			}
-			/* 모달창의 label 스타일 */
-			.modal-content label {
-				font-weight: 500;
-				margin-top: 15px;
-				display: block;
-				color: #333;
-				font-size: 15px;
-			}
-			/* 트림 선택 박스 스타일 */
-			.modal-content .trim-select {
-				width: 100%;
-				padding: 10px;
-				margin-top: 6px;
-				border: 1px solid #ccc;
-				border-radius: 8px;
-				font-size: 15px;
-				outline: none;
-				transition: border-color 0.2s;
-			}
-			/* 트림 선택 박스에 포커스 시 효과 */
-			.modal-content .trim-select:focus {
-				border-color: #007BFF;
-				box-shadow: 0 0 0 2px rgba(0,123,255,0.1);
-			}
-			/* 모달창 닫기 버튼 스타일 */
-			.close {
-				color: #aaa;
-				position: absolute;
-				top: 15px;
-				right: 20px;
-				font-size: 26px;
-				cursor: pointer;
-				transition: color 0.2s;
-			}
-			/* 모달창 닫기 버튼 hover 효과 */
-			.close:hover {
-				color: #000;
-			}
-		</style>
+<head>
+	<meta charset="UTF-8">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<title>모델 비교 | 차량생각</title>
+	<style>
+		/* carbygyo 페이지에서만 푸터 스타일 수정 */
+		.footer {
+			position: static !important;
+			margin-top: 100px;
+			background-color: #e0f7fa;
+		}
+		/* 비교 컨테이너 스타일 */
+		.comparison-containers {
+			padding: 20px;
+		}
+		/* 차량 컨테이너 스타일 */
+		.car-containers {
+			display: flex;
+			justify-content: center;
+			gap: 10px;
+			padding: 20px;
+		}
+		/* 차량 스타일 */
+		.car {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+		}
+		/* 차량 이미지 스타일 */
+		.car-image {
+			width: 460px;
+			height: 250px;
+			object-fit: cover;
+		}
+		/* 'VS' 텍스트 스타일 */
+		.vs-text {
+			font-size: 40px;
+			font-weight: bold;
+			color: #444;
+			padding: 0 20px;
+			margin-top: 100px;
+		}
+		/* 차량 모델 스타일 */
+		.car-model {
+			margin-top: 10px;
+			font-size: 20px;
+			font-weight: bold;
+			color: #333;
+		}
+		/* 트림 선택 스타일 */
+		.trim-select {
+			margin-top: 10px;
+			width: 230px;
+			padding: 8px;
+			font-size: 16px;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+		}
+		/* 차량 정보 테이블 스타일 */
+		.car-info {
+			margin-top: 15px;
+			border-collapse: collapse;
+			width: 400px;
+			font-size: 14px;
+		}
+		/* 차량 정보 테이블 헤더 및 데이터 셀 스타일 */
+		.car-info th {
+			border: 1px solid #ccc;
+			padding: 8px;
+			text-align: center;
+			font-size: 16px;
+			background-color: #f5f5f5;
+			width: 100px;
+		}
+		.car-info td {
+			border: 1px solid #ccc;
+			padding: 8px;
+			text-align: left;
+			font-size: 16px;
+		}
+		/* 선택 버튼 스타일 */
+		.select-button {
+			margin-top: 10px;
+			background-color: #94b0cf;
+			color: white;
+			border: none;
+			padding: 10px 20px;
+			border-radius: 8px;
+			font-size: 16px;
+			cursor: pointer;
+			transition: background-color 0.2s;
+		}
+		/* 선택 버튼 hover 효과 */
+		.select-button:hover {
+			background-color: #6e859f;
+		}
+		/* 모달창 스타일 */
+		.modal {
+			display: none;
+			position: fixed;
+			z-index: 999;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			background-color: rgba(0, 0, 0, 0.4);
+			backdrop-filter: blur(2px);
+		}
+		/* 모달창 내용 스타일 */
+		.modal-content {
+			background-color: #ffffff;
+			margin: 8% auto;
+			padding: 30px 25px;
+			border-radius: 16px;
+			width: 420px;
+			box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+			position: relative;
+			font-family: 'Segoe UI', sans-serif;
+			animation: fadeIn 0.3s ease-in-out;
+		}
+		/* 모달창 fadeIn 애니메이션 */
+		@keyframes fadeIn {
+			from { opacity: 0; transform: scale(0.95); }
+			to { opacity: 1; transform: scale(1); }
+		}
+		/* 모달창 제목 스타일 */
+		.modal-content h3 {
+			margin-bottom: 20px;
+			font-size: 22px;
+			color: #222;
+			text-align: center;
+		}
+		/* 모달창의 label 스타일 */
+		.modal-content label {
+			font-weight: 500;
+			margin-top: 15px;
+			display: block;
+			color: #333;
+			font-size: 15px;
+		}
+		/* 트림 선택 박스 스타일 */
+		.modal-content .trim-select {
+			width: 100%;
+			padding: 10px;
+			margin-top: 6px;
+			border: 1px solid #ccc;
+			border-radius: 8px;
+			font-size: 15px;
+			outline: none;
+			transition: border-color 0.2s;
+		}
+		/* 트림 선택 박스에 포커스 시 효과 */
+		.modal-content .trim-select:focus {
+			border-color: #007BFF;
+			box-shadow: 0 0 0 2px rgba(0,123,255,0.1);
+		}
+		/* 모달창 닫기 버튼 스타일 */
+		.close {
+			color: #aaa;
+			position: absolute;
+			top: 15px;
+			right: 20px;
+			font-size: 26px;
+			cursor: pointer;
+			transition: color 0.2s;
+		}
+		/* 모달창 닫기 버튼 hover 효과 */
+		.close:hover {
+			color: #000;
+		}
+	</style>
 	</head>
 	<body>
 	<!-- 첫 번째 차량 모달창 -->
