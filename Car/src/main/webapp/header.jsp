@@ -127,8 +127,8 @@
 				</ul>
 				<form action="/Car/car/carList.jsp" method="get">
 				<div class="search">
-					<input value="<%=ckeyword %>" type="text" name="carKeyword" placeholder="검색어를 입력해주세요">
-					<button class="searchBtn">검색</button>
+					<input value="<%=ckeyword %>" type="text" name="carKeyword" id="carKeyword" placeholder="검색어를 입력해주세요">
+					<button class="searchBtn" id="searchBtn">검색</button>
 				</div>
 				</form>
 				<div class="dropdown">
@@ -157,4 +157,16 @@
 			</div>
 		</div>
 	</body>
+	<script>
+	let carKeyword = $("#carKeyword");
+	
+	$("#searchBtn").click(function(e){
+		e.preventDefault(); 
+		searchCheckFlag = false;
+		if(carKeyword.val().trim() == ""){
+			alert("검색어를 입력해주세요."); 
+			return;
+		}
+	});
+	</script>
 </html>
