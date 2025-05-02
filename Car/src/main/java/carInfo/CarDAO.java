@@ -376,4 +376,28 @@ public class CarDAO extends DBManager{
 		DBDisConnect();
 		return list;
 	}
+	
+	public List<CarVO> carList() {
+	    driverLoad();
+	    DBConnect();
+
+	    String sql = "select tno, car_name from car_info"; 
+	    executeQuery(sql);
+
+	    List<CarVO> list = new ArrayList<CarVO>();
+	    while (next()) {
+	        String tno = getString("tno");
+	        String carName = getString("car_name");
+
+	        CarVO vo = new CarVO();
+	        vo.setTno(tno);
+	        vo.setCar_name(carName);
+
+	        list.add(vo);
+	    }
+
+	    DBDisConnect();
+	    return list;
+	}
+
 }
