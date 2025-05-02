@@ -1,4 +1,3 @@
-<%@page import="carLike.carLikeDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="carView.carViewVO"%>
 <%@page import="carView.carViewDAO"%>
@@ -8,7 +7,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String tno = request.getParameter("tno");
     CarDAO dao = new CarDAO();
     List<CarVO> list = dao.carView();
     
@@ -32,7 +30,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <title>차량 메인</title> 
+    <title>ì°¨ë ë©ì¸</title> 
     <style>
 	   	#dropdown {
 			/* height: 1000px; */
@@ -63,7 +61,7 @@
 		    border-top: none;
 		    z-index: 99;
 		    display: none;
-		    max-height: 200px;   /* 드롭다운 최대 높이 */
+		    max-height: 200px;   /* ëë¡­ë¤ì´ ìµë ëì´ */
   			overflow-y: auto;
 		  }
 		
@@ -75,11 +73,11 @@
 		    background-color: #f1f1f1;
 		  }
 		  .select-selected:after {
-		    content: "▼";
+		    content: "â¼";
 		    float: right;
 		  }
 		  .select-selected.open:after {
-		    content: "▲";
+		    content: "â²";
 		  }
 		  .hidden {
 		    /* display: none; */
@@ -107,7 +105,7 @@
             background-color: #fff;
             padding: 10px;
         }
-        .carImg {
+        .car img {
             width: 105%;
             height: 320px;
             object-fit: contain;
@@ -137,7 +135,7 @@
             padding: 0 60px;
         }
         
-        /* 모달창 css */
+        /* ëª¨ë¬ì°½ css */
         .modal {
 		  display: none;
 		  position: fixed;
@@ -171,6 +169,9 @@
 		  font-size: 20px;
 		  cursor: pointer;
 		}
+<<<<<<< HEAD
+=======
+		
 		span {
 			align-items: center;
 		}
@@ -179,14 +180,15 @@
   			justify-content: center;
   			margin-bottom: 10px;
 		}
+>>>>>>> branch 'main' of https://github.com/yugyeonghoon/Car.git
     </style>
 </head>
 <body>
 <%@include file="../header.jsp" %>
 <div id="content">
-<!-- <p>최근 본 차량 목록: 현대 더 뉴 아반떼, 현대 더 뉴 아반떼 하이브리드</p> -->
+<!-- <p>ìµê·¼ ë³¸ ì°¨ë ëª©ë¡: íë ë ë´ ìë°ë¼, íë ë ë´ ìë°ë¼ íì´ë¸ë¦¬ë</p> -->
 <div class="carList">
-	<span>최근 본 차량 목록:&nbsp;</span>
+	<span>최근 본 차량 목록:&nbsp;</span>
 <%
 	for(int i = 0; i < carViewList.size(); i++){
 		carViewVO vo = carViewList.get(i);
@@ -214,7 +216,7 @@
                         <div class="col-md-4">
                             <div class="car">
                                 <a href="carDetail.jsp?tno=<%=car.getTno()%>">
-                                    <img src="<%= car.getCar_img() %>" alt="..." class="carImg">
+                                    <img src="<%= car.getCar_img() %>" alt="...">
                                     <div class="car-title">
                                         <%= car.getCompany() %> <%= car.getCar_name() %>
                                     </div>
@@ -235,7 +237,7 @@
         </button>
     </div>
 </div>
-<!-- 모달 창 -->
+<!-- ëª¨ë¬ ì°½ -->
 	<div id="modal" class="modal">
 		<div class="modal-content">
 			<span class="close">&times;</span>

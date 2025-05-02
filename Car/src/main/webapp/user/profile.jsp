@@ -39,7 +39,7 @@
 		}
 		.profile-container{
 			padding: 20px;
-			max-width: 800px;
+			max-width: 900px;
 			margin: 40px auto;
 			background: #ffffff;
 			border-radius: 10px;
@@ -193,9 +193,26 @@
 			.select-button:hover {
 				background-color: #6e859f;
 			}
+			
+			/* 좋아요 목록 조회 css */
+			.likecarItem {
+				margin-top : 15px;
+			}
 			.carousel {
-				overflow-x : scroll;
-				disflex: flex;
+				overflow-x : auto;
+				display: flex;
+			}
+			#likecarImg {
+				flex : 0 0 600px;
+				padding-right : 20px;			
+			}
+			img {
+				width: 100%;
+				height: 90%;
+			}
+			#likecarName {
+				flex: none;
+				text-align: center;
 			}
 	</style>
 	<body>
@@ -239,7 +256,7 @@
 						<button type="button" onclick="location.href='../car/carMain.jsp'">취소</button>
 						<button type="button" onclick="joinout('')">탈퇴</button>
 					</div>
-				<div>
+				<div class="likecarItem">
 					<span><%=user.getId() %>님의 좋아요 한 차량</span>
 						<ul class="carousel">
 						<% 
@@ -250,8 +267,10 @@
 								String carImg = cvo.getImg();
 								System.out.println(tno);
 						%>
-								<li id="likecarImg"><a href="/Car/car/carDetail.jsp?tno=<%=tno%>"><img src="<%=carImg %>"></a></li>
-								<li id="likecarName"><%=carName %></li>
+								<li id="likecarImg">
+									<a href="/Car/car/carDetail.jsp?tno=<%=tno%>"><img src="<%=carImg %>"></a>
+									<div id="likecarName"><%=carName %></div>
+								</li>
 						<%
 							}
 						%>

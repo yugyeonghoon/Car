@@ -17,6 +17,12 @@
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 		<title>차량 비교</title>
 		<style>
+			/* carbygyo 페이지에서만 푸터 스타일 수정 */
+	.footer {
+		position: static !important;
+		margin-top: 100px;
+		background-color: #e0f7fa;
+	}
 			/* 비교 컨테이너 스타일 */
 			.comparison-containers {
 				padding: 20px;
@@ -25,7 +31,7 @@
 			.car-containers {
 				display: flex;
 				justify-content: center;
-				gap: 80px;
+				gap: 10px;
 				padding: 20px;
 			}
 			/* 차량 스타일 */
@@ -68,14 +74,21 @@
 			.car-info {
 				margin-top: 15px;
 				border-collapse: collapse;
-				width: 300px;
+				width: 400px;
 				font-size: 14px;
 			}
 			/* 차량 정보 테이블 헤더 및 데이터 셀 스타일 */
-			.car-info th, .car-info td {
+			.car-info th {
+				border: 1px solid #ccc;
+				padding: 8px;
+				text-align: center;
+				font-size: 16px;
+			}
+			.car-info td {
 				border: 1px solid #ccc;
 				padding: 8px;
 				text-align: left;
+				font-size: 16px;
 			}
 			/* 차량 정보 테이블 헤더 배경색 */
 			.car-info th {
@@ -237,6 +250,37 @@
 				<button class="select-button" onclick="selectCar(2)">선택 완료</button>
 			</div>
 		</div>
+	<!-- 세 번째 차량 모달창 -->  
+		<div id="modal3" class="modal">
+			<div class="modal-content">
+				<span class="close" onclick="closeModal('modal3')">&times;</span>
+				<h3>세 번째 차량 선택</h3>
+				<label for="maker3">제조사</label>
+				<!-- 제조사 선택 -->
+				<select id="maker3" class="trim-select" onchange="loadModels('maker3', 'model3')">
+					<option value="">선택하세요</option>
+					<%
+						for(int i = 0; i < list.size(); i++){
+							CarVO vo = list.get(i);
+							String company = vo.getCompany();
+							String no = vo.getNo();
+					%>
+							<option value="<%= company %>" data-value="<%=no %>"><%= company %></option>
+					<%
+						}
+					%>
+				</select>
+				<label for="model3">모델</label>
+				<select id="model3" class="trim-select" onchange="loadTrims('model3', 'trim3')">
+					<option value="">선택하세요</option>
+				</select>
+				<label for="trim3">트림</label>
+				<select id="trim3" class="trim-select">
+					<option value="">선택하세요</option>
+				</select>
+				<button class="select-button" onclick="selectCar(3)">선택 완료</button>
+			</div>
+		</div>
 		<!-- 차량 비교 컨테이너 -->
 		<div class="comparison-containers">
 			<div class="car-containers">
@@ -248,16 +292,20 @@
 					<table class="car-info">
 						<tr><th colspan="2">기본정보</th></tr>
 						<tr><th>이름</th><td></td></tr>
+						<tr><th>트림</th><td></td></tr>
 						<tr><th>가격</th><td></td></tr>
 						<tr><th>연료</th><td></td></tr>
 						<tr><th>연비</th><td><br></td></tr>
 						<tr><th>출력</th><td></td></tr>
 						<tr><th>엔진</th><td></td></tr>
 						<tr><th>타입</th><td></td></tr>
-						
+						<tr><th>배기량</th><td></td></tr>
+						<tr><th>토크</th><td></td></tr>
+						<tr><th>전장, 전폭</th><td></td></tr>
+						<tr><th>무게</th><td></td></tr>
+						<tr><th>변속</th><td></td></tr>
 					</table>
 				</div>
-				<div class="vs-text">VS</div>
 				<!-- 두 번째 차량 -->
 				<div class="car">
 					<img alt="secondCar" src=".././img/model_200_100.png" class="car-image">
@@ -266,12 +314,40 @@
 					<table class="car-info">
 						<tr><th colspan="2">기본정보</th></tr>
 						<tr><th>이름</th><td></td></tr>
+						<tr><th>트림</th><td></td></tr>
 						<tr><th>가격</th><td></td></tr>
 						<tr><th>연료</th><td></td></tr>
 						<tr><th>연비</th><td><br></td></tr>
 						<tr><th>출력</th><td></td></tr>
 						<tr><th>엔진</th><td></td></tr>
 						<tr><th>타입</th><td></td></tr>
+						<tr><th>배기량</th><td></td></tr>
+						<tr><th>토크</th><td></td></tr>
+						<tr><th>전장, 전폭</th><td></td></tr>
+						<tr><th>무게</th><td></td></tr>
+						<tr><th>변속</th><td></td></tr>
+					</table>
+				</div>
+				<!-- 3 번째 차량 -->
+				<div class="car">
+					<img alt="secondCar" src=".././img/model_200_100.png" class="car-image">
+					<button class="select-button" onclick="openModal('modal3')">추가하기</button>
+					<!-- 차량 기본 정보 테이블 -->
+					<table class="car-info">
+						<tr><th colspan="2">기본정보</th></tr>
+						<tr><th>이름</th><td></td></tr>
+						<tr><th>트림</th><td></td></tr>
+						<tr><th>가격</th><td></td></tr>
+						<tr><th>연료</th><td></td></tr>
+						<tr><th>연비</th><td><br></td></tr>
+						<tr><th>출력</th><td></td></tr>
+						<tr><th>엔진</th><td></td></tr>
+						<tr><th>타입</th><td></td></tr>
+						<tr><th>배기량</th><td></td></tr>
+						<tr><th>토크</th><td></td></tr>
+						<tr><th>전장, 전폭</th><td></td></tr>
+						<tr><th>무게</th><td></td></tr>
+						<tr><th>변속</th><td></td></tr>
 					</table>
 				</div>
 			</div>
@@ -386,12 +462,18 @@
                     $img.attr('src', '../img/' + (imgSrc || 'model_200_100.png'));
                 }
                 $td.eq(0).text(carData.car_name);
-                $td.eq(1).text(carData.price);
-                $td.eq(2).text(carData.gas);
-                $td.eq(3).text(carData.fuel);
-                $td.eq(4).text(carData.output);
-                $td.eq(5).text(carData.engine);
-                $td.eq(6).text(carData.car_type);
+                $td.eq(1).text(carData.trim);
+                $td.eq(2).text(carData.price);
+                $td.eq(3).text(carData.gas);
+                $td.eq(4).text(carData.fuel);
+                $td.eq(5).text(carData.output);
+                $td.eq(6).text(carData.engine);
+                $td.eq(7).text(carData.car_type);
+                $td.eq(8).text(carData.exhaust);
+                $td.eq(9).text(carData.torque);
+                $td.eq(10).text(carData.length_width);
+                $td.eq(11).text(carData.weight);
+                $td.eq(12).text(carData.shift);
 
                 closeModal("modal" + num);
             }
