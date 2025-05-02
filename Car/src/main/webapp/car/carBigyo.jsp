@@ -15,7 +15,7 @@
 		<meta charset="UTF-8">
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-		<title>차량 비교</title>
+		<title>차량생각 | 모델 비교</title>
 		<style>
 			/* carbygyo 페이지에서만 푸터 스타일 수정 */
 	.footer {
@@ -83,17 +83,14 @@
 				padding: 8px;
 				text-align: center;
 				font-size: 16px;
+				background-color: #f5f5f5;
+				width: 100px;
 			}
 			.car-info td {
 				border: 1px solid #ccc;
 				padding: 8px;
 				text-align: left;
 				font-size: 16px;
-			}
-			/* 차량 정보 테이블 헤더 배경색 */
-			.car-info th {
-				background-color: #f5f5f5;
-				width: 90px;
 			}
 			/* 선택 버튼 스타일 */
 			.select-button {

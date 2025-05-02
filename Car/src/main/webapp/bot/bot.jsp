@@ -120,9 +120,9 @@
 
 	
 	        function isCarRelated(message) {
-	            const karKeywords = ['차', '안녕', '여자', '남자', '차량', '자동차', '엔진', '연비', '브레이크', '타이어', '차종', 'SUV', '세단', '중고차', '신차', '주행', '마력'];
+	            const karKeywords = ['차', '가격', '추천'];
 
-	            const noKarKeywords = [/* '사주', '운세', '궁합', '띠', '출생', '별자리', '점', '타로' */];
+	            const noKarKeywords = ['사주', '운세', '궁합', '띠', '출생', '별자리', '점', '타로'];
 	            
 	            if (noKarKeywords.some(keyword => message.replaceAll(" ", "").includes(keyword))) {
 	                return false;
@@ -141,7 +141,7 @@
 	
 	            if (!isCarRelated(message)) {
 	            	console.log(message)
-	                appendMessage("시스템", "◈ 차량 관련 질문만 받을 수 있습니다.");
+	                appendMessage("시스템", "◈ 차량 관련 질문만 받을 수 있습니다. 차량의 상세정보는 상세페이지로 이동하세요");
 	                input.value = "";
 	                return;
 	            }

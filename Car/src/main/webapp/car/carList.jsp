@@ -14,7 +14,7 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
-	    <title>차량 검색 목록</title>
+	    <title>차량생각 | <%=title%>의 검색 결과</title>
 	    <style>
 	        body {
 	            font-family: 'Segoe UI', sans-serif;
