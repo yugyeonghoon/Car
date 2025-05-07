@@ -161,7 +161,7 @@
 	
 	/* 하트 아이콘 css */
 	.heart-icon {
-		transform: translate(15px, 450px);
+		transform: translate(15px, 510px);
 		display: block;
 		width: 30px;
 		height: 30px;
@@ -321,7 +321,7 @@
 	<%@include file="../footer.jsp" %>
 </body>
 <script>
-  let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>];
+  let data = ['<%=rvo.getDrive() %>','<%=rvo.getPrice() %>','<%=rvo.getHabitability() %>','<%=rvo.getQuality() %>','<%=rvo.getDesign() %>','<%=rvo.getFuel() %>'];
   data = data.map(value => Math.max(0, Math.min(10, value)));
 
   let chartData = {
@@ -367,17 +367,6 @@
     }
   };
 
-  if (window.radarChartInstance) {
-    window.radarChartInstance.destroy();
-  }
-
-  let ctx = document.getElementById('carRadarChart').getContext('2d');
-  window.radarChartInstance = new Chart(ctx, {
-    type: 'radar',
-    data: chartData,
-    options: chartOptions
-  });
-
 	//빈 하트 클릭 시 하트가 채워지는 이미지로 변경
 	const heartIcon = document.getElementById("heartIcon");
 	let userId = "<%= users != null ? users.getId() : "" %>"
@@ -416,5 +405,16 @@
 		const tno = this.value
 		location.replace("carDetail.jsp?tno="+tno)
 	})
+	
+	if (window.radarChartInstance) {
+    window.radarChartInstance.destroy();
+  }
+
+  let ctx = document.getElementById('carRadarChart').getContext('2d');
+  window.radarChartInstance = new Chart(ctx, {
+    type: 'radar',
+    data: chartData,
+    options: chartOptions
+  });
 </script>
 </html>
