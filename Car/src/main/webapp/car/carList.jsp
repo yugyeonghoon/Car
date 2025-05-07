@@ -56,11 +56,6 @@
 	        .car-spec {
 	            color: #333;
 	        }
-	        .footer {
-				position: static !important;
-				margin-top: 100px;
-				background-color: #e0f7fa;
-			}
 	    </style>
 	</head>
 	<body class="abody">

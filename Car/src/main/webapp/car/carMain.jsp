@@ -225,10 +225,10 @@
 	            </div>
 	            <% } %>
 	        </div>
-	        <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev">
+	        <button class="carousel-control-prev" type="button" data-bs-target="#carCarousel" data-bs-slide="prev" style="width: 4%;">
 	            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
 	        </button>
-	        <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next">
+	        <button class="carousel-control-next" type="button" data-bs-target="#carCarousel" data-bs-slide="next" style="width: 4%;">
 	            <span class="carousel-control-next-icon" aria-hidden="true"></span>
 	        </button>
 	    </div>
@@ -244,7 +244,7 @@
 	        <iframe src="../bot/bot.jsp" style="width: 100%; height: 100%; border: none; border-radius: 10px;"></iframe>
 	    </div>
 	</div>
-	<%@include file="../footer.jsp" %>
+		<%@include file="../footer.jsp" %>
 	<script>
 	function openChatModal() {
 	    document.getElementById("chatbot-modal").style.display = "block";
@@ -260,4 +260,5 @@
 	}
 	</script>
 	</body>
+
 </html>

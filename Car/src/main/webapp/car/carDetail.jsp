@@ -71,11 +71,6 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 추가 -->
 <link rel="stylesheet" href="../css/font2.css">
 <style>
-	.footer {
-		position: static !important;
-		margin-top: 100px;
-		background-color: #e0f7fa;
-		}
 	body{
 		background-color: white;
 	}

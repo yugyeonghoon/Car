@@ -17,12 +17,6 @@
 	<link rel="stylesheet" href="../css/font2.css">
 	<title>모델 비교 | 차량생각</title>
 	<style>
-		/* carbygyo 페이지에서만 푸터 스타일 수정 */
-		.footer {
-			position: static !important;
-			margin-top: 100px;
-			background-color: #e0f7fa;
-		}
 		/* 비교 컨테이너 스타일 */
 		.comparison-containers {
 			padding: 20px;
