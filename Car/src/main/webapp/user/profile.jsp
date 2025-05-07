@@ -31,6 +31,11 @@
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	</head>
 	<style>
+		.footer {
+			position: static !important;
+			margin-top: 100px;
+			background-color: #e0f7fa;
+		}
 		body {
 			font-family : 'Source Sans Pro', sans-serif; 
 			background: white;
@@ -265,11 +270,6 @@
 						<button class="select-button" onclick="selectCar">변경</button>
 					</div>
 				</div>	
-					<div class="profile-actions">
-						<button type="button" onclick="openModal('modal')">비밀번호 변경</button>
-						<button type="button" onclick="location.href='../car/carMain.jsp'">취소</button>
-						<button type="button" onclick="joinout('')">탈퇴</button>
-					</div>
 				<div class="likecarItem">
 					<span><%=user.getId() %>님의 좋아요한 차량</span>
 						<ul class="carousel">
@@ -295,11 +295,14 @@
 							}
 						%>
 						</ul>
-					</div>
+				</div>
+				<div class="profile-actions">
+					<button type="button" onclick="openModal('modal')">비밀번호 변경</button>
+					<button type="button" onclick="location.href='../car/carMain.jsp'">취소</button>
+					<button type="button" onclick="joinout('')">탈퇴</button>
+				</div>
 			</form>
 		</div>
-		
-
 		<%@include file="../footer.jsp" %>
 	</body>
 	<script>

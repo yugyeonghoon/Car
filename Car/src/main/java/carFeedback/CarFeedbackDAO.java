@@ -17,11 +17,9 @@ public class CarFeedbackDAO extends DBManager{
 		
 		List<CarFeedbackVO> list = new ArrayList<>();
 		while(next()){
-			String tno = getString("tno");
 			String content = getString("content");
 			
 			CarFeedbackVO vo = new CarFeedbackVO();
-			vo.setTno(tno);
 			vo.setContent(content);
 			list.add(vo);
 			
@@ -41,11 +39,9 @@ public class CarFeedbackDAO extends DBManager{
 			
 			List<CarFeedbackVO> list = new ArrayList<>();
 			while(next()){
-				String tno = getString("tno");
 				String content = getString("content");
 				
 				CarFeedbackVO vo = new CarFeedbackVO();
-				vo.setTno(tno);
 				vo.setContent(content);
 				list.add(vo);
 				
@@ -66,11 +62,9 @@ public class CarFeedbackDAO extends DBManager{
 				
 				List<CarFeedbackVO> list = new ArrayList<>();
 				while(next()){
-					String tno = getString("tno");
 					String content = getString("content");
 					
 					CarFeedbackVO vo = new CarFeedbackVO();
-					vo.setTno(tno);
 					vo.setContent(content);
 					list.add(vo);
 					
