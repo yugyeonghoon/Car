@@ -209,6 +209,7 @@
 				<select id="model1" class="trim-select" onchange="loadTrims('model1', 'trim1')">
 					<option value="">선택하세요</option>
 				</select>
+				<img id="model1-img" src="" alt="차량 이미지" style="display:none; max-width:360px; margin-top:10px;">
 				<label for="trim1">트림</label>
 				<select id="trim1" class="trim-select">
 					<option value="">선택하세요</option>
@@ -240,6 +241,7 @@
 				<select id="model2" class="trim-select" onchange="loadTrims('model2', 'trim2')">
 					<option value="">선택하세요</option>
 				</select>
+				<img id="model2-img" src="" alt="차량 이미지" style="display:none; max-width:360px; margin-top:10px;">
 				<label for="trim2">트림</label>
 				<select id="trim2" class="trim-select">
 					<option value="">선택하세요</option>
@@ -271,6 +273,7 @@
 				<select id="model3" class="trim-select" onchange="loadTrims('model3', 'trim3')">
 					<option value="">선택하세요</option>
 				</select>
+				<img id="model3-img" src="" alt="차량 이미지" style="display:none; max-width:360px; margin-top:10px;">
 				<label for="trim3">트림</label>
 				<select id="trim3" class="trim-select">
 					<option value="">선택하세요</option>
@@ -283,7 +286,7 @@
 			<div class="car-containers">
 				<!-- 첫 번째 차량 -->
 				<div class="car">
-					<img alt="firstCar" src=".././img/model_200_100.png" class="car-image">
+					<img alt="firstCar" src="../img/model_200_100.png" class="car-image">
 					<button class="select-button" onclick="openModal('modal1')">추가하기</button>
 					<!-- 차량 기본 정보 테이블 -->
 					<table class="car-info">
@@ -305,7 +308,7 @@
 				</div>
 				<!-- 두 번째 차량 -->
 				<div class="car">
-					<img alt="secondCar" src=".././img/model_200_100.png" class="car-image">
+					<img alt="secondCar" src="../img/model_200_100.png" class="car-image">
 					<button class="select-button" onclick="openModal('modal2')">추가하기</button>
 					<!-- 차량 기본 정보 테이블 -->
 					<table class="car-info">
@@ -386,6 +389,51 @@
             }
         });
     }
+    
+    $('#model1').on('change', function () {
+        const selectedOption = $(this).find('option:selected');
+        const imgSrc = selectedOption.data('img');
+
+        if (imgSrc && imgSrc !== "none_car.png" && imgSrc.trim() !== "") {
+            $('#model1-img')
+                .attr('src', imgSrc)
+                .show(); // 이미지 보여주기
+        } else {
+            $('#model1-img')
+                .removeAttr('src') // src 제거
+                .hide();           // 이미지 숨기기
+        }
+    });  
+    
+    $('#model2').on('change', function () {
+        const selectedOption = $(this).find('option:selected');
+        const imgSrc = selectedOption.data('img');
+
+        if (imgSrc && imgSrc !== "none_car.png" && imgSrc.trim() !== "") {
+            $('#model2-img')
+                .attr('src', imgSrc)
+                .show(); // 이미지 보여주기
+        } else {
+            $('#model2-img')
+                .removeAttr('src') // src 제거
+                .hide();           // 이미지 숨기기
+        }
+    });  
+    
+    $('#model3').on('change', function () {
+        const selectedOption = $(this).find('option:selected');
+        const imgSrc = selectedOption.data('img');
+
+        if (imgSrc && imgSrc !== "none_car.png" && imgSrc.trim() !== "") {
+            $('#model3-img')
+                .attr('src', imgSrc)
+                .show(); // 이미지 보여주기
+        } else {
+            $('#model3-img')
+                .removeAttr('src') // src 제거
+                .hide();           // 이미지 숨기기
+        }
+    });  
 
     // 모델 선택 시 트림 로딩
     function loadTrims(modelId, trimId) {
