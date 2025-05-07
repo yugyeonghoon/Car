@@ -70,15 +70,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js 추가 -->
+<link rel="stylesheet" href="../css/font2.css">
 <style>
 	.footer {
 		position: static !important;
-		margin-top: 135px;
+		margin-top: 100px;
 		background-color: #e0f7fa;
 		}
 	body{
-		font-family: Arial, sans-serif;
-		/* margin: 20px; */
 		background-color: white;
 	}
 	h3 {
@@ -98,10 +97,7 @@
 	    width: 100px;
 	    border-radius: 8px;
 	    object-fit: cover;
-	}			
-	.car-info-box {
-	    flex: 2;
-	}			
+	}						
 	.car-rating-box {
 	    flex: 1;
 	}					
@@ -113,21 +109,9 @@
 		background-color: white;
 		border-radius: 10px;
 		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      }
-    .car-info {
-      	flex: 1;
-      }	       
-    .car-info h2 {
-        font-size: 25px;
-        color: #333;
-      }		       
-    .car-info p {
-        font-size: 16px;
-        color: #555;
-      }		       
+      }       
 	th, td {
 		text-align: center;
-		font-size: 20px;
 		border : none;
       }		       
 	div.table {
@@ -137,12 +121,8 @@
 	.card-title {
 		color: #343a40;
 		
-	}				
-	.card-text {
-		font-size: 16px;
-	}			
+	}						
 	.list-group-item {
-		font-size: 15px;
 		padding: 0.5rem 1rem;
 	}				
 	.poster {
@@ -157,7 +137,6 @@
 	}
 	.card-body p {
 		margin-bottom: 0.3rem;
-		font-size: 15px;
 	}
 	.card-body hr {
 		margin: 0.5rem 0;
@@ -167,7 +146,6 @@
 		padding: 5px;
 		border: 1px solid #ccc;
 		border-radius: 8px;
-		font-size: 15px;
 		outline: none;
 		transition: border-color 0.2s;
 	}
@@ -178,20 +156,23 @@
 	}
 	.table-bordered>:not(caption)>*>* {
 		text-align: left;
-		font-size: 1rem;
+		/* font-size: 1rem; */
 	}
 	
 	/* 하트 아이콘 css */
 	.heart-icon {
-		transform: translate(15px, 475px);
+		transform: translate(15px, 450px);
 		display: block;
 		width: 30px;
 		height: 30px;
 		cursor: pointer;
 	}
+	strong{
+	font-size : 18px;
+	}
 </style>
 </head>
-<body>
+<body class="abody">
 <div class="container my-4">
   <div class="row g-4">
   
@@ -340,7 +321,7 @@
 	<%@include file="../footer.jsp" %>
 </body>
 <script>
-  let data = ['<%=rvo.getDrive() %>','<%=rvo.getPrice() %>','<%=rvo.getHabitability() %>','<%=rvo.getQuality() %>','<%=rvo.getDesign() %>','<%=rvo.getFuel() %>'];
+  let data = [<%=rvo.getDrive() %>,<%=rvo.getPrice() %>,<%=rvo.getHabitability() %>,<%=rvo.getQuality() %>,<%=rvo.getDesign() %>,<%=rvo.getFuel() %>];
   data = data.map(value => Math.max(0, Math.min(10, value)));
 
   let chartData = {
@@ -386,6 +367,17 @@
     }
   };
 
+  if (window.radarChartInstance) {
+    window.radarChartInstance.destroy();
+  }
+
+  let ctx = document.getElementById('carRadarChart').getContext('2d');
+  window.radarChartInstance = new Chart(ctx, {
+    type: 'radar',
+    data: chartData,
+    options: chartOptions
+  });
+
 	//빈 하트 클릭 시 하트가 채워지는 이미지로 변경
 	const heartIcon = document.getElementById("heartIcon");
 	let userId = "<%= users != null ? users.getId() : "" %>"
@@ -424,16 +416,5 @@
 		const tno = this.value
 		location.replace("carDetail.jsp?tno="+tno)
 	})
-	
-	if (window.radarChartInstance) {
-    window.radarChartInstance.destroy();
-  }
-
-  let ctx = document.getElementById('carRadarChart').getContext('2d');
-  window.radarChartInstance = new Chart(ctx, {
-    type: 'radar',
-    data: chartData,
-    options: chartOptions
-  });
 </script>
 </html>
