@@ -73,7 +73,7 @@
 <style>
 	.footer {
 		position: static !important;
-		margin-top: 100px;
+		margin-top: 135px;
 		background-color: #e0f7fa;
 		}
 	body{
@@ -183,7 +183,7 @@
 	
 	/* 하트 아이콘 css */
 	.heart-icon {
-		transform: translate(15px, 450px);
+		transform: translate(15px, 475px);
 		display: block;
 		width: 30px;
 		height: 30px;

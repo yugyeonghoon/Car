@@ -70,8 +70,7 @@ public class UserDAO extends DBManager {
 		DBConnect();
 		
 		String sql = "";
-		sql += "update user set password = '"+pw+"', nickname = '"+nick+"', fv_car_type = '"+carType+"'";
-		sql += " update_date = now() where id = '"+id+"'";
+		sql += "update user set password = '"+pw+"', update_date = now() where id = '"+id+"'";
 		executeUpdate(sql);
 		DBDisConnect();
 	}

@@ -45,12 +45,18 @@
 		}
 		.profile-container{
 			padding: 20px;
-			max-width: 1200px;
-			margin: 40px auto;
+			max-width: 1000px;
+			margin: 80px auto;
 			background: #ffffff;
-			border-radius: 10px;
-			box-shadow: 0 2px 10px rgb(30 88 139 / 20%);
-			border: 2px solid #a9a9a9;
+			/* border-radius: 10px;
+			box-shadow: 0 2px 10px rgb(30 88 139 / 20%); */
+			border: 2px solid /* #a9a9a9 */;
+			/* height: 600px; */
+		    margin: 60px auto;
+		    padding: 40px;
+		    background: white;
+		    border-radius: 16px;
+		    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
 		}
 		h2{
 			color: #000000;
@@ -60,6 +66,7 @@
 		}
 		.profile-field{
 			margin-bottom:15px;
+			margin-left: 28px;
 		}
 		.profile-field label{
 			font-weight: bold;
@@ -70,14 +77,20 @@
 		}
 		.profile-field input{
 			width: 95%;
-			padding: 8px;
-			border: 1px solid black;
-		    height: 20px;
+			padding: 12px;
+			border: 1px solid #dee2e6;
+		    height: 40px;
 		    font-size: 15px;
 		    padding-left: 10px;
-		    box-shadow: 0 1px 10px rgb(30 88 139 / 20%);
-			border-radius: 12px;
-			border-style: hidden;
+		    border-radius: 8px;
+    		background: #f9f9f9;
+		    /* box-shadow: 0 1px 10px rgb(30 88 139 / 20%);
+			border-radius: 12px; */
+			/* border-style: hidden; */
+		}
+		
+		input:focus {
+		    outline: none; /* 테두리 스타일 없애기 */
 		}
 		.feedback{
 			font-size: 0.9rem;
@@ -89,10 +102,12 @@
 		}
 		.profile-actions {
 			display: flex;
-  				justify-content: space-between;
+  			/* justify-content: space-between; */
+  			justify-content: center;
+  			gap: 20px;
 		}
 		.profile-actions button{
-			background: #000000;
+			/* background: #000000;
 			color: #ffffff;
 			border: none;
 			padding: 10px 20px;
@@ -101,11 +116,25 @@
 			transition: background 0.3s ease;
 			margin: 0 50px;
 			font-size: 14px;
-			font-weight: bold;
+			font-weight: bold; */
+			
+			background-color: #343a40;
+		    color: white;
+		    font-size: 15px;
+		    font-weight: 500;
+		    padding: 12px 28px;
+		    border: none;
+		    border-radius: 8px;
+		    cursor: pointer;
+		    transition: background 0.3s;
 		}
+		
 		.profile-actions button:hover {
-		        background: #1a5fc4;
+		    background-color: #212529;
 		}
+		/* .profile-actions button:hover {
+		        background: #1a5fc4;
+		} */
 		.feedback{
 			font-size: 1rem;
 			color: red;
@@ -202,7 +231,7 @@
 			
 			/* 좋아요 목록 조회 css */
 			.likecarItem {
-				margin-top : 15px;
+				margin-top : 20px;
 			}
 			.carousel {
 				overflow-x : auto;
@@ -210,10 +239,22 @@
 				display: flex;
 				flex-wrap: nowrap;
 				padding-bottom: 10px;
+				margin-top: 20px;
+				gap: 16px;
 			}
 			#likecarImg {
 				flex : 0 0 320px;
-				padding-right : 20px;			
+				/* padding-right : 20px; */
+				background: white;
+			    border: 1px solid #dee2e6;
+			    border-radius: 12px;
+			    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+			    padding: 12px;
+			    transition: transform 0.2s;			
+			}
+			
+			#likecarImg:hover {
+			    transform: translateY(-4px);
 			}
 			img {
 				width: 100%;
@@ -223,6 +264,7 @@
 				margin-top: 10px;
 			    font-size: 16px;
 				text-align: center;
+				font-weight: bold;
 			}
 			
 			/* 하트 아이콘 css */
@@ -233,11 +275,15 @@
 				height: 30px;
 				cursor: pointer;
 			}
+			
+			span {
+				margin-left: 10px;
+			}
 	</style>
 	<body>
 		<div class="profile-container">
 			<h2>마이페이지</h2>
-			<form method="post" action="profileok.jsp" onsubmit="return formCheck()">
+			<form method="post" action="/Car/user/profileok.jsp" onsubmit="return formCheck()">
 				<div class="profile-field">
 					<label for="username">아이디</label>
 					<input type="text" id="username" name="username" value="<%= user.getId() %>" readonly>
@@ -255,9 +301,9 @@
 					<label for="email">이메일</label>
 					<input type="text" id="email" name="email" value="<%= user.getEmail() %>" readonly>
 				</div>
-				<div id="modal" class="modal">
+<!-- 				<div id="modal" class="modal">
 					<div class="modal-content">
-						<span class="close" onclick="closeModal('modal')">&times;</span>
+						<span class="close" onclick="closeModal('modal')">&times;</span> -->
 						<div class="profile-field">
 							<label for="password">새 비밀번호</label>
 							<input type="password" id="password" name="password" placeholder="비밀번호를 다시 입력하세요.">
@@ -267,9 +313,9 @@
 							<input type="password" id="password-check" placeholder="새 비밀번호를 다시 입력하세요.">
 							<div id="password-feedback" class="feedback">비밀번호가 일치하지 않습니다.</div>
 						</div>
-						<button class="select-button" onclick="selectCar">변경</button>
-					</div>
-				</div>	
+						<!-- <button class="select-button" onclick="selectCar">변경</button> -->
+					<!-- </div> -->
+<!-- 				</div>	 -->
 				<div class="likecarItem">
 					<span><%=user.getId() %>님의 좋아요한 차량</span>
 						<ul class="carousel">
@@ -297,9 +343,10 @@
 						</ul>
 				</div>
 				<div class="profile-actions">
-					<button type="button" onclick="openModal('modal')">비밀번호 변경</button>
+					<!-- <button type="button" onclick="openModal('modal')">비밀번호 변경</button> -->
+					<button type="submit">저장</button>
 					<button type="button" onclick="location.href='../car/carMain.jsp'">취소</button>
-					<button type="button" onclick="joinout('')">탈퇴</button>
+					<button type="button" onclick="joinout('<%= id %>')">탈퇴</button>
 				</div>
 			</form>
 		</div>
@@ -341,10 +388,10 @@
 		alert("비밀번호가 변경되었습니다.");
 	}
 	function joinout(id){
-		let result = confirm("회원탈퇴를 하시겠습니까 ?")
+		let result = confirm("회원탈퇴를 하시겠습니까?")
 		if(result == true){
 			$.ajax({
-				url : "joinout.jsp",
+				url : "/Car/login/joinout.jsp",
 				type : "post",
 				data : {
 					id : id
@@ -352,7 +399,7 @@
 				success : function(result){
 					if(result.trim() == "success"){
 						alert("회원탈퇴를 하셨습니다.");
-						location.href = "login.jsp"
+						location.href = "/Car/login/login.jsp"
 					}
 				},
 				error : function(){
@@ -363,12 +410,12 @@
 		
 	}
 	
-	function closeModal(id) {
+	/* function closeModal(id) {
 		document.getElementById(id).style.display = "none";
 	}
 	function openModal(id) {
 		document.getElementById(id).style.display = "block";
-	}
+	} */
 	</script>
 <script>
 	document.querySelectorAll('.heart-icon').forEach(icon => {

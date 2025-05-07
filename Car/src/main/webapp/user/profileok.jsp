@@ -9,7 +9,7 @@
 	String pw = request.getParameter("password");
 	
 	if(pw == null || pw.isEmpty()){
-		response.sendRedirect("profile.jsp");
+		response.sendRedirect("/Car/user/profile.jsp");
 		return;
 	}
 	
@@ -24,5 +24,5 @@
 	user.setPw(pw);
 	session.setAttribute("user", user);
 	
-	response.sendRedirect("profile.jsp");
+	response.sendRedirect("/Car/user/profile.jsp");
 %>

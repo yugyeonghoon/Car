@@ -14,8 +14,8 @@ $(document).ready(function () {
   });
 
   // 모달 닫기 (X 버튼 클릭 시)
-  $('.close').click(function () {
-    $('#modal').fadeOut();
+  $('.closeLogin').click(function () {
+	$('#modal').fadeOut();
   });
 
   // 모달 바깥 영역 클릭 시 닫기

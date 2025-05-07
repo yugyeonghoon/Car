@@ -24,7 +24,7 @@
 	  box-sizing: border-box; */
 	}
 	
-	h4 {
+	#title {
 	  font-size: 24px;
 	  font-weight: 600;
 	  color: #111827;
@@ -132,7 +132,7 @@
 		<div class="container">
 			<span class="error animated tada" id="msg"></span>
 			<form method="post" name="form1" class="box" onsubmit="return formCheckId()" action="../login/loginOk.jsp">
-				<h4>로그인 페이지<span></span></h4>
+				<h4 id="title">로그인 페이지<span></span></h4>
 				<h5></h5>
 					<input type="text1" id="id" value="<%= cookie %>" name="id" placeholder="Id" autocomplete="off">
 						<i class="typcn typcn-eye" id="eye"></i>
