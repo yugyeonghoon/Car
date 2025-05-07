@@ -43,7 +43,6 @@
 	    <meta property="og:site_name" content="차량생각">
 	    <meta property="og:description" content="차량생각에서 다양한 차량정보와 실 사용자들의 현실적인 리뷰를 만나보세요." />
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	    <title>자동차의 다양한 정보를 확인하자 | 차량생각</title>
 	    <link rel="stylesheet" href="../css/font2.css">
 	    <style>
