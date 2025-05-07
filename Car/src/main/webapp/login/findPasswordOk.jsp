@@ -10,7 +10,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>비밀번호 변경</title>
-	<script src="./jquery-3.7.1.js"></script>
+	<script src="/Car/jquery-3.7.1.js"></script>
 	<style>
 		body{
 				font-family: 'Pretendard', sans-serif;

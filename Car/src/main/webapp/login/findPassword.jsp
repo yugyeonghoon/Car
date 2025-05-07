@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>비밀번호 찾기</title>
-<script src="./jquery-3.7.1.js"></script>
+<script src="/Car/jquery-3.7.1.js"></script>
 <style>
 	body {
 		font-family: 'Pretendard', sans-serif;
@@ -74,7 +74,7 @@
 	align-items: center;
 	gap: 10px;
 }
-	.btn {
+	.btn, .check {
 		font-size: 0.8rem;
 		cursor: pointer;
 		background-color: #1f2937;
@@ -116,9 +116,9 @@
 						<input type="text" name="email" id="email" placeholder="email을 입력하세요" autocomplete="off">
 						<input type="button" class="btn" id="checkBtn" value="전송">		
 					</div>
-					<div class="fi1"> 
+					<div class="fi2"> 
 						<input type="text" class="pwcheck" id="mailCheck" placeholder="인증번호">
-						<input type="submit" id="mailCheckBtn" value="확인" class="btn">
+						<input type="submit" id="mailCheckBtn" value="확인" class="check">
 						<div id="mailCheck-feedback" class="feedback">인증번호가 일치하지 않습니다.</div>
 					</div>
 				</form>
@@ -137,7 +137,7 @@
 	let emcFeedback = $("#mailCheck-feedback");
 	
 	let mailCode = "";
-	$("#checkBtn").click(function()) {
+	$("#checkBtn").click(function() {
 		if(mail.val().trim() == "") {
 			alert("이메일을 입력해주세요");
 			return;
@@ -153,7 +153,7 @@
 			//비동기를 강제로 동기화
 			data : {
 				id : id.val(),
-				mail : mail.val()
+				email : mail.val()
 			},
 			success : function(result){
 				mailCode = result.trim();
@@ -165,7 +165,7 @@
 			}
 		});
 		
-		if(mailCode == 0){
+		if(mailCode === "0"){
 			$("#checkBtn").attr("disabled", false);
 			alert("아이디와 이메일이 동일하지 않습니다.");
 			return;
@@ -224,5 +224,5 @@
 			alert("코드가 일치하지 않습니다.");
 			return false;
 		}
-	}
+	});
 </script>
