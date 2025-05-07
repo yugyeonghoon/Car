@@ -1,5 +1,9 @@
+<%@page import="user.UserDAO"%>
+<%@page import="user.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -199,13 +203,13 @@
 						<div id="nickname-feedback" class="feedback">닉네임 중복확인을 해주세요.</div>
 					<div>
 						<select id="cartype" name="cartype">
-							<option>세단</option>
-							<option>스포츠카</option>
-							<option>suv</option>
-							<option>해치백</option>
-							<option>rv</option>
-							<option>왜건</option>
-							<option>쿠페</option>
+							<option value="세단">세단</option>
+							<option value="스포츠카">스포츠카</option>
+							<option value="suv">suv</option>
+							<option value="해치백">해치백</option>
+							<option value="rv">rv</option>
+							<option value="왜건">왜건</option>
+							<option value="쿠페">쿠페</option>
 						</select>
 					</div>	
 					<div class="gender-container">

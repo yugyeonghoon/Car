@@ -63,14 +63,13 @@ public class UserDAO extends DBManager {
 	public void update(UserVO vo) {
 		String id = vo.getId();
 		String pw = vo.getPw();
-		String nick = vo.getNick();
 		String carType = vo.getCarType();
 		
 		driverLoad();
 		DBConnect();
 		
 		String sql = "";
-		sql += "update user set password = '"+pw+"', update_date = now() where id = '"+id+"'";
+		sql += "update user set password = '"+pw+"', update_date = now(), fv_car_type = '"+carType+"' where id = '"+id+"'";
 		executeUpdate(sql);
 		DBDisConnect();
 	}
@@ -186,6 +185,7 @@ public class UserDAO extends DBManager {
 			String email = getString("email");
 			String gender = getString("gender");
 			int userType = getInt("user_type");
+			String carType = getString("fv_car_type");
 			
 			UserVO vo = new UserVO();
 			vo.setId(id);
@@ -193,6 +193,7 @@ public class UserDAO extends DBManager {
 			vo.setEmail(email);
 			vo.setGender(gender);
 			vo.setUserType(userType);
+			vo.setCarType(carType);
 			DBDisConnect();
 			return vo;
 		}else {

@@ -1,3 +1,4 @@
+<%@page import="user.UserDAO"%>
 <%@page import="carInfo.CarDAO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="carLike.carLikeVO"%>
@@ -13,6 +14,10 @@
 	String tno = request.getParameter("tno");
 	UserVO users = (UserVO)session.getAttribute("user");
 	
+	UserDAO dao = new UserDAO();
+	
+	UserVO vo = dao.getOneUser(id);
+	
 	if(id == null){
 		response.sendRedirect("../car/carMain.jsp");
 		return;
@@ -27,7 +32,6 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>Insert title here</title>
-		<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	</head>
 	<style>
@@ -283,7 +287,7 @@
 	<body>
 		<div class="profile-container">
 			<h2>마이페이지</h2>
-			<form method="post" action="/Car/user/profileok.jsp" onsubmit="return formCheck()">
+			<form method="post" action="/Car/user/profileok.jsp" onsubmit="return formCheck()" accept-charset="UTF-8">
 				<div class="profile-field">
 					<label for="username">아이디</label>
 					<input type="text" id="username" name="username" value="<%= user.getId() %>" readonly>
@@ -312,6 +316,17 @@
 							<label>새 비밀번호 확인</label>
 							<input type="password" id="password-check" placeholder="새 비밀번호를 다시 입력하세요.">
 							<div id="password-feedback" class="feedback">비밀번호가 일치하지 않습니다.</div>
+						</div>
+						<div>
+							<select id="cartype" name="cartype">
+								<option value="세단" <%= vo.getCarType() == "세단" ? "selected" : "" %>>세단</option>
+								<option value="스포츠카" <%= vo.getCarType() == "스포츠카" ? "selected" : "" %>>스포츠카</option>
+								<option value="suv" <%= vo.getCarType() == "suv" ? "selected" : "" %>>suv</option>
+								<option value="해치백" <%= vo.getCarType() == "해치백" ? "selected" : "" %>>해치백</option>
+								<option value="rv" <%= vo.getCarType() == "rv" ? "selected" : "" %>>rv</option>
+								<option value="왜건" <%= vo.getCarType() == "왜건" ? "selected" : "" %>>왜건</option>
+								<option value="쿠페" <%= vo.getCarType() == "쿠페" ? "selected" : "" %>>쿠페</option>
+							</select>
 						</div>
 						<!-- <button class="select-button" onclick="selectCar">변경</button> -->
 					<!-- </div> -->
