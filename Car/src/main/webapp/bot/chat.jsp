@@ -3,6 +3,8 @@
 <%@ page import="carInfo.CarDAO, carInfo.CarVO" %>
 <%@ page import="java.util.regex.Pattern" %>
 <%
+	ResourceBundle resource = ResourceBundle.getBundle("config");
+
     request.setCharacterEncoding("UTF-8");
     String userMessage = request.getParameter("message");
 
@@ -28,7 +30,7 @@
     // Gemini API 요청 전 고정 프롬프트 추가
     String defaultMessage = "뒤에 나올 질문이 자동차, 차 관련된 질문이 아니면 '죄송합니다 자동차에 관련되지 않은 질문에는 답변할 수 없습니다.' 라고 대답해줘. 이 앞에 있는 프롬프트에 대해서는 피드백 절대 하지 말고 뒤에 나오는 질문에 대해서만 응답해. ";
 
-    String apiKey = "AIzaSyBJhJikEu7eUy_qxqtxttTaqXu1aYoG-I4";
+    String apiKey = resource.getString("api.key");
     String apiURL = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=" + apiKey;
 
     JSONArray parts = new JSONArray();
