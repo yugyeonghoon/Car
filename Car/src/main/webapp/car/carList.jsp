@@ -15,14 +15,15 @@
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+	    <link rel="stylesheet" href="../css/font2.css">
 	    <title><%=title%> 검색결과 | 차량생각</title>
 	    <style>
-	        body {
-	            font-family: 'Segoe UI', sans-serif;
+ 	        body {
+	            /* font-family: 'Segoe UI', sans-serif; */
 	            margin: 0;
 	            padding: 0;
 	            background-color: #fff;
-	        }
+	        } 
 	        .car-list {
 	            display: grid;
 	            grid-template-columns: repeat(2, minmax(300px, 1fr));
@@ -50,14 +51,11 @@
 	            padding: 15px;
 	        }
 	        .car-name {
-	            font-size: 16px;
 	            font-weight: bold;
 	            margin-bottom: 8px;
 	        }
 	        .car-spec {
-	            font-size: 14px;
 	            color: #333;
-	            margin-bottom: 4px;
 	        }
 	        .footer {
 				position: static !important;
@@ -66,12 +64,12 @@
 			}
 	    </style>
 	</head>
-	<body>
+	<body class="abody">
 	<%@ include file="../header.jsp" %>
 	<div class="car-list">
 	  <% for (CarVO vo : list) { %>
 	    <div class="car-card">
-	      <a href="/Car/car/carDetail.jsp?tno=<%= vo.getTno() %>">
+	      <a class="atag" href="/Car/car/carDetail.jsp?tno=<%= vo.getTno() %>">
 	        <img src="<%= vo.getCar_img() %>" alt="<%= vo.getCar_name() %>">
 	      </a>
 	      <div class="car-details">

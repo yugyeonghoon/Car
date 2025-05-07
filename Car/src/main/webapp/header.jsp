@@ -17,9 +17,11 @@
 		<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 		<script src="../js/modal.js"></script>
+		<link rel="stylesheet" href="../css/font2.css">
 		<style>
 			.header-container {
-				font-family: 'Gugi' !important;
+				/* font-family: 'Gugi' !important; */
+				font-weight : bold;
 			}
 			.navbar {
 		 	    display: flex;
@@ -32,14 +34,16 @@
 		 	}
 		 	.logo {
 		 		position: absolute;
-				top: 20px;
+				top: 10px;
 				left: 70px;
 				font-size: 25px;
 				color: black;
 		 	}
 		 	.logo a {
 			    text-decoration: none;
-   			    color: black; 
+   			    color: black;
+   			    font-weight : bold;
+   			    font-size : 50px;
 			}
 			.menu {
 				display: flex;
@@ -115,7 +119,7 @@
 		}
 		</style>
 	</head>
-	<body>
+	<body class="abody">
 		<div class="header-container">
 			<nav class="navbar">
 				<div class="logo">

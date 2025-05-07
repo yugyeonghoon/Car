@@ -31,9 +31,21 @@
 	<head>
 	    <meta charset="UTF-8">
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
+	    <meta name="title" content="자동차의 다양한 정보를 확인하자 | 차량생각">
+	    <meta name="description" content="차량생각에서 다양한 차량정보와 실 사용자들의 현실적인 리뷰를 만나보세요.">
+	    <meta name="Keywords" content="자동차, 자동차 평가, 자동차 제원, 제원, 차량비교, 자동차 리뷰">
+	    <meta http-equiv="Cache-Control" content="no-cache" />
+		<meta http-equiv="Pragma" content="no-cache" />
+	    <meta property="og:type" content="website">
+	    <meta property="og:url" content="http://localhost:8080/Car/car/carMain.jsp">
+	    <meta property="og:title" content="자동차의 다양한 정보를 확인하자 | 차량생각"> 
+	    <meta property="og:image" content="">
+	    <meta property="og:site_name" content="차량생각">
+	    <meta property="og:description" content="차량생각에서 다양한 차량정보와 실 사용자들의 현실적인 리뷰를 만나보세요." />
 	    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 	    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	    <title>자동차의 다양한 정보를 확인하자 | 차량생각</title>
+	    <link rel="stylesheet" href="../css/font2.css">
 	    <style>
 	        #dropdown {
 	            margin-bottom: 50px;
@@ -167,19 +179,25 @@
 	            justify-content: center;
 	            margin-bottom: 10px;
 	        }
+	        
 	    </style>
 	</head>
-	<body>
+	<body class="abody">
 	<%@include file="../header.jsp" %>
 	<div id="content">
 	    <div class="carList">
 	    <% if(user != null){
 	    	%>
 	        <span>최근 본 차량 목록:&nbsp;</span>
-	        <% for(int i = 0; i < carViewList.size(); i++){ %>
-	            <% carViewVO vo = carViewList.get(i); %>
-	            <span><a href="carDetail.jsp?tno=<%= vo.getCarTno() %>"><%= vo.getCarName() %></a>&nbsp;</span>
-	        <% } %>
+				<% for(int i = 0; i < carViewList.size(); i++){ %>
+					<% carViewVO vo = carViewList.get(i); %>
+					<span>
+            			<a class="atag" href="carDetail.jsp?tno=<%= vo.getCarTno() %>"><%= vo.getCarName() %></a>
+							<% if (i != carViewList.size() - 1) { %>
+							,&nbsp;
+							<% } %>
+        			</span>
+				<% } %>
 	        <%
 	        }
 	        %>
@@ -198,7 +216,7 @@
 	                                <a href="carDetail.jsp?tno=<%=car.getTno()%>">
 	                                    <img src="<%= car.getCar_img() %>" alt="...">
 	                                    <div class="car-title">
-	                                       <%= car.getCar_name() %>
+	                                       <a class="atag" href="carDetail.jsp?tno=<%=car.getTno()%>"><%= car.getCar_name() %></a>
 	                                    </div>
 	                                </a>
 	                            </div>

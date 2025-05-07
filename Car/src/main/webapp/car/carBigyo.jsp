@@ -15,6 +15,7 @@
 	<meta charset="UTF-8">
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+	<link rel="stylesheet" href="../css/font2.css">
 	<title>모델 비교 | 차량생각</title>
 	<style>
 		/* carbygyo 페이지에서만 푸터 스타일 수정 */
@@ -46,18 +47,10 @@
 			height: 250px;
 			object-fit: cover;
 		}
-		/* 'VS' 텍스트 스타일 */
-		.vs-text {
-			font-size: 40px;
-			font-weight: bold;
-			color: #444;
-			padding: 0 20px;
-			margin-top: 100px;
-		}
+
 		/* 차량 모델 스타일 */
 		.car-model {
 			margin-top: 10px;
-			font-size: 20px;
 			font-weight: bold;
 			color: #333;
 		}
@@ -66,7 +59,6 @@
 			margin-top: 10px;
 			width: 230px;
 			padding: 8px;
-			font-size: 16px;
 			border: 1px solid #ccc;
 			border-radius: 4px;
 		}
@@ -75,14 +67,12 @@
 			margin-top: 15px;
 			border-collapse: collapse;
 			width: 400px;
-			font-size: 14px;
 		}
 		/* 차량 정보 테이블 헤더 및 데이터 셀 스타일 */
 		.car-info th {
 			border: 1px solid #ccc;
 			padding: 8px;
 			text-align: center;
-			font-size: 16px;
 			background-color: #f5f5f5;
 			width: 100px;
 		}
@@ -90,7 +80,6 @@
 			border: 1px solid #ccc;
 			padding: 8px;
 			text-align: left;
-			font-size: 16px;
 		}
 		/* 선택 버튼 스타일 */
 		.select-button {
@@ -100,7 +89,6 @@
 			border: none;
 			padding: 10px 20px;
 			border-radius: 8px;
-			font-size: 16px;
 			cursor: pointer;
 			transition: background-color 0.2s;
 		}
@@ -129,7 +117,6 @@
 			width: 420px;
 			box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 			position: relative;
-			font-family: 'Segoe UI', sans-serif;
 			animation: fadeIn 0.3s ease-in-out;
 		}
 		/* 모달창 fadeIn 애니메이션 */
@@ -140,7 +127,6 @@
 		/* 모달창 제목 스타일 */
 		.modal-content h3 {
 			margin-bottom: 20px;
-			font-size: 22px;
 			color: #222;
 			text-align: center;
 		}
@@ -150,7 +136,6 @@
 			margin-top: 15px;
 			display: block;
 			color: #333;
-			font-size: 15px;
 		}
 		/* 트림 선택 박스 스타일 */
 		.modal-content .trim-select {
@@ -159,7 +144,6 @@
 			margin-top: 6px;
 			border: 1px solid #ccc;
 			border-radius: 8px;
-			font-size: 15px;
 			outline: none;
 			transition: border-color 0.2s;
 		}
@@ -184,7 +168,7 @@
 		}
 	</style>
 	</head>
-	<body>
+	<body class="abody">
 	<!-- 첫 번째 차량 모달창 -->
 		<div id="modal1" class="modal">
 			<div class="modal-content">
