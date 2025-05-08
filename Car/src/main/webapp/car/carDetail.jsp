@@ -58,6 +58,8 @@
     List<CarFeedbackVO> badList = fdao.badfeedback(tno);
     List<CarFeedbackVO> feddbackList = fdao.feedback(tno);
     
+    RatingDAO re = new RatingDAO();
+    List<RatingVO> relist = re.trimReply(tno);
 %>
 <!DOCTYPE html>
 <html>
@@ -163,6 +165,10 @@
 	}
 	strong{
 	font-size : 18px;
+	}
+	.btn-outline-secondary{
+		position: relative;
+		margin-top: 
 	}
 </style>
 </head>
@@ -308,8 +314,25 @@
 		<h4>해당 차량의 리뷰가 없습니다.</h4>
 		<%
 	}%>
-	<div>
-	
+	<div class="row mt-4">
+		<div class="col-12">
+			<h4>리뷰</h4>
+			<table class="table table-secondary table-bordered">
+			    <tbody id="reviewTable">
+			    <% for (int i = 0; i < relist.size(); i++) {
+			        RatingVO trvo = relist.get(i);
+			        String reply = trvo.getReply();
+			    %>
+			        <tr class="review-row" <%= i >= 5 ? "style='display:none;'" : "" %>>
+			            <td><%= reply %></td>
+			        </tr>
+			    <% } %>
+			    </tbody> 
+			</table>
+				<div class="mt-1 d-flex justify-content-end">
+				    <button id="loadMoreBtn" class="btn btn-outline-secondary">더 보기</button>
+				</div>  
+		</div>
 	</div>
 </div>
 	<%@include file="../footer.jsp" %>
@@ -409,6 +432,26 @@
     type: 'radar',
     data: chartData,
     options: chartOptions
+  });
+  
+  let visibleCount = 5;
+  const increment = 5; 
+
+  $("#loadMoreBtn").click(function() {
+      const rows = $(".review-row");
+      const nextCount = visibleCount + increment;
+
+      rows.each(function(index) {
+          if (index < nextCount) {
+              $(this).show();
+          }
+      });
+
+      visibleCount = nextCount;
+
+      if (visibleCount >= rows.length) {
+          $(this).hide();
+      }
   });
 </script>
 </html>

@@ -1,5 +1,8 @@
 package rating;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import db.DBManager;
 
 public class RatingDAO extends DBManager{
@@ -41,4 +44,30 @@ public class RatingDAO extends DBManager{
 		}
 		
 	}
+	
+	//차량별 리뷰 가져오기
+	public List<RatingVO> trimReply(String tno) {
+		driverLoad();
+		DBConnect();
+		
+		String sql = "select * from trim_reply where tno = "+tno+"";
+		
+		executeQuery(sql);
+		
+		List<RatingVO> list = new ArrayList<>();
+		while(next()) {
+			String title = getString("title");
+			String trim = getString("trim");
+			String reply = getString("reply");
+			
+			RatingVO vo = new RatingVO();
+			vo.setTitle(title);
+			vo.setTrim(trim);
+			vo.setReply(reply);
+			
+			list.add(vo);
+		}
+		DBDisConnect();
+		return list;
+	}	
 }

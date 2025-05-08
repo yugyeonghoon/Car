@@ -12,8 +12,15 @@ public class RatingVO {
 	private String design;
 	private String fuel;
 	private String tno;
+	private String reply;
+	private String trim;
 	
-	
+	public String getTrim() {
+		return trim;
+	}
+	public void setTrim(String trim) {
+		this.trim = trim;
+	}
 	public String getRating_people() {
 		return rating_people;
 	}
@@ -79,6 +86,12 @@ public class RatingVO {
 	}
 	public void setFuel(String fuel) {
 		this.fuel = fuel;
+	}
+	public String getReply() {
+		return reply;
+	}
+	public void setReply(String reply) {
+		this.reply = reply;
 	}
 	
 }
