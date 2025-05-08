@@ -281,7 +281,30 @@
 			}
 			
 			span {
-				margin-left: 10px;
+				margin-left: 28px;
+			}
+			
+			/* 차량 선택바 css */
+			#cartype {
+			    width: 100%;
+			    max-width: 400px;
+			    padding: 10px 14px;
+			    font-size: 15px;
+			    font-family: inherit;
+			    color: #333;
+			    background-color: #f9f9f9;
+			    border: 1px solid #ccc;
+			    border-radius: 8px;
+			    appearance: none;
+			    background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+			    background-repeat: no-repeat;
+			    background-position: right 12px center;
+			    background-size: 18px;
+			    cursor: pointer;
+			}
+			#cartype:focus {
+				outline: 2px solid #d50000;
+				outline: none;
 			}
 	</style>
 	<body>
@@ -317,7 +340,8 @@
 							<input type="password" id="password-check" placeholder="새 비밀번호를 다시 입력하세요.">
 							<div id="password-feedback" class="feedback">비밀번호가 일치하지 않습니다.</div>
 						</div>
-						<div>
+						<div class="profile-field">
+							<label for="carselect">차량 선택</label>
 							<select id="cartype" name="cartype">
 								<option value="세단" <%= "세단".equals(vo.getCarType()) ? "selected" : "" %>>세단</option>
 								<option value="스포츠카" <%= "스포츠카".equals(vo.getCarType()) ? "selected" : "" %>>스포츠카</option>
@@ -414,7 +438,7 @@
 				success : function(result){
 					if(result.trim() == "success"){
 						alert("회원탈퇴를 하셨습니다.");
-						location.href = "/Car/login/login.jsp"
+						location.href = "/Car/car/carMain.jsp"
 					}
 				},
 				error : function(){
