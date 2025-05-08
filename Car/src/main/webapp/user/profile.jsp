@@ -9,7 +9,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="../header.jsp" %>
 <%
-	request.setCharacterEncoding("utf-8");
+	request.setCharacterEncoding("UTF-8"); 
 	String id = user.getId();
 	String tno = request.getParameter("tno");
 	UserVO users = (UserVO)session.getAttribute("user");
@@ -287,7 +287,7 @@
 	<body>
 		<div class="profile-container">
 			<h2>마이페이지</h2>
-			<form method="post" action="/Car/user/profileok.jsp" onsubmit="return formCheck()" accept-charset="UTF-8">
+			<form method="get" action="/Car/user/profileok.jsp" onsubmit="return formCheck()" accept-charset="UTF-8">
 				<div class="profile-field">
 					<label for="username">아이디</label>
 					<input type="text" id="username" name="username" value="<%= user.getId() %>" readonly>
@@ -319,13 +319,13 @@
 						</div>
 						<div>
 							<select id="cartype" name="cartype">
-								<option value="세단" <%= vo.getCarType() == "세단" ? "selected" : "" %>>세단</option>
-								<option value="스포츠카" <%= vo.getCarType() == "스포츠카" ? "selected" : "" %>>스포츠카</option>
-								<option value="suv" <%= vo.getCarType() == "suv" ? "selected" : "" %>>suv</option>
-								<option value="해치백" <%= vo.getCarType() == "해치백" ? "selected" : "" %>>해치백</option>
-								<option value="rv" <%= vo.getCarType() == "rv" ? "selected" : "" %>>rv</option>
-								<option value="왜건" <%= vo.getCarType() == "왜건" ? "selected" : "" %>>왜건</option>
-								<option value="쿠페" <%= vo.getCarType() == "쿠페" ? "selected" : "" %>>쿠페</option>
+								<option value="세단" <%= "세단".equals(vo.getCarType()) ? "selected" : "" %>>세단</option>
+								<option value="스포츠카" <%= "스포츠카".equals(vo.getCarType()) ? "selected" : "" %>>스포츠카</option>
+								<option value="suv" <%= "suv".equals(vo.getCarType()) ? "selected" : "" %>>suv</option>
+								<option value="해치백" <%= "해치백".equals(vo.getCarType()) ? "selected" : "" %>>해치백</option>
+								<option value="rv" <%= "rv".equals(vo.getCarType()) ? "selected" : "" %>>rv</option>
+								<option value="왜건" <%= "왜건".equals(vo.getCarType()) ? "selected" : "" %>>왜건</option>
+								<option value="쿠페" <%= "쿠페".equals(vo.getCarType()) ? "selected" : "" %>>쿠페</option>
 							</select>
 						</div>
 						<!-- <button class="select-button" onclick="selectCar">변경</button> -->
