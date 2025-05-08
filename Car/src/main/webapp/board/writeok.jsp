@@ -12,6 +12,16 @@
 	String content = request.getParameter("content");
 	String boardType = request.getParameter("boardType");
 	
+	if(title == null || content == null){
+		response.sendRedirect("write.jsp");
+		return;
+	}
+	
+	if(title.isEmpty() || content.isEmpty()){
+		response.sendRedirect("write.jsp");
+		return;
+	}
+	
 	BoardDAO dao = new BoardDAO();
 	BoardVO vo = new BoardVO();
 	int boardTypeNum = Integer.parseInt(boardType);
@@ -23,11 +33,11 @@
 	
 	int no = dao.write(vo);
 	
-	if(boardTypeNum == 1) {
+/* 	if(boardTypeNum == 1) {
 		response.sendRedirect("post.jsp?no="+ no);
 	} else {
 		response.sendRedirect("post.jsp?no="+ no);
-	}
+	} */
 	
 	/* if (refer != null) {
 	    response.sendRedirect(refer);

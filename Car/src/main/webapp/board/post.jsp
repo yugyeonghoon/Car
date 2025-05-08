@@ -32,6 +32,7 @@
 <meta charset="UTF-8">
 <title><%=title %> | 자유게시판 | 차량생각</title>
 <script src="./jquery-3.7.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <style>
     body {
       font-family: 'Arial', sans-serif;
@@ -94,30 +95,26 @@
       margin-left: 10px;
       transition: background 0.3s ease;
     }
-
     .post-actions button:hover {
       background: #333;
     }
-
     .reply-container {
       max-width: 1000px;
       margin: 50px auto 0;
     }
-
     .reply-container h5 {
       font-size: 1.4rem;
       margin-bottom: 20px;
       text-align: center;
     }
-
     .comment {
       background: #fff;
       border: 1px solid #ddd;
       border-radius: 10px;
       padding: 15px;
       margin-bottom: 15px;
+      margin-top: 15px;
     }
-
     .comment .meta {
       font-size: 0.85rem;
       color: #888;
@@ -129,12 +126,10 @@
       color: #333;
       line-height: 1.5;
     }
-
     .comment-actions {
       text-align: right;
       margin-top: 10px;
     }
-
     .comment-actions button {
       background: none;
       border: none;
@@ -143,13 +138,11 @@
       font-size: 0.9rem;
       margin-left: 10px;
     }
-
     .comment-form {
       display: flex;
       gap: 10px;
       margin-top: 30px;
     }
-
     .comment-form input {
       flex: 1;
       padding: 10px;
@@ -157,7 +150,6 @@
       border: 1px solid #000;
       border-radius: 5px;
     }
-
     .comment-form button {
       background: #000;
       color: #fff;
@@ -167,11 +159,9 @@
       border-radius: 5px;
       cursor: pointer;
     }
-
     .comment-form button:hover {
       background: #333;
     }
-
     .dpnone {
       display: none;
     }
@@ -186,23 +176,23 @@
       <pre><%= content %></pre>
     </div>
 
-    <%-- <% if(user != null && (user.getId().equals(author) || user.getUserType() == 0)){ %> --%>
+     <% if(user != null && (user.getId().equals(author) || user.getUserType() == 0)){ %>
     <div class="post-actions">
       <button onclick="location.href='modify.jsp?no=<%=no %>'">수정</button>
       <button onclick="deletePost(<%=no %>)">삭제</button>
       <button onclick="location.href='board.jsp'">목록으로</button>
     </div>
-    <%-- <% } %> --%>
+    <% } %> 
   </div>
 
   <div class="reply-container">
-    <%-- <% if(user != null){ %> --%>
+    <% if(user != null){ %> 
     <h5>댓글</h5>
     <div class="comment-form">
       <input id="rcontent" type="text" placeholder="댓글을 입력하세요...">
       <button type="button" id="replyBtn">댓글 작성</button>
     </div>
-    <%-- <% } %> --%>
+     <% } %> 
 
     <% for(int i = 0; i < list.size(); i++) {
       ReplyVO rvo = list.get(i);
