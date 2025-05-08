@@ -63,13 +63,12 @@ public class UserDAO extends DBManager {
 	public void update(UserVO vo) {
 		String id = vo.getId();
 		String pw = vo.getPw();
-		String carType = vo.getCarType();
 		
 		driverLoad();
 		DBConnect();
 		
 		String sql = "";
-		sql += "update user set password = '"+pw+"', update_date = now(), fv_car_type = '"+carType+"' where id = '"+id+"'";
+		sql += "update user set password = '"+pw+"', update_date = now() where id = '"+id+"'";
 		executeUpdate(sql);
 		DBDisConnect();
 	}
