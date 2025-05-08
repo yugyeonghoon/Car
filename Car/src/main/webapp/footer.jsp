@@ -14,13 +14,14 @@
 	
 	.footer {
 		width: 100%;
-	    padding-bottom: 40px;
+	    padding-bottom: 30px;
 	    background-color: #F5F5F5;
 	    text-align: center;
 	    font-size: 12px;
 	    letter-spacing: -1px;
 	    position: absolute;
 	    bottom: 0;
+	    margin-top: 210px;
 	}
 	.wrap_go {
 		border-bottom: 1px solid #E5E5E5;
